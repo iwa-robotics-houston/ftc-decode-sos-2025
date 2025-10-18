@@ -22,7 +22,7 @@ Used to init hardware when an OpMode is run and to control hardware and track st
 hardwareMap names come from the robot configuration step on the DS or DC.
  */
 
-public class Robot {
+public class chassis {
     // dimensions
     final public double drivetrainDiagonal = 19.5; // in
     public boolean isArmClawOpen;
@@ -33,7 +33,7 @@ public class Robot {
 
     static final double armSlideWheelCirc = Math.PI * 1.5;
     // to correct movement lengths
-    static final double drivetrainMultiplier = 1.5;
+    static final double drivetrainMultiplier =  1.5;
 
     // limits
     final public double miniClawOpenPos = 0.3;
@@ -66,22 +66,22 @@ public class Robot {
     public Servo miniClawServo;
     public Servo wristServo;
 
-    public Robot(HardwareMap hardwareMap) {
+    public chassis(HardwareMap hardwareMap) {
         // init hardware
-        leftFrontDrive = hardwareMap.get(DcMotor.class, "leftwheel");
-        rightFrontDrive = hardwareMap.get(DcMotor.class, "rightwheel");
+        leftFrontDrive = hardwareMap.get(DcMotor.class, "frontLeft");
+        rightFrontDrive = hardwareMap.get(DcMotor.class, "frontRight");
         leftBackDrive = hardwareMap.get(DcMotor.class, "backLeft");
         rightBackDrive = hardwareMap.get(DcMotor.class, "backRight");
 
-        //arm1 = hardwareMap.get(DcMotor.class, "arm1");
-        //arm2 = hardwareMap.get(DcMotor.class, "arm2");
-        //armSlide = hardwareMap.get(DcMotor.class, "armSlide");
-        //vertSlide = hardwareMap.get(DcMotor.class, "vertSlide");
+        arm1 = hardwareMap.get(DcMotor.class, "arm1");
+        arm2 = hardwareMap.get(DcMotor.class, "arm2");
+        armSlide = hardwareMap.get(DcMotor.class, "armSlide");
+        vertSlide = hardwareMap.get(DcMotor.class, "vertSlide");
 
-        //intakeServo1 = hardwareMap.get(CRServo.class, "intakeServo1");
-        //intakeServo2 = hardwareMap.get(CRServo.class, "intakeServo2");
-        //miniClawServo = hardwareMap.get(Servo.class, "miniClaw");
-        //wristServo = hardwareMap.get(Servo.class, "wristServo");
+        intakeServo1 = hardwareMap.get(CRServo.class, "intakeServo1");
+        intakeServo2 = hardwareMap.get(CRServo.class, "intakeServo2");
+        miniClawServo = hardwareMap.get(Servo.class, "miniClaw");
+        wristServo = hardwareMap.get(Servo.class, "wristServo");
 
         // configure drive motors
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -89,19 +89,17 @@ public class Robot {
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
         rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
 
-        /*/// Configure encoders
+        /*// Configure encoders
         drivetrainSetRunMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         drivetrainSetRunMode(DcMotor.RunMode.RUN_USING_ENCODER);
          */
 
-        /// Configure servos
-        /*
+        // Configure servos
         intakeServo1.setDirection(DcMotorSimple.Direction.FORWARD);
         intakeServo2.setDirection(DcMotorSimple.Direction.REVERSE);
         wristServo.setDirection(Servo.Direction.REVERSE);
-        */
+
         // Configure slides
-        /*
         arm1.setDirection(DcMotor.Direction.REVERSE);
         arm1.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         arm2.setDirection(DcMotor.Direction.REVERSE);
@@ -114,15 +112,11 @@ public class Robot {
         vertSlide.setDirection(DcMotor.Direction.REVERSE);
         vertSlide.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
         vertSlide.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        */
     }
-}
 
     // Moves the vertical slide to a specified position (in inches).
     // If blockReturn is true, the method will wait until movement is complete.
     // Movement is relative; power is a float in the range [0.0, 1.0].
-
-    /*
     public boolean vertSlideToPosition(double in, double power, boolean blockReturn) {
 
         // Check if the requested movement exceeds the slide's maximum length.
@@ -160,15 +154,11 @@ public class Robot {
         return true;
     }
 
-     */
-
 
     // Moves the arm slide to a specified position (in inches).
     // If blockReturn is true, the method will wait until movement is complete.
     // movement is relative; power is a float in the range [0.0, 1.0]
     // optionally block until movement completion
-
-    /*
     public boolean armSlideToPosition(double in, double power, boolean blockReturn) {
         if (in > armSLideMaxLen) return false;
         double movementClicks = in / armSlideWheelCirc * cpr;
@@ -187,7 +177,7 @@ public class Robot {
             }
         } return true;
     }
-        */
+}
     /*
     public void drivetrainSetRunMode(DcMotor.RunMode mode) {
         leftFrontDrive.setMode(mode);
