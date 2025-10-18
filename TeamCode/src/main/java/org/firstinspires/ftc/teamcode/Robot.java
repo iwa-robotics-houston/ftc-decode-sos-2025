@@ -4,6 +4,7 @@ import static java.lang.Thread.sleep;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -55,8 +56,8 @@ public class Robot {
     public DcMotor leftBackDrive;
     public DcMotor rightBackDrive;
 
-    public DcMotor arm1;
-    public DcMotor arm2;
+    public DcMotorEx flywheel1;
+    public DcMotorEx flywheel2;
     public DcMotor armSlide;
     public DcMotor vertSlide;
 
@@ -70,8 +71,13 @@ public class Robot {
         // init hardware
         leftFrontDrive = hardwareMap.get(DcMotor.class, "leftwheel");
         rightFrontDrive = hardwareMap.get(DcMotor.class, "rightwheel");
-        leftBackDrive = hardwareMap.get(DcMotor.class, "backLeft");
-        rightBackDrive = hardwareMap.get(DcMotor.class, "backRight");
+        //leftBackDrive = hardwareMap.get(DcMotor.class, "backLeft");
+        //rightBackDrive = hardwareMap.get(DcMotor.class, "backRight");
+
+        flywheel1 = hardwareMap.get(DcMotorEx.class, "launcher1");
+        flywheel2 = hardwareMap.get(DcMotorEx.class, "launcher2");
+
+
 
         //arm1 = hardwareMap.get(DcMotor.class, "arm1");
         //arm2 = hardwareMap.get(DcMotor.class, "arm2");
@@ -86,9 +92,17 @@ public class Robot {
         // configure drive motors
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
-        leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
+        //leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
+        //rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
 
+        //Flywheel 1
+        flywheel1.setDirection(DcMotorEx.Direction.FORWARD);
+        //flywheel1.setDirection(DcMotorEx.Direction.REVERSE);
+
+
+        //Flywheel2
+        flywheel2.setDirection(DcMotorEx.Direction.FORWARD);
+        //flywheel2.setDirection(DcMotorEx.Direction.REVERSE);
         /*/// Configure encoders
         drivetrainSetRunMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         drivetrainSetRunMode(DcMotor.RunMode.RUN_USING_ENCODER);
