@@ -37,9 +37,9 @@ public class Main extends LinearOpMode {
 
 
             //for automatic intake:
-            //double orbitPerRotation = 2792.83
-            //double IshowSpeed2 = gamepad2.left_trigger;
-            //robot.rollerIntake.setVelocity(IshowSpeed2 * IshowSpeed2);
+            double orbitPerRotation = 2792.83;
+            double IshowSpeed2 = gamepad2.left_trigger;
+            robot.rollerIntake.setVelocity(IshowSpeed2 * IshowSpeed2);
 
 
 
