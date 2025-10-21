@@ -75,10 +75,10 @@ public class Robot {
 
     public Robot(HardwareMap hardwareMap) {
         // init hardware
-        leftFrontDrive = hardwareMap.get(DcMotor.class, "leftwheel");
-        rightFrontDrive = hardwareMap.get(DcMotor.class, "rightwheel");
-        leftBackDrive = hardwareMap.get(DcMotor.class, "backLeft");
-        rightBackDrive = hardwareMap.get(DcMotor.class, "backRight");
+        //leftFrontDrive = hardwareMap.get(DcMotor.class, "leftwheel");
+        //rightFrontDrive = hardwareMap.get(DcMotor.class, "rightwheel");
+        //leftBackDrive = hardwareMap.get(DcMotor.class, "backLeft");
+        //rightBackDrive = hardwareMap.get(DcMotor.class, "backRight");
 
         //flywheel1 = hardwareMap.get(DcMotorEx.class, "launcher1");
         //flywheel2 = hardwareMap.get(DcMotorEx.class, "launcher2");
@@ -97,10 +97,10 @@ public class Robot {
         //wristServo = hardwareMap.get(Servo.class, "wristServo");
 
         // configure drive motors
-        leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
-        leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
-        rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
+        //leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
+        //rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
+        //leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
+        //rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
 
         //Flywheel 1
         //flywheel1.setDirection(DcMotorEx.Direction.FORWARD);
