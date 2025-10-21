@@ -30,10 +30,19 @@ public class Main extends LinearOpMode {
             double yaw = gamepad1.right_stick_x;
 
             //For flywheel functions: launching artifact
-            double ticksPerRotation = 2786.2;
-            double IshowSpeed = gamepad1.right_stick_y;
-            robot.flywheel1.setVelocity(IshowSpeed * ticksPerRotation);
-            robot.flywheel2.setVelocity(IshowSpeed * ticksPerRotation);
+            //double ticksPerRotation = 2800;
+            //double IshowSpeed = gamepad2.right_stick_y;
+           //robot.flywheel1.setVelocity(IshowSpeed * ticksPerRotation);
+            //robot.flywheel2.setVelocity(IshowSpeed * ticksPerRotation);
+
+
+            //for automatic intake:
+            //double orbitPerRotation = 2792.83
+            //double IshowSpeed2 = gamepad2.left_trigger;
+            //robot.rollerIntake.setVelocity(IshowSpeed2 * IshowSpeed2);
+
+
+
 
 
             //arm1 and arm2 for twerk
@@ -86,27 +95,27 @@ public class Main extends LinearOpMode {
             //set up a variable for each drive wheel to save the power level for telemetry
             double leftFrontPower = axial + lateral + yaw;
             double rightFrontPower = axial - lateral - yaw;
-            //double leftBackPower = axial - lateral + yaw;
-            //double rightBackPower = axial + lateral - yaw;
+            double leftBackPower = axial - lateral + yaw;
+            double rightBackPower = axial + lateral - yaw;
 
             //normalize the values so no wheel power exceeds 100%
             //this ensures that the robot maintains the desired motion
             max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
-           //max = Math.max(max, Math.abs(leftBackPower));
-            //max = Math.max(max, Math.abs(rightBackPower));
+           max = Math.max(max, Math.abs(leftBackPower));
+            max = Math.max(max, Math.abs(rightBackPower));
 
             if (max > 1.0) {
                 leftFrontPower /= max;
                 rightFrontPower /= max;
-                //leftBackPower /= max;
-                //rightBackPower /= max;
+                leftBackPower /= max;
+                rightBackPower /= max;
             }
 
             //send calculated power to wheels
             robot.leftFrontDrive.setPower(leftFrontPower);
             robot.rightFrontDrive.setPower(rightFrontPower);
-            //robot.leftBackDrive.setPower(leftBackPower);
-            //robot.rightBackDrive.setPower(rightBackPower);
+            robot.leftBackDrive.setPower(leftBackPower);
+            robot.rightBackDrive.setPower(rightBackPower);
 
             // Auto Intake
             // Example: Timed Intake Cycle (opens and closes every X seconds)
@@ -157,7 +166,7 @@ public class Main extends LinearOpMode {
             //show the elapsed game time and wheel power.
             telemetry.addData("status", "Run Time:" + runtime);
             telemetry.addData("Front left/Right", "%4.2f,%4.2f", leftFrontPower, rightFrontPower);
-            //telemetry.addData("Back left/Right", "%4.2f,%4.2f", leftBackPower, rightBackPower);
+            telemetry.addData("Back left/Right", "%4.2f,%4.2f", leftBackPower, rightBackPower);
             //telemetry.addData("Wrist Pos", "%4.2f", wristServo.getPosition());
             //telemetry.addData("Claw Power", "%4.2f", robot.intakeServo1.getPower());
             //telemetry.addData("robot.arm Pos", robot.arm1.getCurrentPosition());

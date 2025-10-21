@@ -25,7 +25,11 @@ hardwareMap names come from the robot configuration step on the DS or DC.
 
 public class Robot {
     // dimensions
-    final public double drivetrainDiagonal = 19.5; // in
+    final public double drivetrainDiagonal = 17; // in
+
+    //17
+
+    //14
     public boolean isArmClawOpen;
     public boolean isMiniClawOpen;
     double cpr = 537.7; // clicks
@@ -56,10 +60,12 @@ public class Robot {
     public DcMotor leftBackDrive;
     public DcMotor rightBackDrive;
 
-    public DcMotorEx flywheel1;
-    public DcMotorEx flywheel2;
+    //public DcMotorEx flywheel1;
+    //public DcMotorEx flywheel2;
     public DcMotor armSlide;
     public DcMotor vertSlide;
+
+    public DcMotorEx rollerIntake;
 
     //servos
     public CRServo intakeServo1;
@@ -71,12 +77,13 @@ public class Robot {
         // init hardware
         leftFrontDrive = hardwareMap.get(DcMotor.class, "leftwheel");
         rightFrontDrive = hardwareMap.get(DcMotor.class, "rightwheel");
-        //leftBackDrive = hardwareMap.get(DcMotor.class, "backLeft");
-        //rightBackDrive = hardwareMap.get(DcMotor.class, "backRight");
+        leftBackDrive = hardwareMap.get(DcMotor.class, "backLeft");
+        rightBackDrive = hardwareMap.get(DcMotor.class, "backRight");
 
-        flywheel1 = hardwareMap.get(DcMotorEx.class, "launcher1");
-        flywheel2 = hardwareMap.get(DcMotorEx.class, "launcher2");
+        //flywheel1 = hardwareMap.get(DcMotorEx.class, "launcher1");
+        //flywheel2 = hardwareMap.get(DcMotorEx.class, "launcher2");
 
+        rollerIntake = hardwareMap.get(DcMotorEx.class, "imHungy");
 
 
         //arm1 = hardwareMap.get(DcMotor.class, "arm1");
@@ -92,21 +99,25 @@ public class Robot {
         // configure drive motors
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
-        //leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
-        //rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
+        leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
+        rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
 
         //Flywheel 1
-        flywheel1.setDirection(DcMotorEx.Direction.FORWARD);
+        //flywheel1.setDirection(DcMotorEx.Direction.FORWARD);
         //flywheel1.setDirection(DcMotorEx.Direction.REVERSE);
 
 
         //Flywheel2
-        flywheel2.setDirection(DcMotorEx.Direction.FORWARD);
+        //flywheel2.setDirection(DcMotorEx.Direction.FORWARD);
         //flywheel2.setDirection(DcMotorEx.Direction.REVERSE);
         /*/// Configure encoders
         drivetrainSetRunMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         drivetrainSetRunMode(DcMotor.RunMode.RUN_USING_ENCODER);
          */
+
+        //automatic intake!
+        rollerIntake.setDirection(DcMotorEx.Direction.FORWARD);
+
 
         /// Configure servos
         /*
