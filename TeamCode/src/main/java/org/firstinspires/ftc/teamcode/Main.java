@@ -20,6 +20,10 @@ public class Main extends LinearOpMode {
         runtime.reset();
 
         //run until the end of the match (driver presses STOP)
+        double rightFrontPower = 0;
+        double leftFrontPower = 0;
+        double leftBackPower = 0;
+        double rightBackPower = 0;
         while (opModeIsActive()) {
             double max;
             boolean armLocked = false;
@@ -46,6 +50,9 @@ public class Main extends LinearOpMode {
                 robot.arm2.setPower(0);
             }
             */
+            //set power values
+            double intakePower = 1;
+            double launchPower = 1;
 
 
             // control vert linear slides
@@ -59,7 +66,6 @@ public class Main extends LinearOpMode {
                  robot.vertSlide.setPower(0.0);
             }
             */
-
 
 
             // control arm linear slides
@@ -77,10 +83,10 @@ public class Main extends LinearOpMode {
 
             //combine the joystick requests for each axis-motion to determine each wheel's power
             //set up a variable for each drive wheel to save the power level for telemetry
-            double leftFrontPower = axial + lateral + yaw;
-            double rightFrontPower = axial - lateral - yaw;
-            double leftBackPower = axial - lateral + yaw;
-            double rightBackPower = axial + lateral - yaw;
+            leftFrontPower = axial + lateral + yaw;
+            rightFrontPower = axial - lateral - yaw;
+            leftBackPower = axial - lateral + yaw;
+            rightBackPower = axial + lateral - yaw;
 
             //normalize the values so no wheel power exceeds 100%
             //this ensures that the robot maintains the desired motion
@@ -101,15 +107,35 @@ public class Main extends LinearOpMode {
             robot.leftBackDrive.setPower(leftBackPower);
             robot.rightBackDrive.setPower(rightBackPower);
 
-            // Auto Intake
-            // Example: Timed Intake Cycle (opens and closes every X seconds)
-            //Timed cycle: Alternates between open and closed states at a set time interval.
-            double currentTime = robot.timer.seconds();
+            //operate
+            if (gamepad2.right_trigger > 0) {
+                robot.intake.setPower(intakePower);
+            }
+
+            else if (gamepad2.right_bumper) {
+                robot.intake.setPower(-intakePower);
+            }
+
+            if (gamepad2.left_trigger > 0) {
+                robot.launch.setPower(launchPower);
+                robot.boot.setPower(1);
+            }
+
+            else if (gamepad2.left_bumper) {
+                robot.launch.setPower(launchPower);
+                robot.boot.setPower(-1);
+            }
+        }
+        // Auto Intake
+        // Example: Timed Intake Cycle (opens and closes every X seconds)
+        //Timed cycle: Alternates between open and closed states at a set time interval.
+        double currentTime = robot.timer.seconds();
             /*
             if (currentTime - robot.lastIntakeTime > robot.intakeInterval) {
                 robot.isArmClawOpen = !robot.isArmClawOpen;
                 robot.lastIntakeTime = currentTime;  // Reset timer
             }
+
 
             if (gamepad2.right_trigger > 0) {
                 robot.intakeServo1.setPower(gamepad2.right_trigger);
@@ -147,17 +173,17 @@ public class Main extends LinearOpMode {
 
              */
 
-            //show the elapsed game time and wheel power.
-            telemetry.addData("status", "Run Time:" + runtime);
-            telemetry.addData("Front left/Right", "%4.2f,%4.2f", leftFrontPower, rightFrontPower);
-            telemetry.addData("Back left/Right", "%4.2f,%4.2f", leftBackPower, rightBackPower);
-            //telemetry.addData("Wrist Pos", "%4.2f", wristServo.getPosition());
-            //telemetry.addData("Claw Power", "%4.2f", robot.intakeServo1.getPower());
-            //telemetry.addData("robot.arm Pos", robot.arm1.getCurrentPosition());
-            telemetry.update();
-        }
+        //show the elapsed game time and wheel power.
+        telemetry.addData("status", "Run Time:" + runtime);
+        telemetry.addData("Front left/Right", "%4.2f,%4.2f", leftFrontPower, rightFrontPower);
+        telemetry.addData("Back left/Right", "%4.2f,%4.2f", leftBackPower, rightBackPower);
+        //telemetry.addData("Wrist Pos", "%4.2f", wristServo.getPosition());
+        //telemetry.addData("Claw Power", "%4.2f", robot.intakeServo1.getPower());
+        //telemetry.addData("robot.arm Pos", robot.arm1.getCurrentPosition());
+        telemetry.update();
     }
-}
+    }
+
 
 /*
             //Hard Stop Odometry wheels

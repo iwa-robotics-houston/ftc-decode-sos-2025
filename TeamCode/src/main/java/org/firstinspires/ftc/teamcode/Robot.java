@@ -59,12 +59,16 @@ public class Robot {
     public DcMotor arm2;
     public DcMotor armSlide;
     public DcMotor vertSlide;
+    public DcMotor intake;
+    public DcMotor launch;
+
 
     //servos
     public CRServo intakeServo1;
     public CRServo intakeServo2;
     public Servo miniClawServo;
     public Servo wristServo;
+    public CRServo boot;
 
     public Robot(HardwareMap hardwareMap) {
         // init hardware
@@ -72,6 +76,10 @@ public class Robot {
         rightFrontDrive = hardwareMap.get(DcMotor.class, "rightwheel");
         leftBackDrive = hardwareMap.get(DcMotor.class, "backLeft");
         rightBackDrive = hardwareMap.get(DcMotor.class, "backRight");
+
+        intake = hardwareMap.get(DcMotor.class, "intake");
+        launch = hardwareMap.get(DcMotor.class,"launch");
+        boot = hardwareMap.get(CRServo.class,"boot");
 
         //arm1 = hardwareMap.get(DcMotor.class, "arm1");
         //arm2 = hardwareMap.get(DcMotor.class, "arm2");
@@ -88,6 +96,9 @@ public class Robot {
         rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
         rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
+        intake.setDirection(DcMotor.Direction.FORWARD);
+        launch.setDirection(DcMotor.Direction.FORWARD);
+        boot.setDirection(DcMotorSimple.Direction.FORWARD);
 
         /*/// Configure encoders
         drivetrainSetRunMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
