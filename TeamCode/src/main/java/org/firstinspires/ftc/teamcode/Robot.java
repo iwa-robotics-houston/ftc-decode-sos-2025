@@ -108,8 +108,8 @@ public class Robot {
 
         //automatic intake!
         rollerIntake.setDirection(DcMotor.Direction.FORWARD);
-        boot.setDirection(DcMotor.Direction.FORWARD);
-        boot2.setDirection(DcMotor.Direction.FORWARD);
+        boot.setDirection(CRServo.Direction.FORWARD);
+        boot2.setDirection(CRServo.Direction.FORWARD);
         /// Configure servos
         /*
         intakeServo1.setDirection(DcMotorSimple.Direction.FORWARD);
