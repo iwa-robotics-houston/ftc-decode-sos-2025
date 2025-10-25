@@ -33,8 +33,7 @@ public class Main2 extends LinearOpMode {
 
             //For flywheel functions: launching artifact
             double ticksPerRotation = 2800;
-            double IshowSpeed = gamepad2.left_trigger;
-            robot.flywheel1.setVelocity(IshowSpeed * ticksPerRotation);
+            double IshowSpeed = gamepad2.right_trigger;
             //robot.flywheel2.setVelocity(IshowSpeed * ticksPerRotation);
 
 
@@ -46,19 +45,50 @@ public class Main2 extends LinearOpMode {
             //Set power values
 
             double intakePower = 1;
-            double launchPower = 1;
+            double launchPower = (IshowSpeed * ticksPerRotation);
 
             //operate
-            if(gamepad2.right_trigger > 0) {
-                robot.rollerIntake.setPower(intakePower);}
-            else if (gamepad2.right_bumper){
-                robot.rollerIntake.setPower(-intakePower);}
             if(gamepad2.left_trigger > 0) {
-                robot.flywheel1.setPower(launchPower);
-                robot.boot.setPower(1);}
+                robot.rollerIntake.setPower(intakePower);}
             else if (gamepad2.left_bumper){
-                robot.flywheel1.setPower(launchPower);
+                robot.rollerIntake.setPower(-intakePower);}
+            if(gamepad2.right_trigger > 0) {
+                robot.flywheel1.setVelocity(launchPower);
+                robot.boot.setPower(1);}
+            else if (gamepad2.right_bumper){
+                robot.flywheel1.setVelocity(launchPower);
                 robot.boot.setPower(-1);}
+            else{ robot.flywheel1.setVelocity(0);
+            robot.boot.setPower(0);}
+
+
+            //combine the joystick requests for each axis-motion to determine each wheel's power
+            //set up a variable for each drive wheel to save the power level for telemetry
+            double leftFrontPower = axial + lateral + yaw;
+            double rightFrontPower = axial - lateral - yaw;
+            double leftBackPower = axial - lateral + yaw;
+            double rightBackPower = axial + lateral - yaw;
+
+            //normalize the values so no wheel power exceeds 100%
+            //this ensures that the robot maintains the desired motion
+            max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
+            max = Math.max(max, Math.abs(leftBackPower));
+            max = Math.max(max, Math.abs(rightBackPower));
+
+            if (max > 1.0) {
+                leftFrontPower /= max;
+                rightFrontPower /= max;
+                leftBackPower /= max;
+                rightBackPower /= max;
+            }
+
+            //send calculated power to wheels
+            robot.leftFrontDrive.setPower(leftFrontPower);
+            robot.rightFrontDrive.setPower(rightFrontPower);
+            robot.leftBackDrive.setPower(leftBackPower);
+            robot.rightBackDrive.setPower(rightBackPower);
+
+
             //arm1 and arm2 for twerk
             //robot.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             /*
@@ -103,33 +133,6 @@ public class Main2 extends LinearOpMode {
                 robot.armSlide.setPower(0.0);
             }
            */
-
-
-            //combine the joystick requests for each axis-motion to determine each wheel's power
-            //set up a variable for each drive wheel to save the power level for telemetry
-            double leftFrontPower = axial + lateral + yaw;
-            double rightFrontPower = axial - lateral - yaw;
-            double leftBackPower = axial - lateral + yaw;
-            double rightBackPower = axial + lateral - yaw;
-
-            //normalize the values so no wheel power exceeds 100%
-            //this ensures that the robot maintains the desired motion
-            max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
-            max = Math.max(max, Math.abs(leftBackPower));
-            max = Math.max(max, Math.abs(rightBackPower));
-
-            if (max > 1.0) {
-                leftFrontPower /= max;
-                rightFrontPower /= max;
-                leftBackPower /= max;
-                rightBackPower /= max;
-            }
-
-            //send calculated power to wheels
-            robot.leftFrontDrive.setPower(leftFrontPower);
-            robot.rightFrontDrive.setPower(rightFrontPower);
-            robot.leftBackDrive.setPower(leftBackPower);
-            robot.rightBackDrive.setPower(rightBackPower);
 
             // Auto Intake
             // Example: Timed Intake Cycle (opens and closes every X seconds)
