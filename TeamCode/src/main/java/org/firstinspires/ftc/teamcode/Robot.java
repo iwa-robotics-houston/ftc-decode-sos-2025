@@ -72,8 +72,8 @@ public class Robot {
 
     public Robot(HardwareMap hardwareMap) {
         // init hardware
-        leftFrontDrive = hardwareMap.get(DcMotor.class, "leftwheel");
-        rightFrontDrive = hardwareMap.get(DcMotor.class, "rightwheel");
+        leftFrontDrive = hardwareMap.get(DcMotor.class, "frontLeft");
+        rightFrontDrive = hardwareMap.get(DcMotor.class, "frontRight");
         leftBackDrive = hardwareMap.get(DcMotor.class, "backLeft");
         rightBackDrive = hardwareMap.get(DcMotor.class, "backRight");
 

@@ -24,8 +24,9 @@ hardwareMap names come from the robot configuration step on the DS or DC.
 
 public class chassis {
     // dimensions
-    final public double drivetrainDiagonal = 19.5; // in
+    final public double drivetrainDiagonal = 17; // in
     public boolean isArmClawOpen;
+
     public boolean isMiniClawOpen;
     double cpr = 537.7; // clicks
     double wheelCirc = 11.9; // in

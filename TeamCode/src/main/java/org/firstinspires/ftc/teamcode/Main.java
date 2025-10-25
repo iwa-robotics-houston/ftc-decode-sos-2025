@@ -24,6 +24,8 @@ public class Main extends LinearOpMode {
         double leftFrontPower = 0;
         double leftBackPower = 0;
         double rightBackPower = 0;
+        double intakePower = 1;
+        double launchPower = 1;
         while (opModeIsActive()) {
             double max;
             boolean armLocked = false;
@@ -51,8 +53,6 @@ public class Main extends LinearOpMode {
             }
             */
             //set power values
-            double intakePower = 1;
-            double launchPower = 1;
 
 
             // control vert linear slides
