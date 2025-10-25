@@ -54,12 +54,15 @@ public class Main2 extends LinearOpMode {
                 robot.rollerIntake.setPower(-intakePower);}
             if(gamepad2.right_trigger > 0) {
                 robot.flywheel1.setVelocity(launchPower);
-                robot.boot.setPower(1);}
+                robot.boot.setPower(1);
+                robot.boot2.setPower(1);}
             else if (gamepad2.right_bumper){
                 robot.flywheel1.setVelocity(launchPower);
-                robot.boot.setPower(-1);}
+                robot.boot.setPower(-1);
+                robot.boot2.setPower(-1);}
             else{ robot.flywheel1.setVelocity(0);
-            robot.boot.setPower(0);}
+                robot.boot.setPower(0);
+                robot.boot2.setPower(0);}
 
 
             //combine the joystick requests for each axis-motion to determine each wheel's power

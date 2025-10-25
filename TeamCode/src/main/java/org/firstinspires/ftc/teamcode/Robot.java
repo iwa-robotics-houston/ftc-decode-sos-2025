@@ -64,7 +64,7 @@ public class Robot {
 
     public CRServo boot;
 
-
+    public CRServo boot2;
 
     public DcMotor rollerIntake;
 
@@ -87,7 +87,7 @@ public class Robot {
         rollerIntake = hardwareMap.get(DcMotor.class, "imHungy");
 
         boot = hardwareMap.get(CRServo.class, "boot");
-
+        boot2 = hardwareMap.get(CRServo.class, "boot2");
 
         // configure drive motors
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -109,7 +109,7 @@ public class Robot {
         //automatic intake!
         rollerIntake.setDirection(DcMotor.Direction.FORWARD);
         boot.setDirection(DcMotor.Direction.FORWARD);
-
+        boot2.setDirection(DcMotor.Direction.FORWARD);
         /// Configure servos
         /*
         intakeServo1.setDirection(DcMotorSimple.Direction.FORWARD);
