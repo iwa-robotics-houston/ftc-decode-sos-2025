@@ -60,64 +60,55 @@ public class Robot {
     public DcMotor leftBackDrive;
     public DcMotor rightBackDrive;
 
-    //public DcMotorEx flywheel1;
-    //public DcMotorEx flywheel2;
-    public DcMotor armSlide;
-    public DcMotor vertSlide;
+    public DcMotorEx flywheel1;
 
-    public DcMotorEx rollerIntake;
+    public CRServo boot;
+
+
+
+    public DcMotor rollerIntake;
+
+
 
     //servos
     public CRServo intakeServo1;
     public CRServo intakeServo2;
-    public Servo miniClawServo;
-    public Servo wristServo;
 
     public Robot(HardwareMap hardwareMap) {
         // init hardware
-        //leftFrontDrive = hardwareMap.get(DcMotor.class, "leftwheel");
-        //rightFrontDrive = hardwareMap.get(DcMotor.class, "rightwheel");
-        //leftBackDrive = hardwareMap.get(DcMotor.class, "backLeft");
-        //rightBackDrive = hardwareMap.get(DcMotor.class, "backRight");
+        leftFrontDrive = hardwareMap.get(DcMotor.class, "frontLeft");
+        rightFrontDrive = hardwareMap.get(DcMotor.class, "frontRight");
+        leftBackDrive = hardwareMap.get(DcMotor.class, "backLeft");
+        rightBackDrive = hardwareMap.get(DcMotor.class, "backRight");
 
-        //flywheel1 = hardwareMap.get(DcMotorEx.class, "launcher1");
-        //flywheel2 = hardwareMap.get(DcMotorEx.class, "launcher2");
-
-        rollerIntake = hardwareMap.get(DcMotorEx.class, "imHungy");
+        flywheel1 = hardwareMap.get(DcMotorEx.class, "launcher1");
 
 
-        //arm1 = hardwareMap.get(DcMotor.class, "arm1");
-        //arm2 = hardwareMap.get(DcMotor.class, "arm2");
-        //armSlide = hardwareMap.get(DcMotor.class, "armSlide");
-        //vertSlide = hardwareMap.get(DcMotor.class, "vertSlide");
+        rollerIntake = hardwareMap.get(DcMotor.class, "imHungy");
 
-        //intakeServo1 = hardwareMap.get(CRServo.class, "intakeServo1");
-        //intakeServo2 = hardwareMap.get(CRServo.class, "intakeServo2");
-        //miniClawServo = hardwareMap.get(Servo.class, "miniClaw");
-        //wristServo = hardwareMap.get(Servo.class, "wristServo");
+        boot = hardwareMap.get(CRServo.class, "boot");
+
 
         // configure drive motors
-        //leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
-        //rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
-        //leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
-        //rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
+        leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
+        rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
+        leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
+        rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
 
         //Flywheel 1
-        //flywheel1.setDirection(DcMotorEx.Direction.FORWARD);
+        flywheel1.setDirection(DcMotorEx.Direction.FORWARD);
         //flywheel1.setDirection(DcMotorEx.Direction.REVERSE);
 
 
-        //Flywheel2
-        //flywheel2.setDirection(DcMotorEx.Direction.FORWARD);
-        //flywheel2.setDirection(DcMotorEx.Direction.REVERSE);
+
         /*/// Configure encoders
         drivetrainSetRunMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         drivetrainSetRunMode(DcMotor.RunMode.RUN_USING_ENCODER);
          */
 
         //automatic intake!
-        rollerIntake.setDirection(DcMotorEx.Direction.FORWARD);
-
+        rollerIntake.setDirection(DcMotor.Direction.FORWARD);
+        boot.setDirection(DcMotor.Direction.FORWARD);
 
         /// Configure servos
         /*
@@ -213,7 +204,7 @@ public class Robot {
         } return true;
     }
         */
-    /*
+    /*d
     public void drivetrainSetRunMode(DcMotor.RunMode mode) {
         leftFrontDrive.setMode(mode);
         rightFrontDrive.setMode(mode);

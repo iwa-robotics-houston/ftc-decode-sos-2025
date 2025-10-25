@@ -1,3 +1,5 @@
+
+
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -6,7 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 @TeleOp(name = "TeleOp", group = "LinearOpMode")
 // TeleOp for claw bot with Mecanum drive
-public class Main extends LinearOpMode {
+public class Main2 extends LinearOpMode {
     public void runOpMode() {
         Robot robot = new Robot(hardwareMap);
         ElapsedTime runtime = new ElapsedTime();
@@ -25,23 +27,38 @@ public class Main extends LinearOpMode {
             boolean armLocked = false;
 
             //POV Mode uses left joystick to go forward & strafe, and right joystick to rotate
-            double axial = -gamepad1.left_stick_y; //note: pushing stick forward gives negative value
-            double lateral = gamepad1.left_stick_x;
+            double axial = gamepad1.left_stick_y; //note: pushing stick forward gives negative value
+            double lateral = -gamepad1.left_stick_x;
             double yaw = gamepad1.right_stick_x;
 
             //For flywheel functions: launching artifact
-            //double ticksPerRotation = 2800;
-            //double IshowSpeed = gamepad2.right_stick_y;
-            //robot.flywheel1.setVelocity(IshowSpeed * ticksPerRotation);
+            double ticksPerRotation = 2800;
+            double IshowSpeed = gamepad2.left_trigger;
+            robot.flywheel1.setVelocity(IshowSpeed * ticksPerRotation);
             //robot.flywheel2.setVelocity(IshowSpeed * ticksPerRotation);
 
 
-            //for automatic intake:
+            /*/for automatic intake:
             double orbitPerRotation = 2792.83;
-            double IshowSpeed2 = gamepad2.left_trigger;
-            robot.rollerIntake.setVelocity(IshowSpeed2 * IshowSpeed2);
+            double IshowSpeed2 = gamepad2.right_trigger;
+            robot.rollerIntake.setVelocity(orbitPerRotation * IshowSpeed2);
+            */
+            //Set power values
 
+            double intakePower = 1;
+            double launchPower = 1;
 
+            //operate
+            if(gamepad2.right_trigger > 0) {
+                robot.rollerIntake.setPower(intakePower);}
+            else if (gamepad2.right_bumper){
+                robot.rollerIntake.setPower(-intakePower);}
+            if(gamepad2.left_trigger > 0) {
+                robot.flywheel1.setPower(launchPower);
+                robot.boot.setPower(1);}
+            else if (gamepad2.left_bumper){
+                robot.flywheel1.setPower(launchPower);
+                robot.boot.setPower(-1);}
             //arm1 and arm2 for twerk
             //robot.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
             /*
@@ -74,6 +91,7 @@ public class Main extends LinearOpMode {
             */
 
 
+
             // control arm linear slides
             /*
             if (gamepad2.a) {
@@ -96,27 +114,27 @@ public class Main extends LinearOpMode {
 
             //normalize the values so no wheel power exceeds 100%
             //this ensures that the robot maintains the desired motion
-            //max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
-            //max = Math.max(max, Math.abs(leftBackPower));
-            //max = Math.max(max, Math.abs(rightBackPower));
+            max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
+            max = Math.max(max, Math.abs(leftBackPower));
+            max = Math.max(max, Math.abs(rightBackPower));
 
-            //if (max > 1.0) {
-            //leftFrontPower /= max;
-            //rightFrontPower /= max;
-            //leftBackPower /= max;
-            //rightBackPower /= max;
-        }
+            if (max > 1.0) {
+                leftFrontPower /= max;
+                rightFrontPower /= max;
+                leftBackPower /= max;
+                rightBackPower /= max;
+            }
 
-        //send calculated power to wheels
-        //robot.leftFrontDrive.setPower(leftFrontPower);
-        //robot.rightFrontDrive.setPower(rightFrontPower);
-        //robot.leftBackDrive.setPower(leftBackPower);
-        //robot.rightBackDrive.setPower(rightBackPower);
+            //send calculated power to wheels
+            robot.leftFrontDrive.setPower(leftFrontPower);
+            robot.rightFrontDrive.setPower(rightFrontPower);
+            robot.leftBackDrive.setPower(leftBackPower);
+            robot.rightBackDrive.setPower(rightBackPower);
 
-        // Auto Intake
-        // Example: Timed Intake Cycle (opens and closes every X seconds)
-        //Timed cycle: Alternates between open and closed states at a set time interval.
-        double currentTime = robot.timer.seconds();
+            // Auto Intake
+            // Example: Timed Intake Cycle (opens and closes every X seconds)
+            //Timed cycle: Alternates between open and closed states at a set time interval.
+            double currentTime = robot.timer.seconds();
             /*
             if (currentTime - robot.lastIntakeTime > robot.intakeInterval) {
                 robot.isArmClawOpen = !robot.isArmClawOpen;
@@ -159,14 +177,15 @@ public class Main extends LinearOpMode {
 
              */
 
-        //show the elapsed game time and wheel power.
-        telemetry.addData("status", "Run Time:" + runtime);
-        //telemetry.addData("Front left/Right", "%4.2f,%4.2f", leftFrontPower, rightFrontPower);
-        //telemetry.addData("Back left/Right", "%4.2f,%4.2f", leftBackPower, rightBackPower);
-        //telemetry.addData("Wrist Pos", "%4.2f", wristServo.getPosition());
-        //telemetry.addData("Claw Power", "%4.2f", robot.intakeServo1.getPower());
-        //telemetry.addData("robot.arm Pos", robot.arm1.getCurrentPosition());
-        telemetry.update();
+            //show the elapsed game time and wheel power.
+            telemetry.addData("status", "Run Time:" + runtime);
+            telemetry.addData("Front left/Right", "%4.2f,%4.2f", leftFrontPower, rightFrontPower);
+            telemetry.addData("Back left/Right", "%4.2f,%4.2f", leftBackPower, rightBackPower);
+            //telemetry.addData("Wrist Pos", "%4.2f", wristServo.getPosition());
+            //telemetry.addData("Claw Power", "%4.2f", robot.intakeServo1.getPower());
+            //telemetry.addData("robot.arm Pos", robot.arm1.getCurrentPosition());
+            telemetry.update();
+        }
     }
 }
 
@@ -224,4 +243,3 @@ public class Main extends LinearOpMode {
                 }
             }
             */
-
