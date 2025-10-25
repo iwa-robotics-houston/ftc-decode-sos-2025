@@ -27,8 +27,8 @@ public class Main2 extends LinearOpMode {
             boolean armLocked = false;
 
             //POV Mode uses left joystick to go forward & strafe, and right joystick to rotate
-            double axial = gamepad1.left_stick_y; //note: pushing stick forward gives negative value
-            double lateral = -gamepad1.left_stick_x;
+            double axial = -gamepad1.left_stick_y; //note: pushing stick forward gives negative value
+            double lateral = gamepad1.left_stick_x;
             double yaw = gamepad1.right_stick_x;
 
             //For flywheel functions: launching artifact
@@ -52,6 +52,9 @@ public class Main2 extends LinearOpMode {
                 robot.rollerIntake.setPower(intakePower);}
             else if (gamepad2.left_bumper){
                 robot.rollerIntake.setPower(-intakePower);}
+            else{ robot.rollerIntake.setPower(0);}
+
+
             if(gamepad2.right_trigger > 0) {
                 robot.flywheel1.setVelocity(launchPower);
                 robot.boot.setPower(1);
