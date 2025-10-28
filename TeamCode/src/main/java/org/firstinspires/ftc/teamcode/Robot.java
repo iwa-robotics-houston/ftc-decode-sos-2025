@@ -4,17 +4,11 @@ import static java.lang.Thread.sleep;
 
 import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
-
-/*
-Hey chat, uh at the moment this is just a copy and paste of the Robot.Java from last year.
-I haven't changed much but you'll want to see what needs to be reinstated,
-as I have commented out a couple lines of code as practice using this software.
-- Addy
- */
 
 /*
 Contains robot build, state, and transformation functions.
@@ -24,7 +18,11 @@ hardwareMap names come from the robot configuration step on the DS or DC.
 
 public class Robot {
     // dimensions
-    final public double drivetrainDiagonal = 19.5; // in
+    final public double drivetrainDiagonal = 17; // in
+
+    //17 = length
+
+    //14 = width
     public boolean isArmClawOpen;
     public boolean isMiniClawOpen;
     double cpr = 537.7; // clicks
@@ -55,20 +53,19 @@ public class Robot {
     public DcMotor leftBackDrive;
     public DcMotor rightBackDrive;
 
-    public DcMotor arm1;
-    public DcMotor arm2;
-    public DcMotor armSlide;
-    public DcMotor vertSlide;
-    public DcMotor intake;
-    public DcMotor launch;
+    public DcMotorEx flywheel1;
+
+    public CRServo boot;
+
+    public CRServo boot2;
+
+    public DcMotor rollerIntake;
+
 
 
     //servos
     public CRServo intakeServo1;
     public CRServo intakeServo2;
-    public Servo miniClawServo;
-    public Servo wristServo;
-    public CRServo boot;
 
     public Robot(HardwareMap hardwareMap) {
         // init hardware
@@ -77,40 +74,31 @@ public class Robot {
         leftBackDrive = hardwareMap.get(DcMotor.class, "backLeft");
         rightBackDrive = hardwareMap.get(DcMotor.class, "backRight");
 
-        intake = hardwareMap.get(DcMotor.class, "intake");
-        launch = hardwareMap.get(DcMotor.class,"launch");
-        boot = hardwareMap.get(CRServo.class,"boot");
+        flywheel1 = hardwareMap.get(DcMotorEx.class, "launcher1");
 
-        //arm1 = hardwareMap.get(DcMotor.class, "arm1");
-        //arm2 = hardwareMap.get(DcMotor.class, "arm2");
-        //armSlide = hardwareMap.get(DcMotor.class, "armSlide");
-        //vertSlide = hardwareMap.get(DcMotor.class, "vertSlide");
+        rollerIntake = hardwareMap.get(DcMotor.class, "imHungy");
 
-        //intakeServo1 = hardwareMap.get(CRServo.class, "intakeServo1");
-        //intakeServo2 = hardwareMap.get(CRServo.class, "intakeServo2");
-        //miniClawServo = hardwareMap.get(Servo.class, "miniClaw");
-        //wristServo = hardwareMap.get(Servo.class, "wristServo");
+        boot = hardwareMap.get(CRServo.class, "boot");
+        boot2 = hardwareMap.get(CRServo.class, "boot2");
+
 
         // configure drive motors
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
         leftBackDrive.setDirection(DcMotor.Direction.REVERSE);
         rightBackDrive.setDirection(DcMotor.Direction.FORWARD);
-        intake.setDirection(DcMotor.Direction.FORWARD);
-        launch.setDirection(DcMotor.Direction.FORWARD);
+
+        //Flywheel 1
+        flywheel1.setDirection(DcMotorEx.Direction.REVERSE);
+        //flywheel1.setDirection(DcMotorEx.Direction.REVERSE);
+
+
+        // Configure servos for automatic intake
+        rollerIntake.setDirection(DcMotorSimple.Direction.FORWARD);
         boot.setDirection(DcMotorSimple.Direction.FORWARD);
+        boot2.setDirection(DcMotorSimple.Direction.FORWARD);
 
-        /*/// Configure encoders
-        drivetrainSetRunMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        drivetrainSetRunMode(DcMotor.RunMode.RUN_USING_ENCODER);
-         */
 
-        /// Configure servos
-        /*
-        intakeServo1.setDirection(DcMotorSimple.Direction.FORWARD);
-        intakeServo2.setDirection(DcMotorSimple.Direction.REVERSE);
-        wristServo.setDirection(Servo.Direction.REVERSE);
-        */
         // Configure slides
         /*
         arm1.setDirection(DcMotor.Direction.REVERSE);
@@ -129,9 +117,9 @@ public class Robot {
     }
 }
 
-    // Moves the vertical slide to a specified position (in inches).
-    // If blockReturn is true, the method will wait until movement is complete.
-    // Movement is relative; power is a float in the range [0.0, 1.0].
+// Moves the vertical slide to a specified position (in inches).
+// If blockReturn is true, the method will wait until movement is complete.
+// Movement is relative; power is a float in the range [0.0, 1.0].
 
     /*
     public boolean vertSlideToPosition(double in, double power, boolean blockReturn) {
@@ -174,10 +162,10 @@ public class Robot {
      */
 
 
-    // Moves the arm slide to a specified position (in inches).
-    // If blockReturn is true, the method will wait until movement is complete.
-    // movement is relative; power is a float in the range [0.0, 1.0]
-    // optionally block until movement completion
+// Moves the arm slide to a specified position (in inches).
+// If blockReturn is true, the method will wait until movement is complete.
+// movement is relative; power is a float in the range [0.0, 1.0]
+// optionally block until movement completion
 
     /*
     public boolean armSlideToPosition(double in, double power, boolean blockReturn) {
@@ -199,7 +187,7 @@ public class Robot {
         } return true;
     }
         */
-    /*
+    /*d
     public void drivetrainSetRunMode(DcMotor.RunMode mode) {
         leftFrontDrive.setMode(mode);
         rightFrontDrive.setMode(mode);
