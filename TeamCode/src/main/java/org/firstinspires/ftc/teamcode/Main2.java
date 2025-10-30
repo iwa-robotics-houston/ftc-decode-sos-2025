@@ -49,11 +49,11 @@ public class Main2 extends LinearOpMode {
             double launchPower = (IshowSpeed * ticksPerRotation);
             //operate
             if(gamepad2.left_trigger > 0) {
-                robot.rollerIntake.setPower(-intakePower);
-                robot.boot.setPower(-compliantWheel);}
-            else if (gamepad2.left_bumper){
                 robot.rollerIntake.setPower(intakePower);
                 robot.boot.setPower(compliantWheel);}
+            else if (gamepad2.left_bumper){
+                robot.rollerIntake.setPower(-intakePower);
+                robot.boot.setPower(-compliantWheel);}
             else{ robot.rollerIntake.setPower(0);
                 robot.boot.setPower(0);}
 
@@ -63,7 +63,7 @@ public class Main2 extends LinearOpMode {
                 robot.boot2.setPower(gamepad2.right_trigger);}
             else if (gamepad2.right_bumper){
                 robot.flywheel1.setVelocity(-launchPower);
-                robot.boot2.setPower(1);}
+                robot.boot2.setPower(-1);}
             else{ robot.flywheel1.setVelocity(0);
                 robot.boot2.setPower(0);}
 
