@@ -87,7 +87,7 @@ public class Robot {
         rollerIntake = hardwareMap.get(DcMotor.class, "imHungy");
 
         boot = hardwareMap.get(CRServo.class, "boot");
-        //boot2 = hardwareMap.get(CRServo.class, "boot2");
+        boot2 = hardwareMap.get(CRServo.class, "boot2");
 
         // configure drive motors
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
