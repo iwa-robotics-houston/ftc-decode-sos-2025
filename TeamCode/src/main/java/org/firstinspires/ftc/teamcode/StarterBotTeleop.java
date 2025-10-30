@@ -75,35 +75,46 @@ public class StarterBotTeleop extends LinearOpMode {
             robot.rightBackDrive.setPower(rightBackPower);
 
 
-            // Gamepad 2: Mechanism Controls (from Main2.java)
-
-            // Roller Intake Controls
-            if (gamepad2.left_trigger > 0) {
-                robot.rollerIntake.setPower(1.0); // Set to full power forward
-            } else if (gamepad2.left_bumper) {
-                robot.rollerIntake.setPower(-1.0); // Set to full power reverse
-            } else {
-                robot.rollerIntake.setPower(0); // Stop the intake
-            }
-
-            // --- Flywheel Launcher Controls ---
+            // Gamepad 2: Mechanism Controls
             double ticksPerRotation = 2800; // Example value
-            double launchPower = gamepad2.right_trigger * ticksPerRotation;
+            double launchVelocity = gamepad2.right_trigger * ticksPerRotation;
 
+            // LAUNCH MODE
+            // Pressing the right trigger spins up the flywheel AND runs the intake and boot feeders.
             if (gamepad2.right_trigger > 0) {
-                robot.flywheel1.setVelocity(launchPower);
+                // Launcher active
+                robot.flywheel1.setVelocity(launchVelocity);
                 robot.boot.setPower(gamepad2.right_trigger);
                 robot.boot2.setPower(gamepad2.right_trigger);
-            } else if (gamepad2.right_bumper) {
-                // This is the unjam/reverse mode.
-                robot.flywheel1.setVelocity(1500); // Example constant velocity
+                // Also run the main intake to help feed
+                robot.rollerIntake.setPower(gamepad2.right_trigger);
+            }
+            // REVERSE/UNJAM MODE
+            // Pressing the right bumper reverses ALL motors in the system.
+            else if (gamepad2.right_bumper) {
+                // Reverse mode active
+                robot.flywheel1.setVelocity(0); // Flywheel should not spin in reverse
                 robot.boot.setPower(-1);
                 robot.boot2.setPower(-1);
-            } else {
-                // If no launcher buttons are pressed, turn everything off.
+                robot.rollerIntake.setPower(-1);
+            }
+            // INTAKE ONLY MODE
+            // Pressing the left trigger ONLY runs the roller intake.
+            else if (gamepad2.left_trigger > 0) {
+                // Intake only mode active
+                robot.rollerIntake.setPower(1.0);
+                // Ensure other motors are off
                 robot.flywheel1.setVelocity(0);
                 robot.boot.setPower(0);
                 robot.boot2.setPower(0);
+            }
+            // IDLE MODE
+            // If no buttons are pressed, turn everything off.
+            else {
+                robot.flywheel1.setVelocity(0);
+                robot.boot.setPower(0);
+                robot.boot2.setPower(0);
+                robot.rollerIntake.setPower(0);
             }
 
 
