@@ -49,10 +49,10 @@ public class Main2 extends LinearOpMode {
             //operate
             if(gamepad2.left_trigger > 0) {
                 robot.rollerIntake.setPower(-intakePower);
-                robot.boot.setPower(gamepad2.right_trigger);}
+                robot.boot.setPower(-gamepad2.right_trigger);}
             else if (gamepad2.left_bumper){
                 robot.rollerIntake.setPower(intakePower);
-                robot.boot.setPower(-1);}
+                robot.boot.setPower(1);}
             else{ robot.rollerIntake.setPower(0);
                 robot.boot.setPower(0);}
 
