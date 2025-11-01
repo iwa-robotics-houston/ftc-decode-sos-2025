@@ -27,7 +27,8 @@ public class Main2 extends LinearOpMode {
             boolean armLocked = false;
 
             //POV Mode uses left joystick to go forward & strafe, and right joystick to rotate
-            double axial = -gamepad1.left_stick_y; //note: pushing stick forward gives negative value
+            double axial = gamepad1.left_stick_y; //note: pushing stick forward gives negative value
+            //NOTE: I am making sure they are not in inverse.
             double lateral = gamepad1.left_stick_x;
             double yaw = gamepad1.right_stick_x;
 
@@ -72,6 +73,9 @@ public class Main2 extends LinearOpMode {
 
             //combine the joystick requests for each axis-motion to determine each wheel's power
             //set up a variable for each drive wheel to save the power level for telemetry
+
+
+            //Joystick controls
             double leftFrontPower = axial + lateral + yaw;
             double rightFrontPower = axial - lateral - yaw;
             double leftBackPower = axial - lateral + yaw;
@@ -97,50 +101,6 @@ public class Main2 extends LinearOpMode {
             robot.rightBackDrive.setPower(rightBackPower);
 
 
-            //arm1 and arm2 for twerk
-            //robot.arm.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            /*
-            double arm1Power = 1;
-            double arm2Power = 1;
-            if (gamepad2.dpad_down) { //was: dpad_up edit: reverted
-                robot.arm1.setPower(-arm1Power);
-                robot.arm2.setPower(-arm2Power);
-                //robot.arm.setTargetPosition(robot.arm.getCurrentPosition()-10);
-            } else if (gamepad2.dpad_up) { //was: dpad_down edit: reverted
-                robot.arm1.setPower(arm1Power);
-                robot.arm2.setPower(arm2Power);
-            } else {
-                robot.arm1.setPower(0);
-                robot.arm2.setPower(0);
-            }
-            */
-
-
-            // control vert linear slides
-            /*
-            if (gamepad2.y) {
-                 robot.vertSlide.setPower(0.5);
-            }
-            else if (gamepad2.x) {
-                 robot.vertSlide.setPower(-0.5);
-            } else {
-                 robot.vertSlide.setPower(0.0);
-            }
-            */
-
-
-
-            // control arm linear slides
-            /*
-            if (gamepad2.a) {
-                robot.armSlide.setPower(0.5);
-            }
-            else if (gamepad2.b) {
-                robot.armSlide.setPower(-0.5);
-            } else {
-                robot.armSlide.setPower(0.0);
-            }
-           */
 
             // Auto Intake
             // Example: Timed Intake Cycle (opens and closes every X seconds)
@@ -152,39 +112,12 @@ public class Main2 extends LinearOpMode {
                 robot.lastIntakeTime = currentTime;  // Reset timer
             }
 
-            if (gamepad2.right_trigger > 0) {
-                robot.intakeServo1.setPower(gamepad2.right_trigger);
-                robot.intakeServo2.setPower(gamepad2.right_trigger);
-            } else if (gamepad2.left_trigger > 0.5){
-                robot.intakeServo1.setPower(-gamepad2.left_trigger);
-                robot.intakeServo2.setPower(-gamepad2.left_trigger);
-            }
-            else {
-                robot.intakeServo1.setPower(0);
-                robot.intakeServo2.setPower(0);
+
             }
 
-            // Mini claw
-            if (gamepad2.right_bumper && !robot.rightBumperPrev) {
-                robot.isMiniClawOpen = !robot.isMiniClawOpen;
-            }
-            robot.rightBumperPrev = gamepad2.right_bumper;
-            if (robot.isMiniClawOpen) {
-                robot.miniClawServo.setPosition(robot.miniClawOpenPos);
-            } else {
-                robot.miniClawServo.setPosition(robot.miniClawClosePos);
-            }
 
-            // wrist
-            if (gamepad2.dpad_right) {
-                robot.wristServo.setPosition(1);//135 deg
-            }
-            else if (gamepad2.dpad_left) {
-                robot.wristServo.setPosition(0);//-135 deg
-            }
-            else {
-                robot.wristServo.setPosition(0.5);//0 deg
-            }
+
+
 
              */
 
@@ -201,56 +134,7 @@ public class Main2 extends LinearOpMode {
 }
 
 /*
-            //Hard Stop Odometry wheels
-            public class OdometryWheelStop extends LinearOpMode {
-                private DcMotor OdometryWheelMotor;
 
-                @Override
-                public void init() {
-                    // Initialize the motor and gamepad1
-                    odometryWheelMotorY = hardwareMap.get(DcMotor.class, "odometryWheelMotorY");
-                    gamepad1 = gamepad1; // Assuming gamepad1 is used
-                    odometryWheelMotorX = hardwareMap.get(DcMotor.class, "odometryWheelMotorX");
-                    gamepad1 = gamepad1; // Assuming gamepad1 is used
-                }
-                @Override
-                public void loop() {
-                    // Check if the button (e.g., 'A' button) is pressed
-                    if (gamepad1.a) {
-                        // Hard stop the odometry wheel motor
-                        odometryWheelMotorY.setPower(0);
-                        odometryWheelMotorY.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-                        odometryWheelMotorX.setPower(0);
-                        odometryWheelMotorX.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-
-
-             */
-            /*
-            // Arm claw
-            if (gamepad2.right_trigger > 0.5 && !robot.rightTriggerPrev) {
-                robot.isArmClawOpen = !robot.isArmClawOpen;
-            }
-           robot.rightTriggerPrev = gamepad2.right_trigger > 0.5;
-            if (robot.isArmClawOpen) {
-                robot.armClawServo.setPosition(robot.ArmClawOpenPos);
-            } else {
-                robot.armClawServo.setPosition(robot.ArmClawClosePos);
-            }
-             */
-            /*
-            if (gamepad2.left_bumper) {
-                if (!armLocked) {
-                    robot.arm1.setTargetPosition(robot.arm1.getCurrentPosition());
-                    robot.arm1.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    robot.arm1.setPower(1);
-                    robot.arm2.setTargetPosition(robot.arm2.getCurrentPosition());
-                    robot.arm2.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-                    robot.arm2.setPower(1);
-                   armLocked = true;
-                } else {
-                    robot.arm1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                    robot.arm2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                    armLocked = false;
                 }
             }
             */
