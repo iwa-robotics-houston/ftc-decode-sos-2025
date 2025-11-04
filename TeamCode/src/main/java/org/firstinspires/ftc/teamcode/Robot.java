@@ -7,7 +7,6 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /*
@@ -62,18 +61,17 @@ public class Robot {
 
     public DcMotorEx flywheel1;
 
-    public CRServo boot;
+    public CRServo hotwheelsfront;
 
-    public CRServo boot2;
+    public CRServo hotwheelsback;
 
     public DcMotor rollerIntake;
 
 
-
     //servos
-    public CRServo intakeServo1;
-    public CRServo intakeServo2;
+    public CRServo rollitbackbottom;
 
+    public CRServo rollitbacktop;
     public Robot(HardwareMap hardwareMap) {
         // init hardware
         leftFrontDrive = hardwareMap.get(DcMotor.class, "frontLeft");
@@ -81,13 +79,20 @@ public class Robot {
         leftBackDrive = hardwareMap.get(DcMotor.class, "backLeft");
         rightBackDrive = hardwareMap.get(DcMotor.class, "backRight");
 
-        flywheel1 = hardwareMap.get(DcMotorEx.class, "launcher1");
+        flywheel1 = hardwareMap.get(DcMotorEx.class, "Oreo");
 
 
         rollerIntake = hardwareMap.get(DcMotor.class, "imHungy");
 
-        boot = hardwareMap.get(CRServo.class, "boot");
-        boot2 = hardwareMap.get(CRServo.class, "boot2");
+        hotwheelsfront = hardwareMap.get(CRServo.class, "front");
+        hotwheelsback = hardwareMap.get(CRServo.class, "back");
+
+
+        rollitbackbottom = hardwareMap.get(CRServo.class, "bottoms");
+
+        rollitbacktop= hardwareMap.get(CRServo.class, "rollie");
+
+
 
         // configure drive motors
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
@@ -97,9 +102,9 @@ public class Robot {
 
         //Flywheel 1
         flywheel1.setDirection(DcMotorEx.Direction.REVERSE);
-        //flywheel1.setDirection(DcMotorEx.Direction.REVERSE);
-
-
+        flywheel1.setDirection(DcMotorEx.Direction.REVERSE);
+        rollitbackbottom.setDirection(DcMotorEx.Direction.REVERSE);
+        rollitbacktop.setDirection(DcMotorEx.Direction.REVERSE);
 
         /*/// Configure encoders
         drivetrainSetRunMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
@@ -108,8 +113,8 @@ public class Robot {
 
         //automatic intake!
         rollerIntake.setDirection(DcMotor.Direction.REVERSE);
-        boot.setDirection(DcMotorSimple.Direction.REVERSE);
-        boot2.setDirection(DcMotorSimple.Direction.REVERSE);
+        hotwheelsfront.setDirection(DcMotorSimple.Direction.REVERSE);
+        hotwheelsback.setDirection(DcMotorSimple.Direction.REVERSE);
         /// Configure servos
         /*
         intakeServo1.setDirection(DcMotorSimple.Direction.FORWARD);

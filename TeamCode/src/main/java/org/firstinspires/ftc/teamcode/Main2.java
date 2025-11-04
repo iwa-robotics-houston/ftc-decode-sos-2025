@@ -26,11 +26,6 @@ public class Main2 extends LinearOpMode {
             double max;
             boolean armLocked = false;
 
-            //POV Mode uses left joystick to go forward & strafe, and right joystick to rotate
-            double axial = gamepad1.left_stick_y; //note: pushing stick forward gives negative value
-            //NOTE: I am making sure they are not in inverse.
-            double lateral = gamepad1.left_stick_x;
-            double yaw = gamepad1.right_stick_x;
 
             //For flywheel functions: launching artifact
             double ticksPerRotation = 2800;
@@ -48,34 +43,54 @@ public class Main2 extends LinearOpMode {
             double intakePower = 1;
             double compliantWheel = 1;
             double launchPower = (IshowSpeed * ticksPerRotation);
-            double spikePower = 1;
+            double pollie = 1;
+            double rollie = 1;
+            double hottie = 1;
 
             //operate
-            if(gamepad2.left_trigger > 0) {
+            if (gamepad2.left_trigger > 0) {
                 robot.rollerIntake.setPower(intakePower);
-                robot.boot.setPower(compliantWheel);}
-            else if (gamepad2.left_bumper){
+                robot.hotwheelsfront.setPower(compliantWheel);
+                robot.hotwheelsback.setPower(hottie);
+            } else if (gamepad2.left_bumper) {
                 robot.rollerIntake.setPower(-intakePower);
-                robot.boot.setPower(-compliantWheel);}
-            else{ robot.rollerIntake.setPower(0);
-                robot.boot.setPower(0);}
+                robot.hotwheelsfront.setPower(-compliantWheel);
+            } else {
+                robot.rollerIntake.setPower(0);
+                robot.hotwheelsfront.setPower(0);
+            }
 
 
-            if(gamepad2.right_trigger > 0) {
+            if (gamepad2.right_trigger > 0) {
                 robot.flywheel1.setVelocity(launchPower);
-                robot.boot2.setPower(spikePower);}
-            else if (gamepad2.right_bumper){
+                robot.rollitbackbottom.setPower(pollie);
+                robot.rollitbacktop.setPower(rollie);
+                robot.hotwheelsback.setPower(hottie);
+            }
+            //robot.Hotwheelsback.setPower(spikePower);}
+            else if (gamepad2.right_bumper) {
                 robot.flywheel1.setVelocity(-launchPower);
-                robot.boot2.setPower(-spikePower);}
-            else{ robot.flywheel1.setVelocity(0);
-                robot.boot2.setPower(0);}
+                robot.rollitbackbottom.setPower(-pollie);
+                robot.hotwheelsback.setPower(hottie);
+                robot.rollitbacktop.setPower(-rollie);}
+            else {
+                robot.flywheel1.setVelocity(0);
+                robot.rollitbackbottom.setPower(0);
+                robot.hotwheelsback.setPower(0);
+                robot.rollitbacktop.setPower(0);}
 
 
             //combine the joystick requests for each axis-motion to determine each wheel's power
             //set up a variable for each drive wheel to save the power level for telemetry
 
-
+            //POV Mode uses left joystick to go forward & strafe, and right joystick to rotate
             //Joystick controls
+
+            double axial = -gamepad1.left_stick_y; //note: pushing stick forward gives negative value
+            //NOTE: I am making sure they are not in inverse.
+            double lateral = gamepad1.left_stick_x;
+            double yaw = gamepad1.right_stick_x;
+
             double leftFrontPower = axial + lateral + yaw;
             double rightFrontPower = axial - lateral - yaw;
             double leftBackPower = axial - lateral + yaw;
@@ -99,7 +114,6 @@ public class Main2 extends LinearOpMode {
             robot.rightFrontDrive.setPower(rightFrontPower);
             robot.leftBackDrive.setPower(leftBackPower);
             robot.rightBackDrive.setPower(rightBackPower);
-
 
 
             // Auto Intake
@@ -133,8 +147,5 @@ public class Main2 extends LinearOpMode {
     }
 }
 
-/*
 
-                }
-            }
-            */
+
