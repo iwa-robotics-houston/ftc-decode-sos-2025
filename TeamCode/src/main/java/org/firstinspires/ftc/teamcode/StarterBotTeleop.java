@@ -4,8 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-/**
- * This is the primary TeleOp for the 2025-2026 DECODE season.
+/** * This is the primary TeleOp for the 2025-2026 DECODE season.
  *
  * CONTROLS:
  * Gamepad 1 (Driver):
@@ -13,10 +12,9 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  *  - Right Stick: Rotate (Turn Left/Right)
  *
  * Gamepad 2 (Operator):
- *  - Left Trigger:  Run roller intake forward (collect)
- *  - Left Bumper:   Run roller intake backward (expel)
- *  - Right Trigger: Spin up flywheel and run feeder system forward (LAUNCH)
- *  - Right Bumper:  Spin up flywheel and run feeder system in reverse (unjam)
+ *  - Left Trigger:  Run full intake system to bring a ball IN.
+ *  - Right Trigger: Run full launch system to move a ball UP and OUT.
+ *  - Right Bumper:  Run expel system to move a ball BACK and OUT.
  */
 @TeleOp(name = "TeleOp", group = "SOS TestTeleOp")
 public class StarterBotTeleop extends LinearOpMode {
@@ -37,26 +35,19 @@ public class StarterBotTeleop extends LinearOpMode {
         runtime.reset();
 
         // MAIN CONTROL LOOP
-        // This loop runs continuously after START is pressed, until STOP is pressed.
         while (opModeIsActive()) {
 
             // Gamepad 1: Drivetrain Controls
             double max;
+            double axial   = -gamepad1.left_stick_y;
+            double lateral =  gamepad1.left_stick_x;
+            double yaw     =  gamepad1.right_stick_x;
 
-            // POV Mode uses left joystick to go forward/backward and strafe, and right joystick to rotate.
-            // This is the standard Mecanum drive control scheme.
-            double axial   = -gamepad1.left_stick_y;  // Forward/Backward. Pushing stick forward gives a negative value.
-            double lateral =  gamepad1.left_stick_x;  // Strafe Left/Right
-            double yaw     =  gamepad1.right_stick_x; // Rotation
-
-            // Combine the joystick requests for each axis-motion to determine each wheel's power
             double leftFrontPower  = axial + lateral + yaw;
             double rightFrontPower = axial - lateral - yaw;
             double leftBackPower   = axial - lateral + yaw;
             double rightBackPower  = axial + lateral + yaw;
 
-            // Normalize the values so no wheel power exceeds 100%
-            // This ensures that the robot maintains the desired motion direction, just at a lower speed.
             max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
             max = Math.max(max, Math.abs(leftBackPower));
             max = Math.max(max, Math.abs(rightBackPower));
@@ -68,65 +59,77 @@ public class StarterBotTeleop extends LinearOpMode {
                 rightBackPower  /= max;
             }
 
-            // Send calculated power to the wheels
             robot.leftFrontDrive.setPower(leftFrontPower);
             robot.rightFrontDrive.setPower(rightFrontPower);
             robot.leftBackDrive.setPower(leftBackPower);
             robot.rightBackDrive.setPower(rightBackPower);
 
+            // Gamepad 2
 
-            // Gamepad 2: Mechanism Controls
-            double ticksPerRotation = 2800; // Example value
+            double ticksPerRotation = 2800; // Adjust this value for your flywheel
             double launchVelocity = gamepad2.right_trigger * ticksPerRotation;
+            double feedPower = gamepad2.right_trigger;
 
             // LAUNCH MODE
-            // Pressing the right trigger spins up the flywheel AND runs the intake and boot feeders.
+            // Pressing the right trigger runs all motors needed to move the ball UP and OUT.
             if (gamepad2.right_trigger > 0) {
-                // Launcher active
+                // Activate launching motors
                 robot.flywheel1.setVelocity(launchVelocity);
-                robot.boot.setPower(gamepad2.right_trigger);
-                robot.boot2.setPower(gamepad2.right_trigger);
-                // Also run the main intake to help feed
-                robot.rollerIntake.setPower(gamepad2.right_trigger);
+                robot.hotwheelBack.setPower(feedPower);
+                robot.hotwheelBottom.setPower(feedPower);
+                robot.rollitbackTop.setPower(feedPower);
+
+                // Ensure other systems are off
+                robot.rollerIntake.setPower(0);
+                robot.hotwheelFront.setPower(0);
             }
-            // REVERSE/UNJAM MODE
-            // Pressing the right bumper reverses ALL motors in the system.
+            // EXPEL MODE
+            // Pressing the right bumper reverses all motors needed to expel the ball
             else if (gamepad2.right_bumper) {
-                // Reverse mode active
-                robot.flywheel1.setVelocity(0); // Flywheel should not spin in reverse
-                robot.boot.setPower(-1);
-                robot.boot2.setPower(-1);
-                robot.rollerIntake.setPower(-1);
-            }
-            // INTAKE ONLY MODE
-            // Pressing the left trigger ONLY runs the roller intake.
-            else if (gamepad2.left_trigger > 0) {
-                // Intake only mode active
-                robot.rollerIntake.setPower(1.0);
-                // Ensure other motors are off
+                // Activate expel motors (in reverse)
+                robot.rollerIntake.setPower(-1.0);
+                robot.hotwheelFront.setPower(-1.0);
+                robot.hotwheelBack.setPower(-1.0);
+
+                // Ensure other systems are off
                 robot.flywheel1.setVelocity(0);
-                robot.boot.setPower(0);
-                robot.boot2.setPower(0);
+                robot.hotwheelBottom.setPower(0);
+                robot.rollitbackTop.setPower(0);
+            }
+            // INTAKE MODE
+            // Pressing the left trigger runs all motors needed to bring a ball in
+            else if (gamepad2.left_trigger > 0) {
+                // Activate intake motors
+                robot.rollerIntake.setPower(1.0);
+                robot.hotwheelFront.setPower(1.0);
+                robot.hotwheelBack.setPower(1.0);
+
+                // Ensure other systems are off
+                robot.flywheel1.setVelocity(0);
+                robot.hotwheelBottom.setPower(0);
+                robot.rollitbackTop.setPower(0);
             }
             // IDLE MODE
-            // If no buttons are pressed, turn everything off.
+            // If no buttons are pressed, turn everything off
             else {
                 robot.flywheel1.setVelocity(0);
-                robot.boot.setPower(0);
-                robot.boot2.setPower(0);
+                robot.hotwheelBack.setPower(0);
+                robot.hotwheelBottom.setPower(0);
+                robot.rollitbackTop.setPower(0);
                 robot.rollerIntake.setPower(0);
+                robot.hotwheelFront.setPower(0);
             }
 
 
-            // TELEMETRY
-            // Show the elapsed game time and wheel power.
+            // --- TELEMETRY ---
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("--- Drivetrain ---", "");
             telemetry.addData("Front Wheels", "Left: (%.2f), Right: (%.2f)", leftFrontPower, rightFrontPower);
             telemetry.addData("Back Wheels", "Left: (%.2f), Right: (%.2f)", leftBackPower, rightBackPower);
-            telemetry.addData("--- Launcher ---", "");
-            telemetry.addData("Flywheel Target Velocity", robot.flywheel1.getVelocity());
-            telemetry.addData("Boot Power", robot.boot.getPower());
+            telemetry.addData("--- Mechanisms ---", "");
+            telemetry.addData("Flywheel Velocity", "%.2f", robot.flywheel1.getVelocity());
+            telemetry.addData("Intake Power", "%.2f", robot.rollerIntake.getPower());
+            telemetry.addData("Hotwheel Front Power", "%.2f", robot.hotwheelFront.getPower());
             telemetry.update();
         }
     }
