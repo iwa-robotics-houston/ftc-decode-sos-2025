@@ -76,7 +76,7 @@ public class StarterBotTeleop extends LinearOpMode {
                 // Activate launching motors
                 robot.flywheel1.setVelocity(launchVelocity);
                 robot.hotwheelBack.setPower(feedPower);
-                robot.hotwheelBottom.setPower(feedPower);
+                robot.rollitbackBottom.setPower(feedPower);
                 robot.rollitbackTop.setPower(feedPower);
 
                 // Ensure other systems are off
@@ -93,7 +93,7 @@ public class StarterBotTeleop extends LinearOpMode {
 
                 // Ensure other systems are off
                 robot.flywheel1.setVelocity(0);
-                robot.hotwheelBottom.setPower(0);
+                robot.rollitbackBottom.setPower(0);
                 robot.rollitbackTop.setPower(0);
             }
             // INTAKE MODE
@@ -106,7 +106,7 @@ public class StarterBotTeleop extends LinearOpMode {
 
                 // Ensure other systems are off
                 robot.flywheel1.setVelocity(0);
-                robot.hotwheelBottom.setPower(0);
+                robot.rollitbackBottom.setPower(0);
                 robot.rollitbackTop.setPower(0);
             }
             // IDLE MODE
@@ -114,7 +114,7 @@ public class StarterBotTeleop extends LinearOpMode {
             else {
                 robot.flywheel1.setVelocity(0);
                 robot.hotwheelBack.setPower(0);
-                robot.hotwheelBottom.setPower(0);
+                robot.rollitbackBottom.setPower(0);
                 robot.rollitbackTop.setPower(0);
                 robot.rollerIntake.setPower(0);
                 robot.hotwheelFront.setPower(0);

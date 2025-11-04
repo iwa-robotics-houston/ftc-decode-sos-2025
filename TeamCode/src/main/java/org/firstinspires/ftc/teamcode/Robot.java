@@ -22,7 +22,7 @@ public class Robot {
     // servos
     public CRServo hotwheelFront;
     public CRServo hotwheelBack;
-    public CRServo hotwheelBottom;
+    public CRServo rollitbackBottom;
     public CRServo rollitbackTop;
     public DcMotor rollerIntake;
 
@@ -39,7 +39,7 @@ public class Robot {
         hotwheelFront = hardwareMap.get(CRServo.class, "hotwheelFront");
         hotwheelBack = hardwareMap.get(CRServo.class, "hotwheelBack");
 
-        hotwheelBottom = hardwareMap.get(CRServo.class, "hotwheelBottom");
+        rollitbackBottom = hardwareMap.get(CRServo.class, "rollitbackBottom");
         rollitbackTop = hardwareMap.get(CRServo.class, "rollitbacktop");
 
 
@@ -56,7 +56,7 @@ public class Robot {
         rollerIntake.setDirection(DcMotorSimple.Direction.FORWARD);
         hotwheelFront.setDirection(DcMotorSimple.Direction.FORWARD);
         hotwheelBack.setDirection(DcMotorSimple.Direction.FORWARD);
-        hotwheelBottom.setDirection(DcMotorSimple.Direction.FORWARD); // Set direction for the new parts
+        rollitbackBottom.setDirection(DcMotorSimple.Direction.FORWARD); // Set direction for the new parts
         rollitbackTop.setDirection(DcMotorSimple.Direction.FORWARD);  // Set direction for the new parts
     }
 }
