@@ -63,21 +63,21 @@ public class Main2 extends LinearOpMode {
 
             if (gamepad2.right_trigger > 0) {
                 robot.flywheel1.setVelocity(launchPower);
-                robot.rollitbackbottom.setPower(pollie);
-                robot.rollitbacktop.setPower(rollie);
+                //robot.rollitbackbottom.setPower(pollie);
+                //robot.rollitbacktop.setPower(rollie);
                 //robot.hotwheelsback.setPower(hottie);
             }
             //robot.Hotwheelsback.setPower(spikePower);}
             else if (gamepad2.right_bumper) {
-                robot.flywheel1.setVelocity(-launchPower);
-                robot.rollitbackbottom.setPower(-pollie);
+                robot.flywheel1.setVelocity(-launchPower);}
+                //robot.rollitbackbottom.setPower(-pollie);
                 //robot.hotwheelsback.setPower(hottie);
-                robot.rollitbacktop.setPower(-rollie);}
+                //robot.rollitbacktop.setPower(-rollie);}
             else {
-                robot.flywheel1.setVelocity(0);
-                robot.rollitbackbottom.setPower(0);
+                robot.flywheel1.setVelocity(0);}
+                //robot.rollitbackbottom.setPower(0);
                 //robot.hotwheelsback.setPower(0);
-                robot.rollitbacktop.setPower(0);}
+                //robot.rollitbacktop.setPower(0);}
 
 
             //combine the joystick requests for each axis-motion to determine each wheel's power
