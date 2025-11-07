@@ -49,11 +49,11 @@ public class Main2 extends LinearOpMode {
 
             //operate
             if (gamepad2.left_trigger > 0) {
-                robot.rollerIntake.setPower(intakePower);
+                robot.rollerIntake.setPower(-intakePower);
                 robot.hotwheelsfront.setPower(compliantWheel);
                 //robot.hotwheelsback.setPower(hottie);
             } else if (gamepad2.left_bumper) {
-                robot.rollerIntake.setPower(-intakePower);
+                robot.rollerIntake.setPower(intakePower);
                 robot.hotwheelsfront.setPower(-compliantWheel);
             } else {
                 robot.rollerIntake.setPower(0);
@@ -75,11 +75,11 @@ public class Main2 extends LinearOpMode {
                 //robot.rollitbacktop.setPower(-rollie);}
             }
             else {
-                robot.flywheel1.setVelocity(0);}
+                robot.flywheel1.setVelocity(0);
                 //robot.rollitbackbottom.setPower(0);
                 //robot.hotwheelsback.setPower(0);
                 //robot.rollitbacktop.setPower(0);}
-
+            }
 
             //combine the joystick requests for each axis-motion to determine each wheel's power
             //set up a variable for each drive wheel to save the power level for telemetry
