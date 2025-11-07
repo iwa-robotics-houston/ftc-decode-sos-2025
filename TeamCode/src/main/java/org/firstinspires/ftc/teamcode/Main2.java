@@ -62,14 +62,14 @@ public class Main2 extends LinearOpMode {
 
 
             if (gamepad2.right_trigger > 0) {
-                robot.flywheel1.setVelocity(launchPower);
+                robot.flywheel1.setVelocity(-launchPower);
                 //robot.rollitbackbottom.setPower(pollie);
                 //robot.rollitbacktop.setPower(rollie);
                 //robot.hotwheelsback.setPower(hottie);
             }
 
             else if (gamepad2.right_bumper) {
-                robot.flywheel1.setVelocity(-launchPower);
+                robot.flywheel1.setVelocity(launchPower);
                 //robot.rollitbackbottom.setPower(-pollie);
                 //robot.hotwheelsback.setPower(hottie);
                 //robot.rollitbacktop.setPower(-rollie);}
