@@ -53,8 +53,8 @@ public class Main2 extends LinearOpMode {
                 robot.hotwheelsfront.setPower(-compliantWheel);
                 //robot.hotwheelsback.setPower(hottie);
             } else if (gamepad2.left_bumper) {
-                robot.rollerIntake.setPower(intakePower);
-                robot.hotwheelsfront.setPower(compliantWheel);
+                robot.rollerIntake.setPower(+intakePower);
+                robot.hotwheelsfront.setPower(+compliantWheel);
             } else {
                 robot.rollerIntake.setPower(0);
                 robot.hotwheelsfront.setPower(0);
@@ -69,7 +69,7 @@ public class Main2 extends LinearOpMode {
             }
 
             else if (gamepad2.right_bumper) {
-                robot.flywheel1.setVelocity(launchPower);
+                robot.flywheel1.setVelocity(+launchPower);
                 //robot.rollitbackbottom.setPower(-pollie);
                 //robot.hotwheelsback.setPower(hottie);
                 //robot.rollitbacktop.setPower(-rollie);}
