@@ -8,13 +8,13 @@ import com.qualcomm.robotcore.util.ElapsedTime;
  *
  * CONTROLS:
  * Gamepad 1 (Driver):
- *  - Left Stick:  Strafe (Left/Right) and Drive (Forward/Backward)
- *  - Right Stick: Rotate (Turn Left/Right)
+ * - Left Stick:  Strafe (Left/Right) and Drive (Forward/Backward)
+ * - Right Stick: Rotate (Turn Left/Right)
  *
  * Gamepad 2 (Operator):
- *  - Left Trigger:  Run full intake system to bring a ball IN.
- *  - Right Trigger: Run full launch system to move a ball UP and OUT.
- *  - Right Bumper:  Run expel system to move a ball BACK and OUT.
+ * - Left Trigger:  Run full intake system to bring a ball IN.
+ * - Right Trigger: Run full launch system to move a ball UP and OUT.
+ * - Right Bumper:  Run expel system to move a ball BACK and OUT.
  */
 @TeleOp(name = "TeleOp", group = "SOS TestTeleOp")
 public class StarterBotTeleop extends LinearOpMode {
@@ -65,16 +65,16 @@ public class StarterBotTeleop extends LinearOpMode {
             robot.rightBackDrive.setPower(rightBackPower);
 
             // Gamepad 2
-
-            double ticksPerRotation = 2800; // Adjust this value for your flywheel
+            double ticksPerRotation = 5600; // 2800*2 = 56000
             double launchVelocity = gamepad2.right_trigger * ticksPerRotation;
             double feedPower = gamepad2.right_trigger;
 
             // LAUNCH MODE
-            // Pressing the right trigger runs all motors needed to move the ball UP and OUT.
+            // Pressing the right trigger runs all motors needed to move the ball UP and OUT
             if (gamepad2.right_trigger > 0) {
                 // Activate launching motors
                 robot.flywheel1.setVelocity(launchVelocity);
+                robot.flywheel2.setVelocity(launchVelocity);
                 robot.hotwheelBack.setPower(feedPower);
                 robot.rollitbackBottom.setPower(feedPower);
                 robot.rollitbackTop.setPower(feedPower);
@@ -93,7 +93,8 @@ public class StarterBotTeleop extends LinearOpMode {
 
                 // Ensure other systems are off
                 robot.flywheel1.setVelocity(0);
-                robot.rollitbackBottom.setPower(0);
+                robot.flywheel2.setVelocity(0);
+                robot.rollitbackBottom.setVelocity(0);
                 robot.rollitbackTop.setPower(0);
             }
             // INTAKE MODE
@@ -106,28 +107,31 @@ public class StarterBotTeleop extends LinearOpMode {
 
                 // Ensure other systems are off
                 robot.flywheel1.setVelocity(0);
-                robot.rollitbackBottom.setPower(0);
+                robot.flywheel2.setVelocity(0);
+                robot.rollitbackBottom.setVelocity(0);
                 robot.rollitbackTop.setPower(0);
             }
             // IDLE MODE
             // If no buttons are pressed, turn everything off
             else {
                 robot.flywheel1.setVelocity(0);
+                robot.flywheel2.setVelocity(0);
                 robot.hotwheelBack.setPower(0);
-                robot.rollitbackBottom.setPower(0);
+                robot.rollitbackBottom.setVelocity(0);
                 robot.rollitbackTop.setPower(0);
                 robot.rollerIntake.setPower(0);
                 robot.hotwheelFront.setPower(0);
             }
 
 
-            // --- TELEMETRY ---
+            // TELEMETRY
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("--- Drivetrain ---", "");
             telemetry.addData("Front Wheels", "Left: (%.2f), Right: (%.2f)", leftFrontPower, rightFrontPower);
             telemetry.addData("Back Wheels", "Left: (%.2f), Right: (%.2f)", leftBackPower, rightBackPower);
             telemetry.addData("--- Mechanisms ---", "");
-            telemetry.addData("Flywheel Velocity", "%.2f", robot.flywheel1.getVelocity());
+            telemetry.addData("Flywheel 1 Velocity", "%.2f", robot.flywheel1.getVelocity());
+            telemetry.addData("Flywheel 2 Velocity", "%.2f", robot.flywheel2.getVelocity());
             telemetry.addData("Intake Power", "%.2f", robot.rollerIntake.getPower());
             telemetry.addData("Hotwheel Front Power", "%.2f", robot.hotwheelFront.getPower());
             telemetry.update();
