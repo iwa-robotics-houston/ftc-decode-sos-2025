@@ -43,9 +43,11 @@ public class Main2 extends LinearOpMode {
             double intakePower = 1;
             double compliantWheel = 1;
             double launchPower = (IshowSpeed * ticksPerRotation);
+            double two = (IshowSpeed * ticksPerRotation);
             double pollie = 1;
             double rollie = 1;
             double hottie = 1;
+
 
             //operate
             if (gamepad2.left_trigger > 0) {
@@ -65,16 +67,19 @@ public class Main2 extends LinearOpMode {
 
             if (gamepad2.right_trigger > 0) {
                 robot.flywheel1.setVelocity(-launchPower);
+                robot.flywheel2.setVelocity(-two);
                 //robot.flywheel2.setVelocity(-launchPower);
                 robot.rollitbackbottom.setPower(-pollie);
                 robot.rollitbacktop.setPower(-rollie);
             } else if (gamepad2.right_bumper) {
                 robot.flywheel1.setVelocity(launchPower);
+                robot.flywheel2.setVelocity(two);
                 //robot.flywheel2.setVelocity(launchPower);
                 robot.rollitbackbottom.setPower(pollie);
                 robot.rollitbacktop.setPower(rollie);
             } else{
                 robot.flywheel1.setVelocity(0);
+                robot.flywheel2.setVelocity(0);
                 //robot.flywheel2.setVelocity(0);
                 robot.rollitbackbottom.setPower(0);
                 robot.rollitbacktop.setPower(0);
