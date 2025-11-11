@@ -81,20 +81,20 @@ public class Robot {
         leftBackDrive = hardwareMap.get(DcMotor.class, "backLeft");
         rightBackDrive = hardwareMap.get(DcMotor.class, "backRight");
 
-        flywheel1 = hardwareMap.get(DcMotorEx.class, "Oreo, yay");
+        flywheel1 = hardwareMap.get(DcMotorEx.class, "flywheel1, flywheel2");
         //flywheel2 = hardwareMap.get(DcMotorEx.class, "yay");
 
 
 
         rollerIntake = hardwareMap.get(DcMotor.class, "imHungy");
 
-        hotwheelsfront = hardwareMap.get(CRServo.class, "front");
-        hotwheelsback = hardwareMap.get(CRServo.class, "back");
+        hotwheelsfront = hardwareMap.get(CRServo.class, "hotwheelFront");
+        hotwheelsback = hardwareMap.get(CRServo.class, "hotwheelBack");
 
 
-        rollitbackbottom = hardwareMap.get(DcMotor.class, "bottoms");
+        rollitbackbottom = hardwareMap.get(DcMotor.class, "rollitbackBottom");
 
-        rollitbacktop= hardwareMap.get(CRServo.class, "rollie");
+        rollitbacktop= hardwareMap.get(CRServo.class, "rollitbacktop");
 
 
 
