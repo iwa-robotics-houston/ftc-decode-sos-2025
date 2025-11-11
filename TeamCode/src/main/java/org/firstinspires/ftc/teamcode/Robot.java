@@ -81,7 +81,7 @@ public class Robot {
         leftBackDrive = hardwareMap.get(DcMotor.class, "backLeft");
         rightBackDrive = hardwareMap.get(DcMotor.class, "backRight");
 
-        flywheel1 = hardwareMap.get(DcMotorEx.class, "flywheeL1");
+        flywheel1 = hardwareMap.get(DcMotorEx.class, "flywheel1");
         flywheel2 = hardwareMap.get(DcMotorEx.class, "flywheel2");
         //flywheel2 = hardwareMap.get(DcMotorEx.class, "yay");
 
