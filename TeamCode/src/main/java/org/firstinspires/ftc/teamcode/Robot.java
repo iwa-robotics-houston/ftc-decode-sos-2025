@@ -87,7 +87,7 @@ public class Robot {
 
 
 
-        rollerIntake = hardwareMap.get(DcMotor.class, "imHungy");
+        rollerIntake = hardwareMap.get(DcMotor.class, "rollerIntake");
 
         hotwheelsfront = hardwareMap.get(CRServo.class, "hotwheelFront");
         hotwheelsback = hardwareMap.get(CRServo.class, "hotwheelBack");
