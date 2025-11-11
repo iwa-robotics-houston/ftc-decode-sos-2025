@@ -59,7 +59,7 @@ public class Robot {
     public DcMotor leftBackDrive;
     public DcMotor rightBackDrive;
 
-    public DcMotorEx flywheel1;
+    public DcMotor flywheel1;
 
     //public DcMotorEx flywheel2;
 
@@ -81,7 +81,7 @@ public class Robot {
         leftBackDrive = hardwareMap.get(DcMotor.class, "backLeft");
         rightBackDrive = hardwareMap.get(DcMotor.class, "backRight");
 
-        flywheel1 = hardwareMap.get(DcMotorEx.class, "flywheel1, flywheel2");
+        flywheel1 = hardwareMap.get(DcMotor.class, "flywheel1, flywheel2");
         //flywheel2 = hardwareMap.get(DcMotorEx.class, "yay");
 
 
