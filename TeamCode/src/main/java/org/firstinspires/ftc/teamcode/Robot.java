@@ -107,7 +107,7 @@ public class Robot {
 
         //Flywheel 1
         flywheel1.setDirection(DcMotorEx.Direction.REVERSE);
-        //flywheel2.setDirection(DcMotorEx.Direction.REVERSE);
+        flywheel2.setDirection(DcMotorEx.Direction.REVERSE);
         rollitbackbottom.setDirection(DcMotor.Direction.REVERSE);
         rollitbacktop.setDirection(CRServo.Direction.REVERSE);
 
