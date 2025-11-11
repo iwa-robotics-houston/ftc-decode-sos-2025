@@ -63,8 +63,6 @@ public class Robot {
 
     public DcMotorEx flywheel2;
 
-    //public DcMotorEx flywheel2;
-
     public CRServo hotwheelsfront;
 
     public CRServo hotwheelsback;
