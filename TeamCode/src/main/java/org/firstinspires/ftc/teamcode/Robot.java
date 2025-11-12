@@ -21,7 +21,7 @@ Contains robot build, state, and transformation functions.
 Used to init hardware when an OpMode is run and to control hardware and track state during a run.
 hardwareMap names come from the robot configuration step on the DS or DC.
  */
-
+//Emily was here #procoder #robotdefinatlyworks #weregoingtoworlds
 public class Robot {
     // dimensions
     final public double drivetrainDiagonal = 17; // in
@@ -95,7 +95,7 @@ public class Robot {
 
         rollitbackbottom = hardwareMap.get(DcMotor.class, "rollitbackBottom");
 
-        rollitbacktop= hardwareMap.get(CRServo.class, "rollitbacktop");
+        rollitbacktop= hardwareMap.get(CRServo.class, "rollitbackTop");
 
 
 
