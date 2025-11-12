@@ -22,6 +22,7 @@ Used to init hardware when an OpMode is run and to control hardware and track st
 hardwareMap names come from the robot configuration step on the DS or DC.
  */
 //Emily was here #procoder #robotdefinatlyworks #weregoingtoworlds
+//Emily is our top supporters!!!!!!!!
 public class Robot {
     // dimensions
     final public double drivetrainDiagonal = 17; // in
