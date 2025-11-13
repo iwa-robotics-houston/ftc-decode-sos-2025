@@ -26,9 +26,13 @@ public class Main2 extends LinearOpMode {
             double max;
             boolean armLocked = false;
 
+            double axial = -gamepad1.left_stick_y; //note: pushing stick forward gives negative value
+            //NOTE: I am making sure they are not in inverse.
+            double lateral = gamepad1.left_stick_x;
+            double yaw = gamepad1.right_stick_x;
 
             //For flywheel functions: launching artifact
-            double ticksPerRotation = 5000;
+            double ticksPerRotation = 5600;
             double IshowSpeed = gamepad2.right_trigger;
             //robot.flywheel2.setVelocity(IshowSpeed * ticksPerRotation);
 
@@ -68,19 +72,16 @@ public class Main2 extends LinearOpMode {
             if (gamepad2.right_trigger > 0) {
                 robot.flywheel1.setVelocity(-launchPower);
                 robot.flywheel2.setVelocity(-two);
-                //robot.flywheel2.setVelocity(-launchPower);
                 robot.rollitbackbottom.setPower(-pollie);
                 robot.rollitbacktop.setPower(-rollie);
             } else if (gamepad2.right_bumper) {
                 robot.flywheel1.setVelocity(launchPower);
                 robot.flywheel2.setVelocity(two);
-                //robot.flywheel2.setVelocity(launchPower);
                 robot.rollitbackbottom.setPower(pollie);
                 robot.rollitbacktop.setPower(rollie);
             } else{
                 robot.flywheel1.setVelocity(0);
                 robot.flywheel2.setVelocity(0);
-                //robot.flywheel2.setVelocity(0);
                 robot.rollitbackbottom.setPower(0);
                 robot.rollitbacktop.setPower(0);
         }
@@ -91,10 +92,7 @@ public class Main2 extends LinearOpMode {
         //POV Mode uses left joystick to go forward & strafe, and right joystick to rotate
         //Joystick controls
 
-        double axial = -gamepad1.left_stick_y; //note: pushing stick forward gives negative value
-        //NOTE: I am making sure they are not in inverse.
-        double lateral = gamepad1.left_stick_x;
-        double yaw = gamepad1.right_stick_x;
+
 
         double leftFrontPower = axial + lateral + yaw;
         double rightFrontPower = axial - lateral - yaw;
