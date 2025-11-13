@@ -73,8 +73,8 @@ public class StarterBotTeleop extends LinearOpMode {
             // Pressing the right trigger runs all motors needed to move the ball UP and OUT
             if (gamepad2.right_trigger > 0) {
                 // Activate launching motors
-                robot.flywheel1.setVelocity(launchVelocity);
-                robot.flywheel2.setVelocity(launchVelocity);
+                robot.flywheel1.setPower(launchVelocity);
+                robot.flywheel2.setPower(launchVelocity);
                 robot.hotwheelBack.setPower(feedPower);
                 robot.rollitbackBottom.setPower(feedPower);
                 robot.rollitbackTop.setPower(feedPower);
@@ -87,37 +87,37 @@ public class StarterBotTeleop extends LinearOpMode {
             // Pressing the right bumper reverses all motors needed to expel the ball
             else if (gamepad2.right_bumper) {
                 // Activate expel motors (in reverse)
-                robot.rollerIntake.setPower(-1.0);
+                robot.rollerIntake.setPower(1.0);
                 robot.hotwheelFront.setPower(-1.0);
                 robot.hotwheelBack.setPower(-1.0);
 
                 // Ensure other systems are off
-                robot.flywheel1.setVelocity(0);
-                robot.flywheel2.setVelocity(0);
-                robot.rollitbackBottom.setVelocity(0);
+                robot.flywheel1.setPower(0);
+                robot.flywheel2.setPower(0);
+                robot.rollitbackBottom.setPower(0);
                 robot.rollitbackTop.setPower(0);
             }
             // INTAKE MODE
             // Pressing the left trigger runs all motors needed to bring a ball in
             else if (gamepad2.left_trigger > 0) {
                 // Activate intake motors
-                robot.rollerIntake.setPower(1.0);
-                robot.hotwheelFront.setPower(1.0);
+                robot.rollerIntake.setPower(-1.0);
+                robot.hotwheelFront.setPower(-1.0);
                 robot.hotwheelBack.setPower(1.0);
 
                 // Ensure other systems are off
-                robot.flywheel1.setVelocity(0);
-                robot.flywheel2.setVelocity(0);
-                robot.rollitbackBottom.setVelocity(0);
+                robot.flywheel1.setPower(0);
+                robot.flywheel2.setPower(0);
+                robot.rollitbackBottom.setPower(0);
                 robot.rollitbackTop.setPower(0);
             }
             // IDLE MODE
             // If no buttons are pressed, turn everything off
             else {
-                robot.flywheel1.setVelocity(0);
-                robot.flywheel2.setVelocity(0);
+                robot.flywheel1.setPower(0);
+                robot.flywheel2.setPower(0);
                 robot.hotwheelBack.setPower(0);
-                robot.rollitbackBottom.setVelocity(0);
+                robot.rollitbackBottom.setPower(0);
                 robot.rollitbackTop.setPower(0);
                 robot.rollerIntake.setPower(0);
                 robot.hotwheelFront.setPower(0);
@@ -130,8 +130,8 @@ public class StarterBotTeleop extends LinearOpMode {
             telemetry.addData("Front Wheels", "Left: (%.2f), Right: (%.2f)", leftFrontPower, rightFrontPower);
             telemetry.addData("Back Wheels", "Left: (%.2f), Right: (%.2f)", leftBackPower, rightBackPower);
             telemetry.addData("--- Mechanisms ---", "");
-            telemetry.addData("Flywheel 1 Velocity", "%.2f", robot.flywheel1.getVelocity());
-            telemetry.addData("Flywheel 2 Velocity", "%.2f", robot.flywheel2.getVelocity());
+            telemetry.addData("Flywheel 1 Velocity", "%.2f", robot.flywheel1.getPower());
+            telemetry.addData("Flywheel 2 Velocity", "%.2f", robot.flywheel2.getPower());
             telemetry.addData("Intake Power", "%.2f", robot.rollerIntake.getPower());
             telemetry.addData("Hotwheel Front Power", "%.2f", robot.hotwheelFront.getPower());
             telemetry.update();
