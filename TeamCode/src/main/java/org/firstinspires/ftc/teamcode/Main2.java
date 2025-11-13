@@ -111,16 +111,12 @@ public class Main2 extends LinearOpMode {
         }
 
         //send calculated power to wheels
-        /*robot.leftFrontDrive.setPower(leftFrontPower);
+        robot.leftFrontDrive.setPower(leftFrontPower);
         robot.rightFrontDrive.setPower(rightFrontPower);
         robot.leftBackDrive.setPower(leftBackPower);
         robot.rightBackDrive.setPower(rightBackPower);
-        */
 
-            robot.leftFrontDrive.setVelocity(leftFrontPower);
-            robot.rightFrontDrive.setVelocity(rightFrontPower);
-            robot.leftBackDrive.setVelocity(leftBackPower);
-            robot.rightBackDrive.setVelocity(rightBackPower);
+
 
         // Auto Intake
         // Example: Timed Intake Cycle (opens and closes every X seconds)
