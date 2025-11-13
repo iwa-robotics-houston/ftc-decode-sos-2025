@@ -55,10 +55,10 @@ public class Robot {
 
 
     // motors
-    public DcMotor leftFrontDrive;
-    public DcMotor rightFrontDrive;
-    public DcMotor leftBackDrive;
-    public DcMotor rightBackDrive;
+    public DcMotorEx leftFrontDrive;
+    public DcMotorEx rightFrontDrive;
+    public DcMotorEx leftBackDrive;
+    public DcMotorEx rightBackDrive;
 
     public DcMotorEx flywheel1;
 
@@ -77,10 +77,10 @@ public class Robot {
     public CRServo rollitbacktop;
     public Robot(HardwareMap hardwareMap) {
         // init hardware
-        leftFrontDrive = hardwareMap.get(DcMotor.class, "frontLeft");
-        rightFrontDrive = hardwareMap.get(DcMotor.class, "frontRight");
-        leftBackDrive = hardwareMap.get(DcMotor.class, "backLeft");
-        rightBackDrive = hardwareMap.get(DcMotor.class, "backRight");
+        leftFrontDrive = hardwareMap.get(DcMotorEx.class, "frontLeft");
+        rightFrontDrive = hardwareMap.get(DcMotorEx.class, "frontRight");
+        leftBackDrive = hardwareMap.get(DcMotorEx.class, "backLeft");
+        rightBackDrive = hardwareMap.get(DcMotorEx.class, "backRight");
 
         flywheel1 = hardwareMap.get(DcMotorEx.class, "flywheel1");
         flywheel2 = hardwareMap.get(DcMotorEx.class, "flywheel2");
@@ -92,10 +92,7 @@ public class Robot {
 
         hotwheelsfront = hardwareMap.get(CRServo.class, "hotwheelFront");
         hotwheelsback = hardwareMap.get(CRServo.class, "hotwheelBack");
-
-
         rollitbackbottom = hardwareMap.get(DcMotor.class, "rollitbackBottom");
-
         rollitbacktop= hardwareMap.get(CRServo.class, "rollitbackTop");
 
 
