@@ -51,6 +51,8 @@ public class Main2 extends LinearOpMode {
             double pollie = 1;
             double rollie = 1;
             double hottie = 1;
+            double backitup = -1;
+
 
 
             //operate
@@ -75,8 +77,10 @@ public class Main2 extends LinearOpMode {
                 robot.rollitbackbottom.setPower(-pollie);
                 robot.rollitbacktop.setPower(-rollie);
             } else if (gamepad2.right_bumper) {
-                robot.flywheel1.setVelocity(launchPower);
-                robot.flywheel2.setVelocity(two);
+                //robot.flywheel1.setVelocity(launchPower);
+                robot.flywheel2.setVelocity(backitup);
+                robot.flywheel1.setVelocity(backitup);
+                //robot.flywheel2.setVelocity(two);
                 robot.rollitbackbottom.setPower(pollie);
                 robot.rollitbacktop.setPower(rollie);
             } else{

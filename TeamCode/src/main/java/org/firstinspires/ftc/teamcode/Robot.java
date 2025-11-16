@@ -23,13 +23,10 @@ hardwareMap names come from the robot configuration step on the DS or DC.
  */
 //Emily was here #procoder #robotdefinatlyworks #weregoingtoworlds
 //Emily is our top supporters!!!!!!!!
+//shoutout to vivi and Sakara for helping out with the CODE! LUV YALL :3
 public class Robot {
     // dimensions
     final public double drivetrainDiagonal = 17; // in
-
-    //17
-
-    //14
     public boolean isArmClawOpen;
     public boolean isMiniClawOpen;
     double cpr = 537.7; // clicks
@@ -84,7 +81,6 @@ public class Robot {
 
         flywheel1 = hardwareMap.get(DcMotorEx.class, "flywheel1");
         flywheel2 = hardwareMap.get(DcMotorEx.class, "flywheel2");
-        //flywheel2 = hardwareMap.get(DcMotorEx.class, "yay");
 
 
 
