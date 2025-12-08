@@ -81,80 +81,51 @@ public class Main2 extends LinearOpMode {
                 robot.flywheel2.setVelocity(two);
                 robot.rollitbackbottom.setPower(pollie);
                 robot.rollitbacktop.setPower(rollie);
-            } else{
+            } else {
                 robot.flywheel1.setVelocity(0);
                 robot.flywheel2.setVelocity(0);
                 robot.rollitbackbottom.setPower(0);
                 robot.rollitbacktop.setPower(0);
 
-                // Example: Wait for 1 second before doing something else
-                ElapsedTime timer = new ElapsedTime();
-                double waitTime = 2.0; // Example wait time in seconds
-                if (timer.time() < waitTime) {
-                    // This code will run for the first second
-                    robot.rollitbackbottom.setPower(-pollie);
-                    robot.rollitbacktop.setPower(-rollie);
-                    // For example, set a wheel to a certain power
-                    // frontLeft.setPower(1.0);
-                } else {
-                    // This code will run after the wait is over
-                    robot.flywheel1.setVelocity(-launchPower);
-                    robot.flywheel2.setVelocity(-two);
-                    // frontLeft.setPower(0.0);
-                    // You can reset the timer again for the next action
-                    timer.reset();
+
+                //For timing in the flywheel
+
+
+                //combine the joystick requests for each axis-motion to determine each wheel's power
+                //set up a variable for each drive wheel to save the power level for telemetry
+
+                //POV Mode uses left joystick to go forward & strafe, and right joystick to rotate
+                //Joystick controls
+
+                double leftFrontPower = axial + lateral + yaw;
+                double rightFrontPower = axial - lateral - yaw;
+                double leftBackPower = axial - lateral + yaw;
+                double rightBackPower = axial + lateral - yaw;
+
+                //normalize the values so no wheel power exceeds 100%
+                //this ensures that the robot maintains the desired motion
+                max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
+                max = Math.max(max, Math.abs(leftBackPower));
+                max = Math.max(max, Math.abs(rightBackPower));
+
+                if (max > 1.0) {
+                    leftFrontPower /= max;
+                    rightFrontPower /= max;
+                    leftBackPower /= max;
+                    rightBackPower /= max;
                 }
 
-                // Example of a timed movement
-                double moveDuration = 2.0; // Move for 2 seconds
-                double moveSpeed = 0.5;
-
-                // Reset timer before starting the movement
-                timer.reset();
-        }
+                //send calculated power to wheels
+                robot.leftFrontDrive.setPower(leftFrontPower);
+                robot.rightFrontDrive.setPower(rightFrontPower);
+                robot.leftBackDrive.setPower(leftBackPower);
+                robot.rightBackDrive.setPower(rightBackPower);
 
 
-
-
-            //For timing in the flywheel
-
-
-        //combine the joystick requests for each axis-motion to determine each wheel's power
-        //set up a variable for each drive wheel to save the power level for telemetry
-
-        //POV Mode uses left joystick to go forward & strafe, and right joystick to rotate
-        //Joystick controls
-
-        double leftFrontPower = axial + lateral + yaw;
-        double rightFrontPower = axial - lateral - yaw;
-        double leftBackPower = axial - lateral + yaw;
-        double rightBackPower = axial + lateral - yaw;
-
-        //normalize the values so no wheel power exceeds 100%
-        //this ensures that the robot maintains the desired motion
-        max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
-        max = Math.max(max, Math.abs(leftBackPower));
-        max = Math.max(max, Math.abs(rightBackPower));
-
-        if (max > 1.0) {
-            leftFrontPower /= max;
-            rightFrontPower /= max;
-            leftBackPower /= max;
-            rightBackPower /= max;
-        }
-
-        //send calculated power to wheels
-        robot.leftFrontDrive.setPower(leftFrontPower);
-        robot.rightFrontDrive.setPower(rightFrontPower);
-        robot.leftBackDrive.setPower(leftBackPower);
-        robot.rightBackDrive.setPower(rightBackPower);
-
-
-
-        // Auto Intake
-        // Example: Timed Intake Cycle (opens and closes every X seconds)
-        //Timed cycle: Alternates between open and closed states at a set time interval.
-        double currentTime = robot.timer.seconds();
+                // Auto Intake
+                // Example: Timed Intake Cycle (opens and closes every X seconds)
+                //Timed cycle: Alternates between open and closed states at a set time interval.
+                double currentTime = robot.timer.seconds();
             /*
             if (currentTime - robot.lastIntakeTime > robot.intakeInterval) {
                 robot.isArmClawOpen = !robot.isArmClawOpen;
@@ -170,17 +141,19 @@ public class Main2 extends LinearOpMode {
 
              */
 
-        //show the elapsed game time and wheel power.
-        telemetry.addData("status", "Run Time:" + runtime);
-        telemetry.addData("Front left/Right", "%4.2f,%4.2f", leftFrontPower, rightFrontPower);
-        telemetry.addData("Back left/Right", "%4.2f,%4.2f", leftBackPower, rightBackPower);
-        //telemetry.addData("Wrist Pos", "%4.2f", wristServo.getPosition());
-        //telemetry.addData("Claw Power", "%4.2f", robot.intakeServo1.getPower());
-        //telemetry.addData("robot.arm Pos", robot.arm1.getCurrentPosition());
-        telemetry.update();
+                //show the elapsed game time and wheel power.
+                telemetry.addData("status", "Run Time:" + runtime);
+                telemetry.addData("Front left/Right", "%4.2f,%4.2f", leftFrontPower, rightFrontPower);
+                telemetry.addData("Back left/Right", "%4.2f,%4.2f", leftBackPower, rightBackPower);
+                //telemetry.addData("Wrist Pos", "%4.2f", wristServo.getPosition());
+                //telemetry.addData("Claw Power", "%4.2f", robot.intakeServo1.getPower());
+                //telemetry.addData("robot.arm Pos", robot.arm1.getCurrentPosition());
+                telemetry.update();
+            }
         }
     }
 }
+
 
 
 
