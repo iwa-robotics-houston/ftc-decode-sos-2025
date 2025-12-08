@@ -60,7 +60,7 @@ public class Robot {
 
     public CRServo hotwheelsfront;
 
-    public Servo hotwheelsback;
+    public CRServo hotwheelsback;
 
     public DcMotor rollerIntake;
 
@@ -84,7 +84,7 @@ public class Robot {
         rollerIntake = hardwareMap.get(DcMotor.class, "rollerIntake");
 
         hotwheelsfront = hardwareMap.get(CRServo.class, "hotwheelFront");
-        hotwheelsback = hardwareMap.get(Servo.class, "hotwheelBack");
+        hotwheelsback = hardwareMap.get(CRServo.class, "hotwheelBack");
         rollitbackbottom = hardwareMap.get(DcMotor.class, "rollitbackBottom");
         rollitbacktop= hardwareMap.get(CRServo.class, "rollitbackTop");
 
@@ -113,7 +113,7 @@ public class Robot {
         //automatic intake!
         rollerIntake.setDirection(DcMotor.Direction.REVERSE);
         hotwheelsfront.setDirection(DcMotorSimple.Direction.REVERSE);
-        hotwheelsback.setDirection(Servo.Direction.REVERSE);
+        hotwheelsback.setDirection(CRServo.Direction.FORWARD);
         /// Configure servos
         /*
         intakeServo1.setDirection(DcMotorSimple.Direction.FORWARD);
