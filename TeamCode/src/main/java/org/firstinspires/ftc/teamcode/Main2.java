@@ -52,22 +52,22 @@ public class Main2 extends LinearOpMode {
             double two = (ticksPerRotation);
             double pollie = 1;
             double rollie = 1;
-            double hottie = 0.17;
+            double hottie = 1;
 
 
             //operate
             if (gamepad2.left_trigger > 0) {
                 robot.rollerIntake.setPower(-intakePower);
                 robot.hotwheelsfront.setPower(-compliantWheel);
-                robot.hotwheelsback.setPosition(-hottie);
+                robot.hotwheelsback.setPower(-hottie);
             } else if (gamepad2.left_bumper) {
                 robot.rollerIntake.setPower(intakePower);
                 robot.hotwheelsfront.setPower(compliantWheel);
-                robot.hotwheelsback.setPosition(hottie);
+                robot.hotwheelsback.setPower(hottie);
             } else {
                 robot.rollerIntake.setPower(0);
                 robot.hotwheelsfront.setPower(0);
-                robot.hotwheelsback.setPosition(0);
+                robot.hotwheelsback.setPower(0);
             }
 
 
