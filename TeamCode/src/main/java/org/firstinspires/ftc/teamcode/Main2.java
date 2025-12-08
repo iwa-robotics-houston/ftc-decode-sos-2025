@@ -52,7 +52,7 @@ public class Main2 extends LinearOpMode {
             double two = (ticksPerRotation);
             double pollie = 1;
             double rollie = 1;
-            double hottie = 1;
+            double hottie = 0.17;
 
 
             //operate
@@ -125,7 +125,7 @@ public class Main2 extends LinearOpMode {
                 // Auto Intake
                 // Example: Timed Intake Cycle (opens and closes every X seconds)
                 //Timed cycle: Alternates between open and closed states at a set time interval.
-                double currentTime = robot.timer.seconds();
+
             /*
             if (currentTime - robot.lastIntakeTime > robot.intakeInterval) {
                 robot.isArmClawOpen = !robot.isArmClawOpen;
