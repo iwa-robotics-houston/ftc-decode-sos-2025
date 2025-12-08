@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /*
@@ -24,6 +25,9 @@ hardwareMap names come from the robot configuration step on the DS or DC.
 //Emily was here #procoder #robotdefinatlyworks #weregoingtoworlds
 //Emily is our top supporters!!!!!!!!
 //shoutout to vivi and Sakara for helping out with the CODE! LUV YALL :3
+
+
+
 public class Robot {
     // dimensions
     final public double drivetrainDiagonal = 17; // in
@@ -36,13 +40,6 @@ public class Robot {
     static final double armSlideWheelCirc = Math.PI * 1.5;
     // to correct movement lengths
     static final double drivetrainMultiplier = 1.5;
-
-    // limits
-    final public double miniClawOpenPos = 0.3;
-    final public double miniClawClosePos = 0.0;
-
-    final public double vertSLideMaxLen = 19.15; // in
-    final public double armSLideMaxLen = 18; // in
 
     // state
     public boolean rightBumperPrev = false;
@@ -63,7 +60,7 @@ public class Robot {
 
     public CRServo hotwheelsfront;
 
-    public CRServo hotwheelsback;
+    public Servo hotwheelsback;
 
     public DcMotor rollerIntake;
 
@@ -87,7 +84,7 @@ public class Robot {
         rollerIntake = hardwareMap.get(DcMotor.class, "rollerIntake");
 
         hotwheelsfront = hardwareMap.get(CRServo.class, "hotwheelFront");
-        hotwheelsback = hardwareMap.get(CRServo.class, "hotwheelBack");
+        hotwheelsback = hardwareMap.get(Servo.class, "hotwheelBack");
         rollitbackbottom = hardwareMap.get(DcMotor.class, "rollitbackBottom");
         rollitbacktop= hardwareMap.get(CRServo.class, "rollitbackTop");
 
@@ -105,15 +102,18 @@ public class Robot {
         rollitbackbottom.setDirection(DcMotor.Direction.FORWARD);
         rollitbacktop.setDirection(CRServo.Direction.REVERSE);
 
-        /*/// Configure encoders
-        drivetrainSetRunMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        drivetrainSetRunMode(DcMotor.RunMode.RUN_USING_ENCODER);
-         */
+        // Configure encoders
+        //Encoder code
+        //flywheel1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        flywheel1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //flywheel2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        flywheel2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
 
         //automatic intake!
         rollerIntake.setDirection(DcMotor.Direction.REVERSE);
         hotwheelsfront.setDirection(DcMotorSimple.Direction.REVERSE);
-        hotwheelsback.setDirection(DcMotorSimple.Direction.REVERSE);
+        hotwheelsback.setDirection(Servo.Direction.REVERSE);
         /// Configure servos
         /*
         intakeServo1.setDirection(DcMotorSimple.Direction.FORWARD);
