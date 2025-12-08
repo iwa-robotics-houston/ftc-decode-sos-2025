@@ -59,15 +59,15 @@ public class Main2 extends LinearOpMode {
             if (gamepad2.left_trigger > 0) {
                 robot.rollerIntake.setPower(-intakePower);
                 robot.hotwheelsfront.setPower(-compliantWheel);
-                robot.hotwheelsback.setPower(-hottie);
+                robot.hotwheelsback.setPosition(-hottie);
             } else if (gamepad2.left_bumper) {
                 robot.rollerIntake.setPower(intakePower);
                 robot.hotwheelsfront.setPower(compliantWheel);
-                robot.hotwheelsback.setPower(hottie);
+                robot.hotwheelsback.setPosition(hottie);
             } else {
                 robot.rollerIntake.setPower(0);
                 robot.hotwheelsfront.setPower(0);
-                robot.hotwheelsback.setPower(0);
+                robot.hotwheelsback.setPosition(0);
             }
 
 
@@ -86,7 +86,38 @@ public class Main2 extends LinearOpMode {
                 robot.flywheel2.setVelocity(0);
                 robot.rollitbackbottom.setPower(0);
                 robot.rollitbacktop.setPower(0);
+
+                // Example: Wait for 1 second before doing something else
+                ElapsedTime timer = new ElapsedTime();
+                double waitTime = 2.0; // Example wait time in seconds
+                if (timer.time() < waitTime) {
+                    // This code will run for the first second
+                    robot.rollitbackbottom.setPower(-pollie);
+                    robot.rollitbacktop.setPower(-rollie);
+                    // For example, set a wheel to a certain power
+                    // frontLeft.setPower(1.0);
+                } else {
+                    // This code will run after the wait is over
+                    robot.flywheel1.setVelocity(-launchPower);
+                    robot.flywheel2.setVelocity(-two);
+                    // frontLeft.setPower(0.0);
+                    // You can reset the timer again for the next action
+                    timer.reset();
+                }
+
+                // Example of a timed movement
+                double moveDuration = 2.0; // Move for 2 seconds
+                double moveSpeed = 0.5;
+
+                // Reset timer before starting the movement
+                timer.reset();
         }
+
+
+
+
+            //For timing in the flywheel
+
 
         //combine the joystick requests for each axis-motion to determine each wheel's power
         //set up a variable for each drive wheel to save the power level for telemetry
