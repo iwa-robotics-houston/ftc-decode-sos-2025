@@ -34,7 +34,7 @@ public class auto extends LinearOpMode {
 
         // DRIVE BACKWARD 2 SECONDS
         driveAll(-0.3);
-        sleep(4000);
+        sleep(3000);
         fireINtheHole(0.6);
         sleep(2000);
         strafeleft(0.3);
