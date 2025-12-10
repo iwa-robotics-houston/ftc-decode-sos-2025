@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+/*package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 
@@ -24,7 +24,7 @@ Okay? okay slay
 - Addy
  */
 
-    @Autonomous(name = "Autumn", group = "OpMode")
+    /*@Autonomous(name = "Autumn", group = "OpMode")
     public class Autumn extends OpMode {
 
         // Declare OpMode members.
@@ -56,7 +56,7 @@ Okay? okay slay
              * to 'get' must correspond to the names assigned during the robot configuration
              * step.
              */
-            leftFrontDrive = hardwareMap.get(DcMotor.class, "frontLeft");
+            /*leftFrontDrive = hardwareMap.get(DcMotor.class, "frontLeft");
             rightFrontDrive = hardwareMap.get(DcMotor.class, "frontRight");
             leftBackDrive = hardwareMap.get(DcMotor.class,"backLeft");
             rightBackDrive = hardwareMap.get(DcMotor.class, "backRight");
@@ -80,7 +80,7 @@ Okay? okay slay
              * Reduction or 90 Deg drives may require direction flips
              */
 
-            leftFrontDrive.setDirection(DcMotorEx.Direction.REVERSE);
+            /*leftFrontDrive.setDirection(DcMotorEx.Direction.REVERSE);
             leftBackDrive.setDirection(DcMotorEx.Direction.REVERSE);
             rightFrontDrive.setDirection(DcMotorEx.Direction.FORWARD);
             rightBackDrive.setDirection(DcMotorEx.Direction.FORWARD);
@@ -90,7 +90,7 @@ Okay? okay slay
              * slow down much faster when it is coasting. This creates a much more controllable
              * drivetrain. As the robot stops much quicker.
              */
-            leftFrontDrive.setZeroPowerBehavior(BRAKE);
+            /*leftFrontDrive.setZeroPowerBehavior(BRAKE);
             leftBackDrive.setZeroPowerBehavior(BRAKE);
             rightFrontDrive.setZeroPowerBehavior(BRAKE);
             rightBackDrive.setZeroPowerBehavior(BRAKE);
@@ -109,7 +109,7 @@ Okay? okay slay
             /*
              * Tell the driver that initialization is complete.
              */
-            telemetry.addData("Status", "Initialized");
+            /*telemetry.addData("Status", "Initialized");
 
             telemetry.addData("Void File Running", "None");
         }
@@ -121,29 +121,29 @@ Okay? okay slay
             telemetry.addLine("Im transforming it rn");
             telemetry.addLine("Heh... Autobots.... Rev up and roll out!!");
 
-            //telemetry.addData("Void File Running","DriveTest");
+            telemetry.addData("Void File Running","DriveTest");
 
-            //sleep(100);
+            sleep(100);
 
-            //drivetest();
+            drivetest();
 
-            //sleep(2000);
+            sleep(2000);
 
-            //autonomoustest();
+            autonomoustest();
 
-            //telemetry.addData("Void File Running", "Backwards");
+            telemetry.addData("Void File Running", "Backwards");
 
-            //sleep(100);
+            sleep(100);
 
-            //backwardsRobot();
+            backwardsRobot();
 
-            //sleep(2000);
+            sleep(2000);
 
-            //telemetry.addData("Void File Running", "Forwards");
+            telemetry.addData("Void File Running", "Forwards");
 
-            //sleep(100);
+            sleep(100);
 
-            //forwardsRobot();
+            forwardsRobot();
 
             TestBotPush();
 
@@ -158,7 +158,7 @@ Okay? okay slay
         I suggest you add a lot of comments for whatever void you make. That way everyone knows its purpose.
         - Addy
          */
-        void drivetest(){
+        //void drivetest(){
 
         /*
         This void is the template/testing class. It won't be used during autonomous.
@@ -171,8 +171,8 @@ Okay? okay slay
 
             //Variables needed to know how much engine power is needed.
             // The numbers here can be recorded when playing the teleop mode
-            double forward = -0.19;
-            double backward = 0.24;
+            //double forward = -0.19;
+            //double backward = 0.24;
 
         /*
         After testing, I think the numbers for these variables should be a bit higher. As it was a bit slow.
@@ -183,7 +183,7 @@ Okay? okay slay
 
             //Forward
             //You don't need to put numbers for the set powers here, as we defined a number for the variable "forward" and "backward"
-            leftFrontDrive.setPower(forward);
+            /*leftFrontDrive.setPower(forward);
             rightFrontDrive.setPower(forward);
             leftBackDrive.setPower(forward);
             rightBackDrive.setPower(forward);
@@ -279,7 +279,7 @@ Okay? okay slay
         -Addy
          */
 
-            //Variables needed to know how much engine power is needed.
+            /*//Variables needed to know how much engine power is needed.
             //The numbers here can be recorded when playing the teleop mode
             //I changed the numbers from 0.19 and -0.24 to larger numbers to get a bit more speed - Addy
             double forward = -0.30;
@@ -490,9 +490,9 @@ Okay? okay slay
             //double r_0 = Δfwd/Δ0;
             //double r_1 = Δstr/Δ0;
 
-        }
+        //}
 
-        void okayInternAnnieNowHitTheSecondTower(){
+        /*void okayInternAnnieNowHitTheSecondTower(){
 
             //The purpose of this void is to potentially have the robot launch balls.
             //It is still heavily under construction so uh i wouldn't recommend using it.
@@ -554,5 +554,5 @@ Okay? okay slay
 
         }
     }
-
+*/
 
