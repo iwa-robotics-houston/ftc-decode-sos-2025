@@ -1,114 +1,48 @@
 package org.firstinspires.ftc.teamcode;
 
-import static android.os.SystemClock.sleep;
-import static com.qualcomm.robotcore.hardware.DcMotor.ZeroPowerBehavior.BRAKE;
-
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
-import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous (name = "Auto", group = "OpMode")
-public class Auto extends OpMode {
+@Autonomous(name = "AutoForOurRobot", group = "OpMode")
+public class Auto extends LinearOpMode {
 
-    // Declare OpMode members.
-    private DcMotor frontLeftDrive = null;
-    private DcMotor backLeftDrive = null;
-    private DcMotor frontRightDrive = null;
-    private DcMotor backRightDrive = null;
-    private DcMotor rollerIntake = null;
+    private Robot robot;
 
     @Override
-    public void init() {
-        /*
-         * Initialize the hardware variables. Note that the strings used here as parameters
-         * to 'get' must correspond to the names assigned during the robot configuration
-         * step.
-         */
-        frontLeftDrive = hardwareMap.get(DcMotor.class, "frontLeftDrive");
-        backLeftDrive = hardwareMap.get(DcMotor.class, "backLeftDrive");
-        frontRightDrive = hardwareMap.get(DcMotor.class, "frontRightDrive");
-        backRightDrive = hardwareMap.get(DcMotor.class, "backRightDrive");
-        rollerIntake = hardwareMap.get(DcMotor.class, "rollerIntake");
+    public void runOpMode() {
+        // Create robot instance (loads all motors & servos)
+        robot = new Robot(hardwareMap);
 
-        /*
-         * Note: The settings here assume direct drive on left and right wheels. Gear
-         * Reduction or 90 Deg drives may require direction flips
-         */
-
-        frontLeftDrive.setDirection(DcMotor.Direction.REVERSE);
-        backLeftDrive.setDirection(DcMotor.Direction.REVERSE);
-        frontRightDrive.setDirection(DcMotor.Direction.FORWARD);
-        backRightDrive.setDirection(DcMotor.Direction.FORWARD);
-
-        /*
-         * Setting zeroPowerBehavior to BRAKE enables a "brake mode". This causes the motor to
-         * slow down much faster when it is coasting. This creates a much more controllable
-         * drivetrain. As the robot stops much quicker.
-         */
-        frontLeftDrive.setZeroPowerBehavior(BRAKE);
-        backLeftDrive.setZeroPowerBehavior(BRAKE);
-        frontRightDrive.setZeroPowerBehavior(BRAKE);
-        backRightDrive.setZeroPowerBehavior(BRAKE);
-
-        // If you press the left bumper, you get a drive from the point of view of the robot
-        // (much like driving an RC vehicle)
-
-        double axial = 0;
-        double lateral = 0;
-        double yaw = 0;
-        drive(axial, lateral, yaw);
-
-        /*
-         * Tell the driver that initialization is complete.
-         */
         telemetry.addData("Status", "Initialized");
-    }
+        telemetry.update();
 
-    @Override
-    public void loop() {
+        waitForStart();
 
-        telemetry.addLine("Please work");
-        telemetry.addLine("PLEASE");
-    }
+        if (isStopRequested()) return;
 
-    // Thanks to FTC16072 for sharing this code!!
-    void drive( double axial, double lateral, double yaw){
-        // This calculates the power needed for each wheel based on the amount of axial,
-        // strafe, lateral, and yaw
 
-        // Variables needed to know how much engine power is needed.
-        // The numbers here can be recorded when playing the teleop mode
-        double forward = 0.19; // SOS - RECORD VALUES
-        double backward = -0.24;
-
-        // FORWARD
-
-        frontLeftDrive.setPower(forward);
-        frontRightDrive.setPower(forward);
-        backLeftDrive.setPower(forward);
-        backRightDrive.setPower(forward);
-
+        // DRIVE FORWARD 2 SECONDS
+        driveAll(0.3);   // 30% power forward
         sleep(2000);
 
         // STOP
+        driveAll(0);
+        sleep(1000);
 
-        frontLeftDrive.setPower(0);
-        frontRightDrive.setPower(0);
-        backLeftDrive.setPower(0);
-        backRightDrive.setPower(0);
 
+        // DRIVE BACKWARD 2 SECONDS
+        driveAll(-0.3);
         sleep(2000);
 
-        // BACKWARDS
+        // FINAL STOP
+        driveAll(0);
+    }
 
-        frontLeftDrive.setPower(backward);
-        frontRightDrive.setPower(backward);
-        backLeftDrive.setPower(backward);
-        backRightDrive.setPower(backward);
-
-        sleep(2000);
-
-
-
+    /** Helper method to power every drive motor on the robot */
+    private void driveAll(double power) {
+        robot.leftFrontDrive.setPower(power);
+        robot.rightFrontDrive.setPower(power);
+        robot.leftBackDrive.setPower(power);
+        robot.rightBackDrive.setPower(power);
     }
 }
