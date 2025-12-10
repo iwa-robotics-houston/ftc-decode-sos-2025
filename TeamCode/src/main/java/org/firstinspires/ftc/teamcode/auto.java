@@ -34,11 +34,13 @@ public class auto extends LinearOpMode {
 
         // DRIVE BACKWARD 2 SECONDS
         driveAll(-0.3);
-        sleep(4000);
+        sleep(3500);
         driveAll(0);
         fireINtheHole(0.6);
-        sleep(2000);
+        sleep(1500);
+        driveAll(0);
         strafeleft(0.3);
+        sleep(1000);
         driveAll(0);
     }
 
@@ -58,8 +60,10 @@ public class auto extends LinearOpMode {
     }
 
     private void fireINtheHole(double fire) {
+        fire = 5600;
         robot.flywheel1.setVelocity(fire);
         robot.flywheel2.setVelocity(fire);
+
     }
 
     private void strafeleft(double totheleft) {
