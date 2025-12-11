@@ -145,9 +145,6 @@ public class Main2 extends LinearOpMode {
                 telemetry.addData("status", "Run Time:" + runtime);
                 telemetry.addData("Front left/Right", "%4.2f,%4.2f", leftFrontPower, rightFrontPower);
                 telemetry.addData("Back left/Right", "%4.2f,%4.2f", leftBackPower, rightBackPower);
-                //telemetry.addData("Wrist Pos", "%4.2f", wristServo.getPosition());
-                //telemetry.addData("Claw Power", "%4.2f", robot.intakeServo1.getPower());
-                //telemetry.addData("robot.arm Pos", robot.arm1.getCurrentPosition());
                 telemetry.update();
             }
         }
