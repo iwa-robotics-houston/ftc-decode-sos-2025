@@ -1,8 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
+import static com.sun.tools.doclint.Entity.and;
+
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+import java.util.Timer;
 
 
 @Autonomous(name = "auto", group = "OpMode")
@@ -36,9 +39,9 @@ public class auto extends LinearOpMode {
         driveAll(-0.3);
         sleep(3500);
         driveAll(0);
-        fireINtheHole(0.6);
-        sleep(1500);
-        driveAll(0);
+        fireINtheHole(1);
+        sleep(6000);
+        fireINtheHole(0);
         strafeleft(0.3);
         sleep(1000);
         driveAll(0);
@@ -58,13 +61,26 @@ public class auto extends LinearOpMode {
 
 
     }
+    private void fireINtheHole(double ticksperRotation) {
 
-    private void fireINtheHole(double fire) {
-        fire = 5600;
-        robot.flywheel1.setVelocity(fire);
-        robot.flywheel2.setVelocity(fire);
 
-    }
+        robot.flywheel1.setVelocity(ticksperRotation);
+        robot.flywheel2.setVelocity(ticksperRotation);
+
+        sleep(3000);
+
+        robot.hotwheelsback.setPower(1);
+        robot.rollitbacktop.setPower(1);
+
+        sleep(3000);
+
+
+
+
+
+
+        };
+
 
     private void strafeleft(double totheleft) {
 
