@@ -43,20 +43,7 @@ public class auto extends LinearOpMode {
         driveAll(-0.6);
         sleep(1250);
         driveAll(0);
-        fireINtheHole(3000);
-        sleep(2000);
-        backitup(1);
-        sleep(2000);
-        fireINtheHole(0);
-        strafeleft(0.3);
-        sleep(3000);
-        driveAll(0);
-
-
-        driveAll(-0.6);
-        sleep(1250);
-        driveAll(0);
-        fireINtheHole(1000);
+        fireINtheHole(1250);
         sleep(2000);
         backitup(1);
         sleep(2000);
