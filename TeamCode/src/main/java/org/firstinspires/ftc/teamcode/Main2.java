@@ -23,14 +23,12 @@ public class Main2 extends LinearOpMode {
 
         //run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
-            double max;
-            boolean armLocked = false;
 
             double axial = -gamepad1.left_stick_y; //note: pushing stick forward gives negative value
-            //NOTE: I am making sure they are not in inverse.
             double lateral = gamepad1.left_stick_x;
             double yaw = gamepad1.right_stick_x;
 
+            double max;
             //For flywheel functions: launching artifact
             double ticksPerRotation = 5600;
             double IshowSpeed = gamepad2.right_trigger;
