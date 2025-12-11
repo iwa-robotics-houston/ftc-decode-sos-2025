@@ -38,6 +38,7 @@ public class auto extends LinearOpMode {
         //sleep(1000);
 
 
+
         // DRIVE BACKWARD 2 SECONDS
         driveAll(-0.6);
         sleep(1250);
@@ -71,12 +72,13 @@ public class auto extends LinearOpMode {
 
         robot.flywheel1.setVelocity(-ticksperRotation);
         robot.flywheel2.setVelocity(-ticksperRotation);
+        sleep(2000);
     }
         private void backitup(double power) {
             robot.hotwheelsback.setPower(-power);
             robot.rollitbackbottom.setPower(power);
             robot.rollitbacktop.setPower(-power);
-
+            sleep(2000);
 
         }
     private void strafeleft(double totheleft) {
