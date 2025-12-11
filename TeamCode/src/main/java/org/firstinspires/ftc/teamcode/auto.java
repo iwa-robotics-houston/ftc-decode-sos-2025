@@ -4,6 +4,9 @@ import static com.sun.tools.doclint.Entity.and;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 
 import java.util.Timer;
 
@@ -36,11 +39,13 @@ public class auto extends LinearOpMode {
 
 
         // DRIVE BACKWARD 2 SECONDS
-        driveAll(-0.3);
+        driveAll(-0.6);
         sleep(3500);
         driveAll(0);
-        fireINtheHole(1);
-        sleep(6000);
+        fireINtheHole(5600);
+        sleep(3000);
+        backitup(1);
+        sleep(2000);
         fireINtheHole(0);
         strafeleft(0.3);
         sleep(1000);
@@ -64,24 +69,16 @@ public class auto extends LinearOpMode {
     private void fireINtheHole(double ticksperRotation) {
 
 
-        robot.flywheel1.setVelocity(ticksperRotation);
-        robot.flywheel2.setVelocity(ticksperRotation);
-
-        sleep(3000);
-
-        robot.hotwheelsback.setPower(1);
-        robot.rollitbacktop.setPower(1);
-
-        sleep(3000);
+        robot.flywheel1.setVelocity(-ticksperRotation);
+        robot.flywheel2.setVelocity(-ticksperRotation);
+    }
+        private void backitup(double power) {
+            robot.hotwheelsback.setPower(-power);
+            robot.rollitbackbottom.setPower(power);
+            robot.rollitbacktop.setPower(-power);
 
 
-
-
-
-
-        };
-
-
+        }
     private void strafeleft(double totheleft) {
 
 
@@ -90,6 +87,7 @@ public class auto extends LinearOpMode {
         robot.leftBackDrive.setPower(-totheleft);
         robot.rightBackDrive.setPower(totheleft);
     }
+
 }
 
 
