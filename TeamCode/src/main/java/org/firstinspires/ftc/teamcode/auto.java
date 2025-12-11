@@ -75,9 +75,9 @@ public class auto extends LinearOpMode {
         sleep(2000);
     }
         private void backitup(double power) {
-            robot.hotwheelsback.setPower(-power);
+            robot.hotwheelsback.setPower(power);
             robot.rollitbackbottom.setPower(power);
-            robot.rollitbacktop.setPower(-power);
+            robot.rollitbacktop.setPower(power);
             sleep(2000);
 
         }
