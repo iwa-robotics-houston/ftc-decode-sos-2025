@@ -31,7 +31,7 @@ public class ForwardRedAuto extends LinearOpMode {
 
         // Turn slightly RIGHT for red goal
         turnRight(0.5);      // ← mirrored from the blue side
-        sleep(600); //400
+        sleep(700); //400
         driveAll(0);
 
 
