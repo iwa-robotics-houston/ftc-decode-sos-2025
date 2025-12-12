@@ -37,7 +37,7 @@ public class ForwardRedAuto extends LinearOpMode {
 
         // Drive forward more to get into shooting position
         driveAll(0.6);
-        sleep(300);
+        sleep(500);
         driveAll(0);
 
 
