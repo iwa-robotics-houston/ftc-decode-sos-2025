@@ -3,46 +3,105 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name = "AutoForOurRobot", group = "OpMode")
+@Autonomous(name = "AutoVelocityLaunch", group = "OpMode")
 public class Auto extends LinearOpMode {
 
     private Robot robot;
 
     @Override
     public void runOpMode() {
-        // Create robot instance (loads all motors & servos)
+
+        // Initialize robot
         robot = new Robot(hardwareMap);
 
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
         waitForStart();
-
         if (isStopRequested()) return;
 
-
-        // DRIVE FORWARD 2 SECONDS
-        driveAll(0.3);   // 30% power forward
-        sleep(2000);
-
-        // STOP
-        driveAll(0);
-        sleep(1000);
+        // back up to line up shot
+        driveAll(-0.6);   // backward at 60% power
+        sleep(1000);      // move for 1 second
+        driveAll(0);      // stop
 
 
-        // DRIVE BACKWARD 2 SECONDS
-        driveAll(-0.3);
-        sleep(2000);
+        // fire two artifacts using velocity trigger
+        fireSequence(1500, 2);  // 1500 ticks/sec target velocity, 2 balls
 
-        // FINAL STOP
-        driveAll(0);
+        // strafe left after all shots
+        strafeLeft(0.4); // 40% power left
+        sleep(2000);     // strafe for 2 seconds
+        driveAll(0);     // stop movement
+
+        telemetry.addData("Status", "ugghghghgh");
+        telemetry.update();
     }
 
-    /** Helper method to power every drive motor on the robot */
+
+    // Fires each ball only when flywheel is up to speed
+    private void fireSequence(double targetVelocity, int shots) {
+
+        // Start flywheel motors spinning toward target
+        robot.flywheel1.setVelocity(-targetVelocity);
+        robot.flywheel2.setVelocity(-targetVelocity);
+
+        for (int i = 0; i < shots && opModeIsActive(); i++) {
+
+            // Wait until flywheel is up to speed
+            while (opModeIsActive() && getAvgFlywheel() < targetVelocity * 0.9) {
+                telemetry.addData("Flywheel Avg", getAvgFlywheel());
+                telemetry.addData("Shots Fired", i);
+                telemetry.update();
+                sleep(10);  // tiny delay
+            }
+
+            // Feed one artifact
+            feedOnce();
+
+            // Short pause to allow flywheel to recover
+            sleep(120);
+        }
+
+        // Stop flywheel after all shots
+        robot.flywheel1.setVelocity(0);
+        robot.flywheel2.setVelocity(0);
+    }
+
+    // avg flywheel velocity
+    private double getAvgFlywheel() {
+        return (Math.abs(robot.flywheel1.getVelocity()) +
+                Math.abs(robot.flywheel2.getVelocity())) / 2.0;
+    }
+
+    // feed one artifact
+    private void feedOnce() {
+
+        // Start feeding motors
+        robot.hotwheelsback.setPower(1);
+        robot.rollitbackbottom.setPower(-1);
+        robot.rollitbacktop.setPower(-1);
+
+        sleep(1000);  // adjust duration for your mechanism
+
+        // Stop feeding motors
+        robot.hotwheelsback.setPower(0);
+        robot.rollitbackbottom.setPower(0);
+        robot.rollitbacktop.setPower(0);
+    }
+
+    // drivetrain helpers
     private void driveAll(double power) {
         robot.leftFrontDrive.setPower(power);
         robot.rightFrontDrive.setPower(power);
         robot.leftBackDrive.setPower(power);
+        robot.rightBackDrive.setPower(power);
+    }
+
+    private void strafeLeft(double power) {
+        robot.leftFrontDrive.setPower(-power);
+        robot.rightFrontDrive.setPower(power);
+        robot.leftBackDrive.setPower(-power);
         robot.rightBackDrive.setPower(power);
     }
 }

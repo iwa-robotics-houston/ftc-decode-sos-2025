@@ -140,14 +140,34 @@ public class StarterBotTeleop extends LinearOpMode {
 
              */
 
-                //show the elapsed game time and wheel power.
-                telemetry.addData("status", "Run Time:" + runtime);
-                telemetry.addData("Front left/Right", "%4.2f,%4.2f", leftFrontPower, rightFrontPower);
-                telemetry.addData("Back left/Right", "%4.2f,%4.2f", leftBackPower, rightBackPower);
-                //telemetry.addData("Wrist Pos", "%4.2f", wristServo.getPosition());
-                //telemetry.addData("Claw Power", "%4.2f", robot.intakeServo1.getPower());
-                //telemetry.addData("robot.arm Pos", robot.arm1.getCurrentPosition());
+                // TELEMETRY FOR FLYWHEEL & LAUNCH SYSTEM
+                telemetry.addData("Status", "Run Time: " + runtime.toString());
+
+// Flywheel speeds (ticks/sec)
+                telemetry.addData("Flywheel 1 Velocity", robot.flywheel1.getVelocity());
+                telemetry.addData("Flywheel 2 Velocity", robot.flywheel2.getVelocity());
+
+// Feeder wheels (power)
+                telemetry.addData("Roller Top Power", robot.rollitbacktop.getPower());
+                telemetry.addData("Roller Bottom Power", robot.rollitbackbottom.getPower());
+
+// Intake system
+                telemetry.addData("Front Compliant Wheel", robot.hotwheelsfront.getPower());
+                telemetry.addData("Back Compliant Wheel", robot.hotwheelsback.getPower());
+                telemetry.addData("Intake Roller", robot.rollerIntake.getPower());
+
+// Show launch state
+                boolean launching = (gamepad2.right_trigger > 0 || gamepad2.right_bumper);
+                telemetry.addData("Launching?", launching ? "YES" : "NO");
+
+// Drive wheels
+                telemetry.addData("Front L / R", "%4.2f / %4.2f",
+                        robot.leftFrontDrive.getPower(), robot.rightFrontDrive.getPower());
+                telemetry.addData("Back  L / R", "%4.2f / %4.2f",
+                        robot.leftBackDrive.getPower(), robot.rightBackDrive.getPower());
+
                 telemetry.update();
+
             }
         }
     }
