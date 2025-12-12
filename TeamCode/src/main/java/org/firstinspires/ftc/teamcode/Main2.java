@@ -15,8 +15,6 @@ public class Main2 extends LinearOpMode {
 
         //wait for the game to start (driver presses START)
         telemetry.addData("status", "initialized");
-        //telemetry.addData("Servo Power", robot.intakeServo1.getPower());
-        //telemetry.addData("Servo Position", wristServo.getPosition());
         telemetry.update();
         waitForStart();
         runtime.reset();
@@ -44,8 +42,6 @@ public class Main2 extends LinearOpMode {
 
             double intakePower = 1;
             double compliantWheel = 1;
-            //double launchPower = (IshowSpeed * ticksPerRotation);
-            //double two = (IshowSpeed * ticksPerRotation);
             double launchPower = (ticksPerRotation);
             double two = (ticksPerRotation);
             double pollie = 1;
