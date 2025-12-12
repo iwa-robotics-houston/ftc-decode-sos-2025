@@ -43,8 +43,8 @@ public class auto extends LinearOpMode {
         driveAll(-0.6);
         sleep(1250);
         driveAll(0);
-        fireINtheHole(2200);
-        sleep(2000);
+        fireINtheHole(2000);
+        sleep(1990);
         backitup(1);
         sleep(2000);
         fireINtheHole(0);
@@ -88,6 +88,8 @@ public class auto extends LinearOpMode {
         robot.rightFrontDrive.setPower(totheleft);
         robot.leftBackDrive.setPower(-totheleft);
         robot.rightBackDrive.setPower(totheleft);
+
+
     }
 
 }
