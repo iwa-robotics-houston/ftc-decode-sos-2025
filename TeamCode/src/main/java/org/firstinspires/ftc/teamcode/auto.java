@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous(name = "AutoVelocityLaunch", group = "OpMode")
 public class auto extends LinearOpMode {
-
+//credits to vivi too :)
     private Robot robot;
 
     @Override
@@ -27,7 +27,7 @@ public class auto extends LinearOpMode {
 
 
         // fire two artifacts using velocity trigger
-        fireSequence(700, 2);  // 1500 ticks/sec target velocity, 2 balls
+        fireSequence(1300, 2);  // 1500 ticks/sec target velocity, 2 balls
 
         // strafe left after all shots
         strafeLeft(0.4); // 40% power left
