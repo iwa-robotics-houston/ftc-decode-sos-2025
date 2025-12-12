@@ -72,13 +72,13 @@ public class auto extends LinearOpMode {
 
         robot.flywheel1.setVelocity(-ticksperRotation);
         robot.flywheel2.setVelocity(-ticksperRotation);
-        sleep(1000);
+        sleep(500);
     }
         private void backitup(double power) {
             robot.hotwheelsback.setPower(power);
             robot.rollitbackbottom.setPower(-power);
             robot.rollitbacktop.setPower(-power);
-            sleep(2000);
+            sleep(400);
 
         }
     private void strafeleft(double totheleft) {
