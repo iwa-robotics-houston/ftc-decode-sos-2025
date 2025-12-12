@@ -3,8 +3,11 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name = "AutoVelocityLaunch", group = "OpMode")
-public class Auto extends LinearOpMode {
+// THIS IS THE **WIP** AUTONOMOUS FOR WHEN THE ROBOT STARTS AGAINST THE WALL
+// AND DRIVES FORWARD -> TURNS LEFT -> SHOOTS INTO BLUE GOAL
+// IT IS A WIP
+@Autonomous(name = "ForwardBlueAutoWIP", group = "OpMode")
+public class ForwardBlueAuto extends LinearOpMode {
 
     private Robot robot;
 
@@ -20,77 +23,68 @@ public class Auto extends LinearOpMode {
         waitForStart();
         if (isStopRequested()) return;
 
-        // back up to line up shot
-        driveAll(-0.6);   // backward at 60% power
-        sleep(1000);      // move for 1 second
-        driveAll(0);      // stop
+        // Drive forward away from wall
+        driveAll(0.6);     // forward at 60%
+        sleep(900);        // move 0.9 sec, probably should adjust
+        driveAll(0);
+
+        // Turn slightly left to aim at blue goal
+        turnLeft(0.4);     // 40% power turn
+        sleep(300);        // adjust based on your robot turn rate
+        driveAll(0);
+
+        // Fire two shots using velocity triggering
+        fireSequence(1285, 2);
 
 
-        // fire two artifacts using velocity trigger
-        fireSequence(750, 2);  // 1500 ticks/sec target velocity, 2 balls
-
-        // strafe left after all shots
-        strafeLeft(0.4); // 40% power left
-        sleep(2000);     // strafe for 2 seconds
-        driveAll(0);     // stop movement
-
-        telemetry.addData("Status", "ugghghghgh");
+        telemetry.addData("Status", "Finished Auto :)");
         telemetry.update();
     }
 
 
-    // Fires each ball only when flywheel is up to speed
+    // Shooting system
     private void fireSequence(double targetVelocity, int shots) {
 
-        // Start flywheel motors spinning toward target
         robot.flywheel1.setVelocity(-targetVelocity);
         robot.flywheel2.setVelocity(-targetVelocity);
 
         for (int i = 0; i < shots && opModeIsActive(); i++) {
 
-            // Wait until flywheel is up to speed
-            while (opModeIsActive() && getAvgFlywheel() < targetVelocity * 0.9) {
+            while (opModeIsActive() && getAvgFlywheel() < targetVelocity * 0.99) {
                 telemetry.addData("Flywheel Avg", getAvgFlywheel());
                 telemetry.addData("Shots Fired", i);
                 telemetry.update();
-                sleep(10);  // tiny delay
+                sleep(10);
             }
 
-            // Feed one artifact
             feedOnce();
-
-            // Short pause to allow flywheel to recover
             sleep(120);
         }
 
-        // Stop flywheel after all shots
         robot.flywheel1.setVelocity(0);
         robot.flywheel2.setVelocity(0);
     }
 
-    // avg flywheel velocity
     private double getAvgFlywheel() {
         return (Math.abs(robot.flywheel1.getVelocity()) +
                 Math.abs(robot.flywheel2.getVelocity())) / 2.0;
     }
 
-    // feed one artifact
     private void feedOnce() {
-
-        // Start feeding motors
         robot.hotwheelsback.setPower(1);
         robot.rollitbackbottom.setPower(-1);
         robot.rollitbacktop.setPower(-1);
 
-        sleep(1000);  // adjust duration for your mechanism
+        sleep(1000);
 
-        // Stop feeding motors
         robot.hotwheelsback.setPower(0);
         robot.rollitbackbottom.setPower(0);
         robot.rollitbacktop.setPower(0);
     }
 
-    // drivetrain helpers
+
+
+    // Movement helpers
     private void driveAll(double power) {
         robot.leftFrontDrive.setPower(power);
         robot.rightFrontDrive.setPower(power);
@@ -98,10 +92,13 @@ public class Auto extends LinearOpMode {
         robot.rightBackDrive.setPower(power);
     }
 
-    private void strafeLeft(double power) {
+    // Turn left
+    private void turnLeft(double power) {
         robot.leftFrontDrive.setPower(-power);
-        robot.rightFrontDrive.setPower(power);
         robot.leftBackDrive.setPower(-power);
+        robot.rightFrontDrive.setPower(power);
         robot.rightBackDrive.setPower(power);
     }
+
+
 }

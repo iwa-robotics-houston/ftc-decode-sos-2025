@@ -143,7 +143,7 @@ public class StarterBotTeleop extends LinearOpMode {
                 // TELEMETRY FOR FLYWHEEL & LAUNCH SYSTEM
                 telemetry.addData("Status", "Run Time: " + runtime.toString());
 
-// Flywheel speeds (ticks/sec)
+// Flywheel speeds (ticks/sec) // to use for auto
                 telemetry.addData("Flywheel 1 Velocity", robot.flywheel1.getVelocity());
                 telemetry.addData("Flywheel 2 Velocity", robot.flywheel2.getVelocity());
 
