@@ -27,7 +27,8 @@ public class auto extends LinearOpMode {
 
 
         // fire two artifacts using velocity trigger
-        fireSequence(1300, 2);  // 1500 ticks/sec target velocity, 2 balls
+        fireSequence(1500, 2);  // 1500 ticks/sec target velocity, 2 balls
+        fireSequence(750, 2);
 
         // strafe left after all shots
         strafeLeft(0.4); // 40% power left
