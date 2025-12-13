@@ -47,7 +47,8 @@ public class BackFromRedAuto extends LinearOpMode {
         // Start flywheel motors spinning toward target
         robot.flywheel1.setVelocity(-targetVelocity);
         robot.flywheel2.setVelocity(-targetVelocity);
-
+        //code from some website.  TRUST IT.  IMPORTANT!!
+        //&& = and.
         for (int i = 0; i < shots && opModeIsActive(); i++) {
 
             // Wait until flywheel is up to speed
