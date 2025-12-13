@@ -24,7 +24,7 @@ public class ForwardBlueAuto extends LinearOpMode {
 
         // Drive forward away from wall
         driveAll(0.6);     // forward at 60%
-        sleep(900);        //move 0.9 sec, probably should adjust
+        sleep(1000);        //move 0.9 sec, probably should adjust
         driveAll(0);
 
         // Turn slightly left to aim at blue goal
@@ -34,11 +34,15 @@ public class ForwardBlueAuto extends LinearOpMode {
 
         // Drive forward again
         driveAll(0.6);     // forward at 60%
-        sleep(1100);        // move 0.9 sec, probably should adjust
+        sleep(900);        // move 0.9 sec, probably should adjust
         driveAll(0);
 
         // Fire two shots using velocity triggering
         fireSequence(1320, 2);
+
+        strafeLeft(0.4); // 40% power left
+        sleep(2000);     // strafe for 2 seconds
+        driveAll(0);     // stop movement
 
 
         telemetry.addData("Status", "Finished Auto :)");
@@ -102,6 +106,12 @@ public class ForwardBlueAuto extends LinearOpMode {
         robot.leftBackDrive.setPower(-power);
         robot.rightFrontDrive.setPower(power);
         robot.rightBackDrive.setPower(power);
+    }
+    private void strafeLeft(double power) {
+        robot.leftFrontDrive.setPower(-power);
+        robot.rightFrontDrive.setPower(power);
+        robot.leftBackDrive.setPower(power);
+        robot.rightBackDrive.setPower(-power);
     }
 
 
