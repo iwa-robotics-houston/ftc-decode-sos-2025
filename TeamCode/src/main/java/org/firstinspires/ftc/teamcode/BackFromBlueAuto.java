@@ -23,7 +23,7 @@ public class BackFromBlueAuto extends LinearOpMode {
 
         // back up to line up shot
         driveAll(-0.6);   // backward at 60% power
-        sleep(1000);      // move for 1 second
+        sleep(1000);      //move for 1 second
         driveAll(0);      // stop
 
 

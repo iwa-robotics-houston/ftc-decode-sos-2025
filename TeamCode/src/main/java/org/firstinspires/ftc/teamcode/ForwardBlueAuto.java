@@ -24,7 +24,7 @@ public class ForwardBlueAuto extends LinearOpMode {
 
         // Drive forward away from wall
         driveAll(0.6);     // forward at 60%
-        sleep(900);        // move 0.9 sec, probably should adjust
+        sleep(900);        //move 0.9 sec, probably should adjust
         driveAll(0);
 
         // Turn slightly left to aim at blue goal
