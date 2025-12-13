@@ -24,7 +24,7 @@ public class ForwardBlueAuto extends LinearOpMode {
 
         // Drive forward away from wall
         driveAll(0.6);     // forward at 60%
-        sleep(1200);        //move 0.9 sec, probably should adjust
+        sleep(1400);        //move 0.9 sec, probably should adjust
         driveAll(0);
 
         // Turn slightly left to aim at blue goal
@@ -33,9 +33,9 @@ public class ForwardBlueAuto extends LinearOpMode {
         driveAll(0);
 
         // Drive forward again
-        driveAll(0.6);     // forward at 60%
-        sleep(900);        // move 0.9 sec, probably should adjust
-        driveAll(0);
+        //driveAll(0.6);     // forward at 60%
+        //sleep(300);        // move 0.9 sec, probably should adjust
+        //driveAll(0);
 
         // Fire two shots using velocity triggering
         fireSequence(1320, 2);

@@ -23,7 +23,7 @@ public class BackFromRedAuto extends LinearOpMode {
 
         // back up to line up shot
         driveAll(-0.6);   // backward at 60% power
-        sleep(1000);      //move for 1 second
+        sleep(1000);      // move for 1 second
         driveAll(0);      // stop
 
 
@@ -48,7 +48,7 @@ public class BackFromRedAuto extends LinearOpMode {
         robot.flywheel1.setVelocity(-targetVelocity);
         robot.flywheel2.setVelocity(-targetVelocity);
         //code from some website.  TRUST IT.  IMPORTANT!!
-        //&& = and.
+        //&& = adn
         for (int i = 0; i < shots && opModeIsActive(); i++) {
 
             // Wait until flywheel is up to speed
