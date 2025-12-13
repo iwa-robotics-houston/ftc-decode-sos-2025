@@ -25,7 +25,7 @@ public class ForwardRedAuto extends LinearOpMode {
 
         // Drive forward away from wall
         driveAll(0.6);
-        sleep(1200);  // 900
+        sleep(1400);  // 900
         driveAll(0);
 
 
@@ -36,9 +36,9 @@ public class ForwardRedAuto extends LinearOpMode {
 
 
         // Drive forward more to get into shooting position
-        driveAll(0.6);
-        sleep(1100);
-        driveAll(0);
+        //driveAll(0.6);
+        //sleep(300);
+        //driveAll(0);
 
 
         // Fire two velocity-triggered shots
