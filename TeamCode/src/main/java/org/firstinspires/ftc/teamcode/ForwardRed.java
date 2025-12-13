@@ -4,9 +4,9 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 // THIS IS THE AUTONOMOUS FOR WHEN THE ROBOT STARTS AGAINST THE WALL
-// AND DRIVES FORWARD -> TURNS RIGHT -> SHOOTS INTO RED GOAL
-@Autonomous(name = "ForwardRedAuto", group = "OpMode")
-public class ForwardRedAuto extends LinearOpMode {
+// AND DRIVES FORWARD -> TURNS LEFT -> SHOOTS INTO BLUE GOAL
+@Autonomous(name = "ForwardBlueAuto", group = "OpMode")
+public class ForwardRed extends LinearOpMode {
 
     private Robot robot;
 
@@ -22,31 +22,23 @@ public class ForwardRedAuto extends LinearOpMode {
         waitForStart();
         if (isStopRequested()) return;
 
-
         // Drive forward away from wall
-        driveAll(0.6);
-        sleep(1400);  // 900
+        driveAll(0.6);     // forward at 60%
+        sleep(2000);        // move 0.9 sec, probably should adjust
         driveAll(0);
 
-
-        // Turn slightly RIGHT for red goal
-        turnRight(0.4);      // ← mirrored from the blue side
-        sleep(380);
+        // Turn slightly left to aim at blue goal
+        turnLeft(0.28);     // 40% power turn
+        sleep(380);        // adjust based on your robot turn rate
         driveAll(0);
 
-
-        // Drive forward more to get into shooting position
-        //driveAll(0.6);
-        //sleep(300);
+        // Drive forward again
+        //driveAll(0.6);     // forward at 60%
+        //sleep(1100);        // move 0.9 sec, probably should adjust
         //driveAll(0);
 
-
-        // Fire two velocity-triggered shots
-        fireSequence(1310, 2);
-
-        strafeRight(0.4); // 40% power RIGHT
-        sleep(2000);     // strafe for 2 seconds
-        driveAll(0);     // stop movement
+        // Fire two shots using velocity triggering
+        fireSequence(1320, 2);
 
 
         telemetry.addData("Status", "Finished Auto :)");
@@ -77,12 +69,10 @@ public class ForwardRedAuto extends LinearOpMode {
         robot.flywheel2.setVelocity(0);
     }
 
-
     private double getAvgFlywheel() {
         return (Math.abs(robot.flywheel1.getVelocity()) +
                 Math.abs(robot.flywheel2.getVelocity())) / 2.0;
     }
-
 
     private void feedOnce() {
         robot.hotwheelsback.setPower(1);
@@ -97,6 +87,7 @@ public class ForwardRedAuto extends LinearOpMode {
     }
 
 
+
     // Movement helpers
     private void driveAll(double power) {
         robot.leftFrontDrive.setPower(power);
@@ -105,19 +96,13 @@ public class ForwardRedAuto extends LinearOpMode {
         robot.rightBackDrive.setPower(power);
     }
 
-
-    // Turn right
-    private void turnRight(double power) {
-        robot.leftFrontDrive.setPower(power);
-        robot.leftBackDrive.setPower(power);
-        robot.rightFrontDrive.setPower(-power);
-        robot.rightBackDrive.setPower(-power);
-    }
-    private void strafeRight(double power) {
-        robot.leftFrontDrive.setPower(power);
-        robot.rightFrontDrive.setPower(-power);
+    // Turn left
+    private void turnLeft(double power) {
+        robot.leftFrontDrive.setPower(-power);
         robot.leftBackDrive.setPower(-power);
+        robot.rightFrontDrive.setPower(power);
         robot.rightBackDrive.setPower(power);
     }
+
 
 }
