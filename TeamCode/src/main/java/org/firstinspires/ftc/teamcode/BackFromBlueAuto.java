@@ -42,6 +42,7 @@ public class BackFromBlueAuto extends LinearOpMode {
 
 
     // Fires each ball only when flywheel is up to speed
+    //FUCKIN PERFECT
     private void fireSequence(double targetVelocity, int shots) {
 
         // Start flywheel motors spinning toward target
