@@ -25,19 +25,19 @@ public class ForwardRedAuto extends LinearOpMode {
 
         // Drive forward away from wall
         driveAll(0.6);
-        sleep(1200);
+        sleep(900);
         driveAll(0);
 
 
         // Turn slightly RIGHT for red goal
-        turnRight(0.5);      // ← mirrored from the blue side
-        sleep(700); //400
+        turnRight(0.4);      // ← mirrored from the blue side
+        sleep(380);
         driveAll(0);
 
 
         // Drive forward more to get into shooting position
         driveAll(0.6);
-        sleep(400);
+        sleep(1100);
         driveAll(0);
 
 
