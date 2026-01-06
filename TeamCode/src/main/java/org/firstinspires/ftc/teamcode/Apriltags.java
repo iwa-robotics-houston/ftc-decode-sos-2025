@@ -19,7 +19,7 @@ public class Apriltags extends OpMode {
     @Override
     public void init() {
         limelight = hardwareMap.get(Limelight3A.class, "limelight");
-        limelight.pipelineSwitch(6);
+        limelight.pipelineSwitch(7);
         imu = hardwareMap.get(IMU.class, "imu");
         RevHubOrientationOnRobot RevHubOrientationOnRobot = new RevHubOrientationOnRobot(com.qualcomm.hardware.rev.RevHubOrientationOnRobot.LogoFacingDirection.FORWARD,
                 com.qualcomm.hardware.rev.RevHubOrientationOnRobot.UsbFacingDirection.LEFT);
@@ -32,7 +32,9 @@ public class Apriltags extends OpMode {
         limelight.start();
 
 
-
+        /* Goal one: to scan the tag and decipher the colors needed
+        /*  to get colors and then scan localization tag for launching
+         */
     }
 
 
