@@ -28,7 +28,7 @@ public class Main2 extends LinearOpMode {
 
             double max;
             //For flywheel functions: launching artifact
-            double ticksPerRotation = 5600;
+            double ticksPerRotation = 6000; //5600
             double IshowSpeed = gamepad2.right_trigger;
             //robot.flywheel2.setVelocity(IshowSpeed * ticksPerRotation);
 
@@ -55,13 +55,13 @@ public class Main2 extends LinearOpMode {
                 robot.hotwheelsfront.setPower(-compliantWheel);
                 robot.hotwheelsback.setPower(-hottie);
                 robot.rollitbackbottom.setPower(pollie);
-                robot.rollitbacktop.setPower(-rollie);
+                robot.rollitbacktop.setPower(rollie);
             } else if (gamepad2.left_bumper) {
                 robot.rollerIntake.setPower(intakePower);
                 robot.hotwheelsfront.setPower(compliantWheel);
                 robot.hotwheelsback.setPower(hottie);
                 robot.rollitbackbottom.setPower(-pollie);
-                robot.rollitbacktop.setPower(rollie);
+                robot.rollitbacktop.setPower(-rollie);
 
             } else {
                 robot.rollerIntake.setPower(0);
