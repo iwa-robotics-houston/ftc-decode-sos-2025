@@ -46,7 +46,7 @@ public class Apriltags extends OpMode {
         limelight.updateRobotOrientation(orientation.getYaw());
         LLResult LLResult = limelight.getLatestResult();
         if (LLResult != null && LLResult.isValid()) {
-            Pose3D botPose = LLResult.getBotpose();
+            Pose3D botPose = LLResult.getBotpose_MT2();
             telemetry.addData("tx", LLResult.getTx());
             telemetry.addData("ty", LLResult.getTy());
             telemetry.addData("ta", LLResult.getTa());
