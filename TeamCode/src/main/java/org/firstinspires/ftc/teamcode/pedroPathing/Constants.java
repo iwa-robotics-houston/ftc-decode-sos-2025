@@ -55,9 +55,9 @@ public class Constants {
 
     // and/or:
 
-            .strafeEncoderDirection(Encoder.REVERSE);
-            //.forwardTicksToInches((Double) multiplier)
-            //.strafeTicksToInches((Double) multiplier);
+            .strafeEncoderDirection(Encoder.REVERSE)
+            .forwardTicksToInches((Double) multiplier)
+            .strafeTicksToInches((Double) multiplier);
     public static Follower createFollower(HardwareMap hardwareMap) {
         return new FollowerBuilder(followerConstants, hardwareMap)
                 .twoWheelLocalizer(localizerConstants)
