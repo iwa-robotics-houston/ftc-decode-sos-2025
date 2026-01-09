@@ -50,14 +50,14 @@ public class Constants {
             )
             .forwardPodY(-1.4)
 
-            .strafePodX(-5.6)
-            .forwardEncoderDirection(Encoder.REVERSE)
+            .strafePodX(-5.6);
+            //.forwardEncoderDirection(Encoder.REVERSE)
 
     // and/or:
 
-            .strafeEncoderDirection(Encoder.REVERSE)
-            .forwardTicksToInches((Double) multiplier)
-            .strafeTicksToInches((Double) multiplier);
+            //.strafeEncoderDirection(Encoder.REVERSE)
+            //.forwardTicksToInches((Double) multiplier)
+            //.strafeTicksToInches((Double) multiplier);
     public static Follower createFollower(HardwareMap hardwareMap) {
         return new FollowerBuilder(followerConstants, hardwareMap)
                 .twoWheelLocalizer(localizerConstants)
