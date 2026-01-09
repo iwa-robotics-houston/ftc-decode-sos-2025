@@ -50,12 +50,9 @@ public class Constants {
             )
             .forwardPodY(-1.4)
 
-            .strafePodX(-5.6)
-            //.forwardEncoderDirection(Encoder.REVERSE)
+            .strafePodX(-5.6);
 
-    // and/or:
-
-            .strafeEncoderDirection(Encoder.REVERSE);
+            //.strafeEncoderDirection(Encoder.REVERSE);
             //.forwardTicksToInches((Double) multiplier)
             //.strafeTicksToInches((Double) multiplier);
     public static Follower createFollower(HardwareMap hardwareMap) {
