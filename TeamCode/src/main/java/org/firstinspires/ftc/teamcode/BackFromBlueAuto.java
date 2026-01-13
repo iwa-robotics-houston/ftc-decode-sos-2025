@@ -101,7 +101,7 @@ public class BackFromBlueAuto extends LinearOpMode {
         robot.rightBackDrive.setPower(power);
     }
 
-    // strafe to the left
+    // strafe to the leftt
     private void strafeLeft(double power) {
         robot.leftFrontDrive.setPower(-power);
         robot.rightFrontDrive.setPower(power);
