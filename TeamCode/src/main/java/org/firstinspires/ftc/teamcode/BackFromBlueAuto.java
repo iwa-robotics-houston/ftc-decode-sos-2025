@@ -81,7 +81,8 @@ public class BackFromBlueAuto extends LinearOpMode {
     private void feedOnce() {
 
         // Start feeding motors
-        robot.hotwheelsfront.setPower(-1);
+        robot.rollerIntake.setPower(1);
+        robot.hotwheelsfront.setPower(1);
         robot.hotwheelsback.setPower(1);
         robot.rollitbackbottom.setPower(-1);
         robot.rollitbacktop.setPower(-1);
@@ -89,6 +90,7 @@ public class BackFromBlueAuto extends LinearOpMode {
         sleep(1000);
 
         // Stop feeding motors
+        robot.rollerIntake.setPower(0);
         robot.hotwheelsfront.setPower(0);
         robot.hotwheelsback.setPower(0);
         robot.rollitbackbottom.setPower(0);
