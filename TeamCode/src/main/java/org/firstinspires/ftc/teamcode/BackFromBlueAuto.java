@@ -87,7 +87,7 @@ public class BackFromBlueAuto extends LinearOpMode {
         robot.rollitbackbottom.setPower(-1);
         robot.rollitbacktop.setPower(-1);
 
-        sleep(1000);
+        sleep(1500); //1000
 
         // Stop feeding motors
         robot.rollerIntake.setPower(0);
