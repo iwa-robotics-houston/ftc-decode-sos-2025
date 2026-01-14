@@ -71,7 +71,7 @@ public class BackFromBlueAuto extends LinearOpMode {
         robot.flywheel2.setVelocity(0);
     }
 
-    // avg flywheel velocity
+    // avg flywheel velocityyy
     private double getAvgFlywheel() {
         return (Math.abs(robot.flywheel1.getVelocity()) +
                 Math.abs(robot.flywheel2.getVelocity())) / 2.0;
