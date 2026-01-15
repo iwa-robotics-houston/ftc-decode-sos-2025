@@ -53,8 +53,13 @@ public class Constants {
             .strafePodX(-5.6)
 
             .strafeEncoderDirection(Encoder.REVERSE)
-            .forwardTicksToInches(0.01966263510288413)
-            .strafeTicksToInches(0.043079223894641014);
+            //.forwardTicksToInches(0.01966263510288413)
+            //.strafeTicksToInches(0.043079223894641014);
+            .forwardTicksToInches(15.658827329368565)
+            .strafeTicksToInches(24.72190433384411);
+
+
+
     public static Follower createFollower(HardwareMap hardwareMap) {
         return new FollowerBuilder(followerConstants, hardwareMap)
                 .twoWheelLocalizer(localizerConstants)
