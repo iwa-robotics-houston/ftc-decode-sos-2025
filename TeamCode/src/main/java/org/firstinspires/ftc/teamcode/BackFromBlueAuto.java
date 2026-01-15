@@ -87,7 +87,7 @@ public class BackFromBlueAuto extends LinearOpMode {
         robot.rollitbackbottom.setPower(-1);
         robot.rollitbacktop.setPower(-1);
 
-        sleep(1300); //1000
+        sleep(1200); //1000
 
         // Stop feeding motors
         robot.rollerIntake.setPower(0);
@@ -96,6 +96,25 @@ public class BackFromBlueAuto extends LinearOpMode {
         robot.rollitbackbottom.setPower(0);
         robot.rollitbacktop.setPower(0);
     }
+
+    private void advanceThirdBall() {
+
+     robot.rollerIntake.setPower(1);
+        robot.hotwheelsfront.setPower(1);
+        robot.hotwheelsback.setPower(1);
+        robot.rollitbackbottom.setPower(-1);
+        robot.rollitbacktop.setPower(-1);
+
+    sleep(2000); //1000
+
+    // Stop feeding motors
+        robot.rollerIntake.setPower(0);
+        robot.hotwheelsfront.setPower(0);
+        robot.hotwheelsback.setPower(0);
+        robot.rollitbackbottom.setPower(0);
+        robot.rollitbacktop.setPower(0);
+}
+
 
     // drivetrain helpers
     private void driveAll(double power) {
