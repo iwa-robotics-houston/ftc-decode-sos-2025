@@ -28,7 +28,7 @@ public class BackFromBlueAuto extends LinearOpMode {
 
 
         // fire two artifacts using velocity trigger
-        fireSequence(1300, 3);  // 1285 ticks/sec target velocity, 2 balls
+        fireSequence(1350, 3);  // 1285 ticks/sec target velocity, 2 balls
 
         // strafe left after all shots
         strafeLeft(0.4); // 40% power left
