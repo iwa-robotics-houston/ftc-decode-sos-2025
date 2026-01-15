@@ -61,7 +61,7 @@ public class BackFromBlueAuto extends LinearOpMode {
                 telemetry.addData("Flywheel Avg", getAvgFlywheel());
                 telemetry.addData("Shots Fired", i);
                 telemetry.update();
-                sleep(30);  // tiny delay //10
+                sleep(20);  // tiny delay //10
             }
 
             // Feed one artifact
