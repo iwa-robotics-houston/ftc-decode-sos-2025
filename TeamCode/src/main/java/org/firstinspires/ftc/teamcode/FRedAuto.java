@@ -5,8 +5,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 // THIS IS THE AUTONOMOUS FOR WHEN THE ROBOT STARTS AGAINST THE WALL
 // AND DRIVES FORWARD -> TURNS RIGHT -> SHOOTS INTO RED GOAL
-@Autonomous(name = "ForwardRedAuto", group = "OpMode")
-public class ForwardBlueAuto extends LinearOpMode {
+@Autonomous(name = "FRedAuto", group = "OpMode")
+public class FRedAuto extends LinearOpMode {
 
     private Robot robot;
 

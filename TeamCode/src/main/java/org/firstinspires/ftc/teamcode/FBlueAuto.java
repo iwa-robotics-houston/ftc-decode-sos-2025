@@ -3,9 +3,10 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-// THIS IS THE AUTONOMOUS FOR WHEN THE ROBOT STARTS AT THE BLUE GOAL AND BACKS UP TO SHOOT
-@Autonomous(name = "BackFromBlue", group = "OpMode")
-public class BackFromBlueAuto extends LinearOpMode {
+// THIS IS THE AUTONOMOUS FOR WHEN THE ROBOT STARTS AGAINST THE WALL
+// AND DRIVES FORWARD -> TURNS LEFT -> SHOOTS INTO BLUE GOAL
+@Autonomous(name = "FBlueAuto", group = "OpMode")
+public class FBlueAuto extends LinearOpMode {
 
     private Robot robot;
 
@@ -21,30 +22,31 @@ public class BackFromBlueAuto extends LinearOpMode {
         waitForStart();
         if (isStopRequested()) return;
 
-        // back up to line up shot
-        driveAll(-0.6);   // backward at 60% power
-        sleep(1100);     // move for 1.1seconds
-        driveAll(0);     // stop
-
-        // fire first two balls
-        fireSequence(1350, 2); // original = 1285
-
-        // move third ball up into shooter
-        advanceThirdBall();
-
-        // fire third ball
-        fireSequence(1350, 1);
-
-        // strafe left after all shots
-        strafeLeft(0.4);
-        sleep(2000);
+        // Drive forward away from wall
+        driveAll(0.6);     // forward at 60%
+        sleep(2000);        // move 0.9 sec, probably should adjust
         driveAll(0);
 
-        telemetry.addData("Status", "Finished Auto");
+        // Turn slightly left to aim at blue goal
+        turnLeft(0.28);     // 40% power turn
+        sleep(380);        // adjust based on your robot turn rate
+        driveAll(0);
+
+        // Drive forward again
+        //driveAll(0.6);     // forward at 60%
+        //sleep(1100);        // move 0.9 sec, probably should adjust
+        //driveAll(0);
+
+        // Fire two shots using velocity triggering
+        fireSequence(1320, 2);
+
+
+        telemetry.addData("Status", "Finished Auto :)");
         telemetry.update();
     }
 
-    // Fires each ball only when flywheel is up to speed
+
+    // Shooting system
     private void fireSequence(double targetVelocity, int shots) {
 
         robot.flywheel1.setVelocity(-targetVelocity);
@@ -56,7 +58,7 @@ public class BackFromBlueAuto extends LinearOpMode {
                 telemetry.addData("Flywheel Avg", getAvgFlywheel());
                 telemetry.addData("Shots Fired", i);
                 telemetry.update();
-                sleep(20); // original 10
+                sleep(10);
             }
 
             feedOnce();
@@ -67,45 +69,26 @@ public class BackFromBlueAuto extends LinearOpMode {
         robot.flywheel2.setVelocity(0);
     }
 
-    // Pulls the 3rd ball up into launch position
-    private void advanceThirdBall() {
-
-        robot.rollerIntake.setPower(1);
-        robot.hotwheelsfront.setPower(1);
-        robot.hotwheelsback.setPower(1);
-        robot.rollitbackbottom.setPower(-1);
-        robot.rollitbacktop.setPower(-1);
-
-        sleep(2000);// tune this so the ball stages correctly
-
-        robot.rollerIntake.setPower(0);
-        robot.hotwheelsfront.setPower(0);
-        robot.hotwheelsback.setPower(0);
-        robot.rollitbackbottom.setPower(0);
-        robot.rollitbacktop.setPower(0);
-    }
-
-    // avg flywheel velocity
     private double getAvgFlywheel() {
         return (Math.abs(robot.flywheel1.getVelocity()) +
                 Math.abs(robot.flywheel2.getVelocity())) / 2.0;
     }
 
-    // feed one artifact
     private void feedOnce() {
-
         robot.hotwheelsback.setPower(1);
         robot.rollitbackbottom.setPower(-1);
         robot.rollitbacktop.setPower(-1);
 
-        sleep(1200);
+        sleep(1500);
 
         robot.hotwheelsback.setPower(0);
         robot.rollitbackbottom.setPower(0);
         robot.rollitbacktop.setPower(0);
     }
 
-    // drivetrain helpers
+
+
+    // Movement helpers
     private void driveAll(double power) {
         robot.leftFrontDrive.setPower(power);
         robot.rightFrontDrive.setPower(power);
@@ -113,11 +96,13 @@ public class BackFromBlueAuto extends LinearOpMode {
         robot.rightBackDrive.setPower(power);
     }
 
-    // strafe to the left
-    private void strafeLeft(double power) {
+    // Turn left
+    private void turnLeft(double power) {
         robot.leftFrontDrive.setPower(-power);
+        robot.leftBackDrive.setPower(-power);
         robot.rightFrontDrive.setPower(power);
-        robot.leftBackDrive.setPower(power);
-        robot.rightBackDrive.setPower(-power);
+        robot.rightBackDrive.setPower(power);
     }
+
+
 }
