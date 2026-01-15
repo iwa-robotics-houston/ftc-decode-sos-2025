@@ -23,17 +23,22 @@ public class BackFromBlueAuto extends LinearOpMode {
 
         // back up to line up shot
         driveAll(-0.6);   // backward at 60% power
-        sleep(1200);      //move for 1 second
-        driveAll(0);      // stop
+        sleep(1100);     // move for 1.1seconds
+        driveAll(0);     // stop
 
+        // fire first two balls
+        fireSequence(1350, 2); // original = 1285
 
-        // fire two artifacts using velocity trigger
-        fireSequence(1350, 3);  // 1285 ticks/sec target velocity, 2 balls
+        // move third ball up into shooter
+        advanceThirdBall();
+
+        // fire third ball
+        fireSequence(1350, 1);
 
         // strafe left after all shots
-        strafeLeft(0.4); // 40% power left
-        sleep(2000);     // strafe for 2 seconds
-        driveAll(0);     // stop movement
+        strafeLeft(0.4);
+        sleep(2000);
+        driveAll(0);
 
 
         telemetry.addData("Status", "ugghghghgh");
