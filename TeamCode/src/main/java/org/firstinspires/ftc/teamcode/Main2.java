@@ -28,7 +28,7 @@ public class Main2 extends LinearOpMode {
 
             double max;
             //For flywheel functions: launching artifact
-            double ticksPerRotation = 5400; //5600  //6000
+            double ticksPerRotation = 5500; //5600  //6000
             double IshowSpeed = gamepad2.right_trigger;
             //robot.flywheel2.setVelocity(IshowSpeed * ticksPerRotation);
 
