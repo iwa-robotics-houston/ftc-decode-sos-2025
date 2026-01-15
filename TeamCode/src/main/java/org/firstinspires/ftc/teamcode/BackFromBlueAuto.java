@@ -23,7 +23,7 @@ public class BackFromBlueAuto extends LinearOpMode {
 
         // back up to line up shot
         driveAll(-0.6);   // backward at 60% power
-        sleep(1000);      //move for 1 second
+        sleep(1200);      //move for 1 second
         driveAll(0);      // stop
 
 
@@ -56,7 +56,7 @@ public class BackFromBlueAuto extends LinearOpMode {
                 telemetry.addData("Flywheel Avg", getAvgFlywheel());
                 telemetry.addData("Shots Fired", i);
                 telemetry.update();
-                sleep(20);  // tiny delay //10
+                sleep(30);  // tiny delay //10
             }
 
             // Feed one artifact
@@ -87,7 +87,7 @@ public class BackFromBlueAuto extends LinearOpMode {
         robot.rollitbackbottom.setPower(-1);
         robot.rollitbacktop.setPower(-1);
 
-        sleep(1500); //1000
+        sleep(1300); //1000
 
         // Stop feeding motors
         robot.rollerIntake.setPower(0);
