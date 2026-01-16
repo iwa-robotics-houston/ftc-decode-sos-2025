@@ -76,15 +76,15 @@ public class Main2 extends LinearOpMode {
             if (gamepad2.right_trigger > 0) {
                 robot.flywheel1.setVelocity(-launchPower);
                 robot.flywheel2.setVelocity(-two);
-                robot.rollitbacktop.setPower(-rollie);
+                //robot.rollitbacktop.setPower(-rollie);
             } else if (gamepad2.right_bumper) {
                 robot.flywheel1.setVelocity(launchPower);
                 robot.flywheel2.setVelocity(two);
-                robot.rollitbacktop.setPower(rollie);
+                //robot.rollitbacktop.setPower(rollie);
             } else {
                 robot.flywheel1.setVelocity(0);
                 robot.flywheel2.setVelocity(0);
-                robot.rollitbacktop.setPower(0);
+               // robot.rollitbacktop.setPower(0);
 
                 //meh
                 //For timing in the flywheel
