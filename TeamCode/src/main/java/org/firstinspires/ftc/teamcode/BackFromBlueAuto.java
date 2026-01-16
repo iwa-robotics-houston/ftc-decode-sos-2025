@@ -2,8 +2,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
-// THIS IS THE AUTONOMOUS FOR WHEN THE ROBOT STARTS AT THE BLUE GOAL AND BACKS UP TO SHOOT
 @Autonomous(name = "BackFromBlue", group = "OpMode")
 public class BackFromBlueAuto extends LinearOpMode {
 
@@ -12,7 +12,6 @@ public class BackFromBlueAuto extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        // Initialize robot
         robot = new Robot(hardwareMap);
 
         telemetry.addData("Status", "Initialized");
@@ -21,21 +20,21 @@ public class BackFromBlueAuto extends LinearOpMode {
         waitForStart();
         if (isStopRequested()) return;
 
-        // back up to line up shot
-        driveAll(-0.6);   // backward at 60% power
-        sleep(1100);     // move for 1.1seconds
-        driveAll(0);     // stop
+        // Back up to line up shot
+        driveAll(-0.6);
+        sleep(1000);
+        driveAll(0);
 
-        // fire first two balls
-        fireSequence(1350, 2); // original = 1285
+        // Fire first two balls smoothly
+        fireSequenceSmooth(1310, 2);
 
-        // move third ball up into shooter
-        advanceThirdBall();
+        // Stage third ball
+        advanceThirdBallSmooth(900);
 
-        // fire third ball
-        fireSequence(1350, 1);
+        // Fire third ball
+        fireSequenceSmooth(1310, 1);
 
-        // strafe left after all shots
+        // Strafe left and stop
         strafeLeft(0.4);
         sleep(2000);
         driveAll(0);
@@ -44,68 +43,97 @@ public class BackFromBlueAuto extends LinearOpMode {
         telemetry.update();
     }
 
-    // Fires each ball only when flywheel is up to speed
-    private void fireSequence(double targetVelocity, int shots) {
+    // flywheel keeps spinning, balls fed one by one
+    private void fireSequenceSmooth(double targetVelocity, int shots) {
 
+        final double spinupTimeout = 1.5; // seconds
+        final double percentReady = 0.97; // 97% of target for READY
+
+        // Start flywheel and keep it running
         robot.flywheel1.setVelocity(-targetVelocity);
         robot.flywheel2.setVelocity(-targetVelocity);
 
         for (int i = 0; i < shots && opModeIsActive(); i++) {
 
-            while (opModeIsActive() && getAvgFlywheel() < targetVelocity * 0.99) {
+            // Slight delay for consistent launch
+            ElapsedTime spinupTimer = new ElapsedTime();
+            spinupTimer.reset();
+            while (opModeIsActive() && getAvgFlywheel() < targetVelocity * percentReady && spinupTimer.seconds() < spinupTimeout) {
+                telemetry.addData("Shot", i + 1);
                 telemetry.addData("Flywheel Avg", getAvgFlywheel());
-                telemetry.addData("Shots Fired", i);
+                telemetry.addData("Target Vel", targetVelocity);
                 telemetry.update();
-                sleep(20); // original 10
+                sleep(20);
             }
 
-            feedOnce();
-            sleep(120);
+            // Start intake to feed ball smoothly while flywheel keeps running
+            startIntake();
+            sleep(300); // slight buffer before ball hits flywheel
+
+            // Fire ball
+            feedOnceSmooth();
+
+            // Keep intake moving just enough to stage next ball (if any)
+            if (i < shots - 1) {
+                startIntake(); // keeps balls moving up
+            }
+
+            sleep(150); // small delay between shots for consistency
         }
 
+        // Stop intake after all shots, keep flywheel off
+        stopIntake();
         robot.flywheel1.setVelocity(0);
         robot.flywheel2.setVelocity(0);
     }
 
-    // Pulls the 3rd ball up into launch position
-    private void advanceThirdBall() {
-
-        robot.rollerIntake.setPower(1);
-        robot.hotwheelsfront.setPower(1);
-        robot.hotwheelsback.setPower(1);
+    // Pulls third ball into flywheel
+    private void advanceThirdBallSmooth(int stageTimeMs) {
+        startIntake();
         robot.rollitbackbottom.setPower(-1);
         robot.rollitbacktop.setPower(-1);
 
-        sleep(2000);// tune this so the ball stages correctly
+        sleep(stageTimeMs);
 
-        robot.rollerIntake.setPower(0);
-        robot.hotwheelsfront.setPower(0);
-        robot.hotwheelsback.setPower(0);
+        stopIntake();
         robot.rollitbackbottom.setPower(0);
         robot.rollitbacktop.setPower(0);
     }
 
-    // avg flywheel velocity
+    // Average flywheel velocity
     private double getAvgFlywheel() {
         return (Math.abs(robot.flywheel1.getVelocity()) +
                 Math.abs(robot.flywheel2.getVelocity())) / 2.0;
     }
 
-    // feed one artifact
-    private void feedOnce() {
-
+    // Feed one ball smoothly
+    private void feedOnceSmooth() {
         robot.hotwheelsback.setPower(1);
         robot.rollitbackbottom.setPower(-1);
         robot.rollitbacktop.setPower(-1);
 
-        sleep(1200);
+        sleep(1000); // feed duration
 
         robot.hotwheelsback.setPower(0);
         robot.rollitbackbottom.setPower(0);
         robot.rollitbacktop.setPower(0);
     }
 
-    // drivetrain helpers
+    // Start intake wheels for smooth staging
+    private void startIntake() {
+        robot.rollerIntake.setPower(1);
+        robot.hotwheelsfront.setPower(1);
+        robot.hotwheelsback.setPower(1);
+    }
+
+    // Stop intake wheels
+    private void stopIntake() {
+        robot.rollerIntake.setPower(0);
+        robot.hotwheelsfront.setPower(0);
+        robot.hotwheelsback.setPower(0);
+    }
+
+    // Drivetrain helpers
     private void driveAll(double power) {
         robot.leftFrontDrive.setPower(power);
         robot.rightFrontDrive.setPower(power);
@@ -113,7 +141,6 @@ public class BackFromBlueAuto extends LinearOpMode {
         robot.rightBackDrive.setPower(power);
     }
 
-    // strafe to the left
     private void strafeLeft(double power) {
         robot.leftFrontDrive.setPower(-power);
         robot.rightFrontDrive.setPower(power);
