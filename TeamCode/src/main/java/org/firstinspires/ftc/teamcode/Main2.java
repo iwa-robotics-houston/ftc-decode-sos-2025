@@ -148,12 +148,27 @@ public class Main2 extends LinearOpMode {
              */
 
                 //show the elapsed game time and wheel power.
-                telemetry.addData("status", "Run Time:" + runtime);
-                telemetry.addData("Front left/Right", "%4.2f,%4.2f", leftFrontPower, rightFrontPower);
-                telemetry.addData("Back left/Right", "%4.2f,%4.2f", leftBackPower, rightBackPower);
-                telemetry.addData("status", "Run Time:" + runtime);
-                telemetry.addData("Flywheel1", "setVelocity" + ticksPerRotation);
-                telemetry.addData("Flywheel2", "setVelocity" + ticksPerRotation);
+                //telemetry.addData("status", "Run Time:" + runtime);
+                //telemetry.addData("Front left/Right", "%4.2f,%4.2f", leftFrontPower, rightFrontPower);
+                //telemetry.addData("Back left/Right", "%4.2f,%4.2f", leftBackPower, rightBackPower);
+                //telemetry.addData("status", "Run Time:" + runtime);
+                //telemetry.addData("Flywheel1", "setVelocity" + ticksPerRotation);
+                //telemetry.addData("Flywheel2", "setVelocity" + ticksPerRotation);
+                //telemetry.update();
+
+                telemetry.addData("Run Time", runtime.toString());
+
+                telemetry.addData("Flywheel 1 Vel", robot.flywheel1.getVelocity());
+                telemetry.addData("Flywheel 2 Vel", robot.flywheel2.getVelocity());
+
+                telemetry.addData("Drive FL / FR", "%.2f / %.2f",
+                        robot.leftFrontDrive.getPower(),
+                        robot.rightFrontDrive.getPower());
+
+                telemetry.addData("Drive BL / BR", "%.2f / %.2f",
+                        robot.leftBackDrive.getPower(),
+                        robot.rightBackDrive.getPower());
+
                 telemetry.update();
             }
         }
