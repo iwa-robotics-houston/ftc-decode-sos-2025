@@ -4,6 +4,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 @TeleOp(name = "TeleOp", group = "LinearOpMode")
@@ -122,11 +123,16 @@ public class Main2 extends LinearOpMode {
                 robot.rightBackDrive.setPower(rightBackPower);
 
 
+
+
                 // Auto Intake
                 // Example: Timed Intake Cycle (opens and closes every X seconds)
                 //Timed cycle: Alternates between open and closed states at a set time interval.
 
-            /*
+            /*} else {
+                        robot.arm1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                        robot.arm2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+                        armLocked = false;
             if (currentTime - robot.lastIntakeTime > robot.intakeInterval) {
                 robot.isArmClawOpen = !robot.isArmClawOpen;
                 robot.lastIntakeTime = currentTime;  // Reset timer
