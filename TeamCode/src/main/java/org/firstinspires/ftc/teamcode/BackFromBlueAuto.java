@@ -21,18 +21,15 @@ public class BackFromBlueAuto extends LinearOpMode {
         if (isStopRequested()) return;
 
         // Back up to line up shot
-        driveAll(-0.6);
+        driveAll(-0.55);
         sleep(1000);
         driveAll(0);
 
-        // Fire first two balls smoothly
-        fireSequenceSmooth(1310, 2);
+        // Fire first two balls
+        fireSequence(1310, 2, 500); // 250ms delay between first two shots
 
-        // Stage third ball
-        advanceThirdBallSmooth(900);
-
-        // Fire third ball
-        fireSequenceSmooth(1310, 1);
+        // Third ball to flywheel
+        advanceThirdBall(900);
 
         // Strafe left and stop
         strafeLeft(0.4);
@@ -43,22 +40,22 @@ public class BackFromBlueAuto extends LinearOpMode {
         telemetry.update();
     }
 
-    // flywheel keeps spinning, balls fed one by one
-    private void fireSequenceSmooth(double targetVelocity, int shots) {
+    // Fire shots at target velocity
+    private void fireSequence(double targetVelocity, int shots, int delayBetweenShotsMs) {
 
+        final double tolerance = 0.99;  // 99% of target
         final double spinupTimeout = 1.5; // seconds
-        final double percentReady = 0.97; // 97% of target for READY
 
-        // Start flywheel and keep it running
+        // Start flywheel
         robot.flywheel1.setVelocity(-targetVelocity);
         robot.flywheel2.setVelocity(-targetVelocity);
 
         for (int i = 0; i < shots && opModeIsActive(); i++) {
 
-            // Slight delay for consistent launch
+            // Wait for flywheel to reach target speed (or timeout)
             ElapsedTime spinupTimer = new ElapsedTime();
             spinupTimer.reset();
-            while (opModeIsActive() && getAvgFlywheel() < targetVelocity * percentReady && spinupTimer.seconds() < spinupTimeout) {
+            while (opModeIsActive() && getAvgFlywheel() < targetVelocity * tolerance && spinupTimer.seconds() < spinupTimeout) {
                 telemetry.addData("Shot", i + 1);
                 telemetry.addData("Flywheel Avg", getAvgFlywheel());
                 telemetry.addData("Target Vel", targetVelocity);
@@ -66,29 +63,24 @@ public class BackFromBlueAuto extends LinearOpMode {
                 sleep(20);
             }
 
-            // Start intake to feed ball smoothly while flywheel keeps running
-            startIntake();
-            sleep(300); // slight buffer before ball hits flywheel
+            // Feed the ball
+            feedOnce();
 
-            // Fire ball
-            feedOnceSmooth();
-
-            // Keep intake moving just enough to stage next ball (if any)
+            // Stage next ball if applicable
             if (i < shots - 1) {
-                startIntake(); // keeps balls moving up
+                startIntake();
+                sleep(delayBetweenShotsMs); // allow ball to move into position
             }
-
-            sleep(150); // small delay between shots for consistency
         }
 
-        // Stop intake after all shots, keep flywheel off
+        // Stop intake and flywheel after all shots
         stopIntake();
         robot.flywheel1.setVelocity(0);
         robot.flywheel2.setVelocity(0);
     }
 
-    // Pulls third ball into flywheel
-    private void advanceThirdBallSmooth(int stageTimeMs) {
+    // Stage third ball
+    private void advanceThirdBall(int stageTimeMs) {
         startIntake();
         robot.rollitbackbottom.setPower(-1);
         robot.rollitbacktop.setPower(-1);
@@ -106,27 +98,27 @@ public class BackFromBlueAuto extends LinearOpMode {
                 Math.abs(robot.flywheel2.getVelocity())) / 2.0;
     }
 
-    // Feed one ball smoothly
-    private void feedOnceSmooth() {
+    // Feed one ball through shooter
+    private void feedOnce() {
         robot.hotwheelsback.setPower(1);
         robot.rollitbackbottom.setPower(-1);
         robot.rollitbacktop.setPower(-1);
 
-        sleep(1000); // feed duration
+        sleep(1200);
 
         robot.hotwheelsback.setPower(0);
         robot.rollitbackbottom.setPower(0);
         robot.rollitbacktop.setPower(0);
     }
 
-    // Start intake wheels for smooth staging
+    // Start intake
     private void startIntake() {
         robot.rollerIntake.setPower(1);
         robot.hotwheelsfront.setPower(1);
         robot.hotwheelsback.setPower(1);
     }
 
-    // Stop intake wheels
+    // Stop intake
     private void stopIntake() {
         robot.rollerIntake.setPower(0);
         robot.hotwheelsfront.setPower(0);
