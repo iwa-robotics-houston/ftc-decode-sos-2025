@@ -1,178 +1,155 @@
-
-
 package org.firstinspires.ftc.teamcode;
+
+/*
+ Limelight AprilTag
+*/
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import com.qualcomm.hardware.limelightvision.Limelight3A;
+import com.qualcomm.hardware.limelightvision.LLResult;
+import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
+import com.qualcomm.robotcore.hardware.IMU;
+
+import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
+
+import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
+import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
+
 @TeleOp(name = "TeleOp", group = "LinearOpMode")
-// TeleOp for claw bot with Mecanum drive
 public class Main2 extends LinearOpMode {
+
+    private Limelight3A limelight;
+    private IMU imu;
+    private RevBlinkinLedDriver blinkin;
+
+    @Override
     public void runOpMode() {
+
         Robot robot = new Robot(hardwareMap);
         ElapsedTime runtime = new ElapsedTime();
 
-        //wait for the game to start (driver presses START)
-        telemetry.addData("status", "initialized");
+        limelight = hardwareMap.get(Limelight3A.class, "limelight");
+        limelight.pipelineSwitch(0);
+        limelight.start();
+
+        imu = hardwareMap.get(IMU.class, "imu");
+
+        RevHubOrientationOnRobot revHubOrientationOnRobot =
+                new RevHubOrientationOnRobot(
+                        RevHubOrientationOnRobot.LogoFacingDirection.UP,
+                        RevHubOrientationOnRobot.UsbFacingDirection.FORWARD
+                );
+
+        imu.initialize(new IMU.Parameters(revHubOrientationOnRobot));
+
+        blinkin = hardwareMap.get(RevBlinkinLedDriver.class, "Jesuz");
+        blinkin.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
+
+        telemetry.addData("Status", "Initialized");
         telemetry.update();
+
         waitForStart();
         runtime.reset();
 
-        //run until the end of the match (driver presses STOP)
+        double targetVelocity = 0;
+        RevBlinkinLedDriver.BlinkinPattern readyColor = RevBlinkinLedDriver.BlinkinPattern.BLACK;
+
         while (opModeIsActive()) {
 
-            double axial = -gamepad1.left_stick_y; //note: pushing stick forward gives negative value
+            // DRIVE
+            double axial = -gamepad1.left_stick_y;
             double lateral = gamepad1.left_stick_x;
             double yaw = gamepad1.right_stick_x;
 
-            double max;
-            //For flywheel functions: launching artifact
-            double ticksPerRotation = 5500; //5600  //6000
-            double IshowSpeed = gamepad2.right_trigger;
-            //robot.flywheel2.setVelocity(IshowSpeed * ticksPerRotation);
+            double leftFrontPower = axial + lateral + yaw;
+            double rightFrontPower = axial - lateral - yaw;
+            double leftBackPower = axial - lateral + yaw;
+            double rightBackPower = axial + lateral - yaw;
 
+            double max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
+            max = Math.max(max, Math.abs(leftBackPower));
+            max = Math.max(max, Math.abs(rightBackPower));
 
-            /*/for automatic intake:
-            double orbitPerRotation = 2792.83;
-            double IshowSpeed2 = gamepad2.right_trigger;
-            robot.rollerIntake.setVelocity(orbitPerRotation * IshowSpeed2);
-            */
-            //Set power values
+            if (max > 0.85) {
+                leftFrontPower /= max;
+                rightFrontPower /= max;
+                leftBackPower /= max;
+                rightBackPower /= max;
+            }
 
-            double intakePower = 1;
-            double compliantWheel = 1;
-            double launchPower = (ticksPerRotation);
-            double two = (ticksPerRotation);
-            double pollie = 1;
-            double rollie = 1;
-            double hottie = 1;
+            robot.leftFrontDrive.setPower(leftFrontPower);
+            robot.rightFrontDrive.setPower(rightFrontPower);
+            robot.leftBackDrive.setPower(leftBackPower);
+            robot.rightBackDrive.setPower(rightBackPower);
 
-
-            //operate
+            // INTAKE
             if (gamepad2.left_trigger > 0) {
-                robot.rollerIntake.setPower(-intakePower);
-                robot.hotwheelsfront.setPower(-compliantWheel);
-                robot.hotwheelsback.setPower(-hottie);
-                robot.rollitbackbottom.setPower(pollie);
-                robot.rollitbacktop.setPower(rollie);
+                robot.rollerIntake.setPower(-1);
+                robot.hotwheelsfront.setPower(-1);
+                robot.hotwheelsback.setPower(-1);
             } else if (gamepad2.left_bumper) {
-                robot.rollerIntake.setPower(intakePower);
-                robot.hotwheelsfront.setPower(compliantWheel);
-                robot.hotwheelsback.setPower(hottie);
-                robot.rollitbackbottom.setPower(-pollie);
-                robot.rollitbacktop.setPower(-rollie);
-
+                robot.rollerIntake.setPower(1);
+                robot.hotwheelsfront.setPower(1);
+                robot.hotwheelsback.setPower(1);
+                robot.rollitbackbottom.setPower(-1);
             } else {
                 robot.rollerIntake.setPower(0);
                 robot.hotwheelsfront.setPower(0);
                 robot.hotwheelsback.setPower(0);
+            }
+
+            // SHOOTER MODE SELECT
+            if (gamepad2.x) {
+                targetVelocity = 1310;
+                readyColor = RevBlinkinLedDriver.BlinkinPattern.BLUE_GREEN; // purple
+            } else if (gamepad2.y) {
+                targetVelocity = 1500;
+                readyColor = RevBlinkinLedDriver.BlinkinPattern.HEARTBEAT_RED; // green
+            }
+
+            double tolerance = 40;
+
+            // SHOOTER CONTROL
+            if (gamepad2.right_trigger > 0) {
+                robot.flywheel1.setVelocity(-targetVelocity);
+                robot.flywheel2.setVelocity(-targetVelocity);
                 robot.rollitbackbottom.setPower(0);
                 robot.rollitbacktop.setPower(0);
 
-            }
-
-
-            if (gamepad2.right_trigger > 0) {
-                robot.flywheel1.setVelocity(-launchPower);
-                robot.flywheel2.setVelocity(-two);
-                //robot.rollitbacktop.setPower(-rollie);
             } else if (gamepad2.right_bumper) {
-                robot.flywheel1.setVelocity(launchPower);
-                robot.flywheel2.setVelocity(two);
-                //robot.rollitbacktop.setPower(rollie);
+                robot.flywheel1.setVelocity(targetVelocity);
+                robot.flywheel2.setVelocity(targetVelocity);
+                robot.rollitbackbottom.setPower(1);
+                robot.rollitbacktop.setPower(1);
+
             } else {
                 robot.flywheel1.setVelocity(0);
                 robot.flywheel2.setVelocity(0);
-               // robot.rollitbacktop.setPower(0);
+                robot.rollitbackbottom.setPower(0);
+                robot.rollitbacktop.setPower(0);
+                blinkin.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
+            }
 
-                //meh
-                //For timing in the flywheel
+            // BLINKIN READY INDICATOR
+            if (targetVelocity > 0 && (gamepad2.right_trigger > 0 || gamepad2.right_bumper)) {
+                double flywheelVel = Math.abs(robot.flywheel1.getVelocity());
 
-
-
-                //combine the joystick requests for each axis-motion to determine each wheel's power
-                //set up a variable for each drive wheel to save the power level for telemetry
-
-                //POV Mode uses left joystick to go forward & strafe, and right joystick to rotate
-                //Joystick controls
-
-                double leftFrontPower = axial + lateral + yaw;
-                double rightFrontPower = axial - lateral - yaw;
-                double leftBackPower = axial - lateral + yaw;
-                double rightBackPower = axial + lateral - yaw;
-
-                //normalize the values so no wheel power exceeds 100%
-                //this ensures that the robot maintains the desired motion
-                max = Math.max(Math.abs(leftFrontPower), Math.abs(rightFrontPower));
-                max = Math.max(max, Math.abs(leftBackPower));
-                max = Math.max(max, Math.abs(rightBackPower));
-
-                if (max > 0.85) {
-                    leftFrontPower /= max;
-                    rightFrontPower /= max;
-                    leftBackPower /= max;
-                    rightBackPower /= max;
+                if (flywheelVel >= targetVelocity - tolerance) {
+                    blinkin.setPattern(readyColor);
+                } else {
+                    blinkin.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
                 }
-
-                //send calculated power to wheels
-                robot.leftFrontDrive.setPower(leftFrontPower);
-                robot.rightFrontDrive.setPower(rightFrontPower);
-                robot.leftBackDrive.setPower(leftBackPower);
-                robot.rightBackDrive.setPower(rightBackPower);
-
-
-
-
-                // Auto Intake
-                // Example: Timed Intake Cycle (opens and closes every X seconds)
-                //Timed cycle: Alternates between open and closed states at a set time interval.
-
-            /*} else {
-                        robot.arm1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                        robot.arm2.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-                        armLocked = false;
-            if (currentTime - robot.lastIntakeTime > robot.intakeInterval) {
-                robot.isArmClawOpen = !robot.isArmClawOpen;
-                robot.lastIntakeTime = currentTime;  // Reset timer
+            } else {
+                blinkin.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
             }
 
-
-            }
-
-
-
-
-
-             */
-
-                //show the elapsed game time and wheel power.
-                //telemetry.addData("status", "Run Time:" + runtime);
-                //telemetry.addData("Front left/Right", "%4.2f,%4.2f", leftFrontPower, rightFrontPower);
-                //telemetry.addData("Back left/Right", "%4.2f,%4.2f", leftBackPower, rightBackPower);
-                //telemetry.addData("status", "Run Time:" + runtime);
-                //telemetry.addData("Flywheel1", "setVelocity" + ticksPerRotation);
-                //telemetry.addData("Flywheel2", "setVelocity" + ticksPerRotation);
-                //telemetry.update();
-
-                telemetry.addData("Run Time", runtime.toString());
-
-                telemetry.addData("Flywheel 1 Vel", robot.flywheel1.getVelocity());
-                telemetry.addData("Flywheel 2 Vel", robot.flywheel2.getVelocity());
-
-                telemetry.addData("Drive FL / FR", "%.2f / %.2f",
-                        robot.leftFrontDrive.getPower(),
-                        robot.rightFrontDrive.getPower());
-
-                telemetry.addData("Drive BL / BR", "%.2f / %.2f",
-                        robot.leftBackDrive.getPower(),
-                        robot.rightBackDrive.getPower());
-
-                telemetry.update();
-            }
+            telemetry.addData("Run Time", runtime.toString());
+            telemetry.addData("Flywheel 1 Vel", robot.flywheel1.getVelocity());
+            telemetry.addData("Flywheel 2 Vel", robot.flywheel2.getVelocity());
+            telemetry.update();
         }
     }
 }
-
-
