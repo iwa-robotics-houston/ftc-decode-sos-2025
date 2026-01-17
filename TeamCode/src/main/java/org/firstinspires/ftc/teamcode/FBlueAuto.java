@@ -5,7 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 // THIS IS THE AUTONOMOUS FOR WHEN THE ROBOT STARTS AGAINST THE WALL
 // AND DRIVES FORWARD -> TURNS LEFT -> SHOOTS INTO BLUE GOAL
-@Autonomous(name = "FBlueAuto", group = "OpMode")
+@Autonomous(name = "ForwardBlueAuto", group = "OpMode")
 public class FBlueAuto extends LinearOpMode {
 
     private Robot robot;
@@ -38,10 +38,10 @@ public class FBlueAuto extends LinearOpMode {
         //driveAll(0);
 
         // Fire two shots using velocity triggering
-        fireSequence(1320, 2);
+        fireSequence(1310, 2);
 
 
-        telemetry.addData("Status", "Finished Auto :)");
+        telemetry.addData("Status", "Finished Auto");
         telemetry.update();
     }
 

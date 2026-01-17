@@ -3,7 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-@Autonomous(name = "BlueFarPGPAuto", group = "OpMode")
+@Autonomous(name = "DO NOT USE", group = "OpMode")
 public class BlueFarPGPAuto extends LinearOpMode {
 
     private Robot robot;

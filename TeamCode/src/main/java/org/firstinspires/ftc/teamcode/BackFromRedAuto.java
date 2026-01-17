@@ -2,8 +2,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
-// THIS IS THE AUTONOMOUS FOR WHEN THE ROBOT STARTS AT THE RED GOAL AND BACKS UP TO SHOOT
 @Autonomous(name = "BackFromRed", group = "OpMode")
 public class BackFromRedAuto extends LinearOpMode {
 
@@ -12,7 +12,6 @@ public class BackFromRedAuto extends LinearOpMode {
     @Override
     public void runOpMode() {
 
-        // Initialize robot
         robot = new Robot(hardwareMap);
 
         telemetry.addData("Status", "Initialized");
@@ -21,79 +20,102 @@ public class BackFromRedAuto extends LinearOpMode {
         waitForStart();
         if (isStopRequested()) return;
 
-        // back up to line up shot
-        driveAll(-0.6);   // backward at 60% power
-        sleep(1000);      // move for 1 second
-        driveAll(0);      // stop
+        // Back up to line up shot
+        driveAll(-0.55);
+        sleep(1000);
+        driveAll(0);
 
+        // Fire first two balls
+        fireSequence(1310, 2, 500);
 
-        // fire two artifacts using velocity trigger
-        fireSequence(1285, 2);  // 1285 ticks/sec target velocity, 2 balls
+        // Third ball to flywheel
+        advanceThirdBall(900);
 
-        // strafe right after all shots
-        strafeRight(0.4); // 40% power RIGHT
-        sleep(2000);     // strafe for 2 seconds
-        driveAll(0);     // stop movement
+        // Strafe right
+        strafeRight(0.4);
+        sleep(2000);
+        driveAll(0);
 
-
-        telemetry.addData("Status", "ugghghghgh");
+        telemetry.addData("Status", "Finished Auto");
         telemetry.update();
     }
 
+    // Fire shots at target velocity
+    private void fireSequence(double targetVelocity, int shots, int delayBetweenShotsMs) {
 
-    // Fires each ball only when flywheel is up to speed
-    private void fireSequence(double targetVelocity, int shots) {
+        final double tolerance = 0.99;
+        final double spinupTimeout = 1.5;
 
-        // Start flywheel motors spinning toward target
         robot.flywheel1.setVelocity(-targetVelocity);
         robot.flywheel2.setVelocity(-targetVelocity);
-        //code from some website.  TRUST IT.  IMPORTANT!!
-        //&& = adn
+
         for (int i = 0; i < shots && opModeIsActive(); i++) {
 
-            // Wait until flywheel is up to speed
-            while (opModeIsActive() && getAvgFlywheel() < targetVelocity * 0.99) {
+            ElapsedTime spinupTimer = new ElapsedTime();
+            spinupTimer.reset();
+            while (opModeIsActive() && getAvgFlywheel() < targetVelocity * tolerance && spinupTimer.seconds() < spinupTimeout) {
+                telemetry.addData("Shot", i + 1);
                 telemetry.addData("Flywheel Avg", getAvgFlywheel());
-                telemetry.addData("Shots Fired", i);
+                telemetry.addData("Target Vel", targetVelocity);
                 telemetry.update();
-                sleep(10);  // tiny delay
+                sleep(20);
             }
 
-            // Feed one artifact
             feedOnce();
 
-            // Short pause to allow flywheel to recover
-            sleep(120);
+            if (i < shots - 1) {
+                startIntake();
+                sleep(delayBetweenShotsMs);
+            }
         }
 
-        // Stop flywheel after all shots
+        stopIntake();
         robot.flywheel1.setVelocity(0);
         robot.flywheel2.setVelocity(0);
     }
 
-    // avg flywheel velocity
+    // Stage third ball
+    private void advanceThirdBall(int stageTimeMs) {
+        startIntake();
+        robot.rollitbackbottom.setPower(-1);
+        robot.rollitbacktop.setPower(-1);
+
+        sleep(stageTimeMs);
+
+        stopIntake();
+        robot.rollitbackbottom.setPower(0);
+        robot.rollitbacktop.setPower(0);
+    }
+
     private double getAvgFlywheel() {
         return (Math.abs(robot.flywheel1.getVelocity()) +
                 Math.abs(robot.flywheel2.getVelocity())) / 2.0;
     }
 
-    // feed one artifact
     private void feedOnce() {
-
-        // Start feeding motors
         robot.hotwheelsback.setPower(1);
         robot.rollitbackbottom.setPower(-1);
         robot.rollitbacktop.setPower(-1);
 
-        sleep(1000);
+        sleep(1200);
 
-        // Stop feeding motors
         robot.hotwheelsback.setPower(0);
         robot.rollitbackbottom.setPower(0);
         robot.rollitbacktop.setPower(0);
     }
 
-    // drivetrain helpers
+    private void startIntake() {
+        robot.rollerIntake.setPower(1);
+        robot.hotwheelsfront.setPower(1);
+        robot.hotwheelsback.setPower(1);
+    }
+
+    private void stopIntake() {
+        robot.rollerIntake.setPower(0);
+        robot.hotwheelsfront.setPower(0);
+        robot.hotwheelsback.setPower(0);
+    }
+
     private void driveAll(double power) {
         robot.leftFrontDrive.setPower(power);
         robot.rightFrontDrive.setPower(power);
@@ -101,12 +123,11 @@ public class BackFromRedAuto extends LinearOpMode {
         robot.rightBackDrive.setPower(power);
     }
 
-    // strafe to the right
+    // Mirror of strafeLeft
     private void strafeRight(double power) {
         robot.leftFrontDrive.setPower(power);
         robot.rightFrontDrive.setPower(-power);
         robot.leftBackDrive.setPower(-power);
         robot.rightBackDrive.setPower(power);
     }
-
 }
