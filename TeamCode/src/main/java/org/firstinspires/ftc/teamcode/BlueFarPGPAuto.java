@@ -3,17 +3,14 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-// THIS IS THE AUTONOMOUS FOR WHEN THE ROBOT STARTS AGAINST THE WALL
-// AND DRIVES FORWARD -> TURNS RIGHT -> SHOOTS INTO RED GOAL
-@Autonomous(name = "FRedAuto", group = "OpMode")
-public class ForwardRed extends LinearOpMode {
+@Autonomous(name = "DO NOT USE", group = "OpMode")
+public class BlueFarPGPAuto extends LinearOpMode {
 
     private Robot robot;
 
     @Override
     public void runOpMode() {
 
-        // Initialize robot
         robot = new Robot(hardwareMap);
 
         telemetry.addData("Status", "Initialized");
@@ -22,37 +19,66 @@ public class ForwardRed extends LinearOpMode {
         waitForStart();
         if (isStopRequested()) return;
 
-
         // Drive forward away from wall
         driveAll(0.6);
-        sleep(2000);  // 900
+        sleep(2000);
         driveAll(0);
 
-
-        // Turn slightly RIGHT for red goal
-        turnRight(0.28);      // ← mirrored from the blue side
+        // Turn slightly left to aim at blue goal
+        turnLeft(0.28);
         sleep(380);
         driveAll(0);
 
-
-        // Drive forward more to get into shooting position
-        //driveAll(0.6);
-        //sleep(300);
-        //driveAll(0);
+        // Shoot first two balls
+        fireSequence(1320, 2);
 
 
-        // Fire two velocity-triggered shots
-        fireSequence(1310, 2);
+        // Go collect more balls
 
-        strafeRight(0.4); // 40% power RIGHT
-        sleep(2000);     // strafe for 2 seconds
-        driveAll(0);     // stop movement
 
+        // Drive backwards away from goal
+        driveAll(-0.55);
+        sleep(1200);
+        driveAll(0);
+
+        // Turn left toward ball stack PGP
+        turnLeft(0.35);
+        sleep(600);
+        driveAll(0);
+
+        // Drive forward to pick up balls
+        driveAll(0.4);
+        sleep(2000);
+        driveAll(0);
+
+        // Intake balls
+
+
+
+        // Return to shooting position
+
+
+        // Drive backwards to original line
+        driveAll(-0.55);
+        sleep(2000);
+        driveAll(0);
+
+        // Turn right to face goal again
+        turnRight(0.45);
+        sleep(600);
+        driveAll(0);
+
+        // Drive forward to shooting spot
+        driveAll(0.5);
+        sleep(1200);
+        driveAll(0);
+
+        // Shoot collected balls
+        fireSequence(1320, 2);
 
         telemetry.addData("Status", "Finished Auto :)");
         telemetry.update();
     }
-
 
     // Shooting system
     private void fireSequence(double targetVelocity, int shots) {
@@ -77,12 +103,10 @@ public class ForwardRed extends LinearOpMode {
         robot.flywheel2.setVelocity(0);
     }
 
-
     private double getAvgFlywheel() {
         return (Math.abs(robot.flywheel1.getVelocity()) +
                 Math.abs(robot.flywheel2.getVelocity())) / 2.0;
     }
-
 
     private void feedOnce() {
         robot.hotwheelsback.setPower(1);
@@ -96,7 +120,6 @@ public class ForwardRed extends LinearOpMode {
         robot.rollitbacktop.setPower(0);
     }
 
-
     // Movement helpers
     private void driveAll(double power) {
         robot.leftFrontDrive.setPower(power);
@@ -105,19 +128,18 @@ public class ForwardRed extends LinearOpMode {
         robot.rightBackDrive.setPower(power);
     }
 
+    private void turnLeft(double power) {
+        robot.leftFrontDrive.setPower(-power);
+        robot.leftBackDrive.setPower(-power);
+        robot.rightFrontDrive.setPower(power);
+        robot.rightBackDrive.setPower(power);
+    }
 
-    // Turn right
     private void turnRight(double power) {
         robot.leftFrontDrive.setPower(power);
         robot.leftBackDrive.setPower(power);
         robot.rightFrontDrive.setPower(-power);
         robot.rightBackDrive.setPower(-power);
     }
-    private void strafeRight(double power) {
-        robot.leftFrontDrive.setPower(power);
-        robot.rightFrontDrive.setPower(-power);
-        robot.leftBackDrive.setPower(-power);
-        robot.rightBackDrive.setPower(power);
-    }
-
 }
+// unable to find a hardware device with name "frontLeft" and type DC Motor
