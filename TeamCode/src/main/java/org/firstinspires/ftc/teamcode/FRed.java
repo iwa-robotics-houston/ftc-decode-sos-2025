@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 // THIS IS THE AUTONOMOUS FOR WHEN THE ROBOT STARTS AGAINST THE WALL
 // AND DRIVES FORWARD -> TURNS RIGHT -> SHOOTS INTO RED GOAL
@@ -42,7 +43,11 @@ public class FRed extends LinearOpMode {
 
 
         // Fire two velocity-triggered shots
-        fireSequence(1310, 2);
+        fireSequence(1310, 2, 500);
+
+        advanceThirdBall(900);
+
+        //fireSequence(1310, 1);
 
         strafeRight(0.4); // 40% power RIGHT
         sleep(2000);     // strafe for 2 seconds
@@ -55,24 +60,35 @@ public class FRed extends LinearOpMode {
 
 
     // Shooting system
-    private void fireSequence(double targetVelocity, int shots) {
+    private void fireSequence(double targetVelocity, int shots, int delayBetweenShotsMs) {
+
+        final double tolerance = 0.99;
+        final double spinupTimeout = 1.5;
 
         robot.flywheel1.setVelocity(-targetVelocity);
         robot.flywheel2.setVelocity(-targetVelocity);
 
         for (int i = 0; i < shots && opModeIsActive(); i++) {
 
-            while (opModeIsActive() && getAvgFlywheel() < targetVelocity * 0.99) {
+            ElapsedTime spinupTimer = new ElapsedTime();
+            spinupTimer.reset();
+            while (opModeIsActive() && getAvgFlywheel() < targetVelocity * tolerance && spinupTimer.seconds() < spinupTimeout) {
+                telemetry.addData("Shot", i + 1);
                 telemetry.addData("Flywheel Avg", getAvgFlywheel());
-                telemetry.addData("Shots Fired", i);
+                telemetry.addData("Target Vel", targetVelocity);
                 telemetry.update();
-                sleep(10);
+                sleep(20);
             }
 
             feedOnce();
-            sleep(120);
+
+            if (i < shots - 1) {
+                startIntake();
+                sleep(delayBetweenShotsMs);
+            }
         }
 
+        stopIntake();
         robot.flywheel1.setVelocity(0);
         robot.flywheel2.setVelocity(0);
     }
@@ -105,6 +121,30 @@ public class FRed extends LinearOpMode {
         robot.rightBackDrive.setPower(power);
     }
 
+    private void advanceThirdBall(int stageTimeMs) {
+        startIntake();
+        robot.rollitbackbottom.setPower(-1);
+        robot.rollitbacktop.setPower(-1);
+
+        sleep(stageTimeMs);
+
+        stopIntake();
+        robot.rollitbackbottom.setPower(0);
+        robot.rollitbacktop.setPower(0);
+    }
+
+
+    private void startIntake() {
+        robot.rollerIntake.setPower(1);
+        robot.hotwheelsfront.setPower(1);
+        robot.hotwheelsback.setPower(1);
+    }
+
+    private void stopIntake() {
+        robot.rollerIntake.setPower(0);
+        robot.hotwheelsfront.setPower(0);
+        robot.hotwheelsback.setPower(0);
+    }
 
     // Turn right
     private void turnRight(double power) {

@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 // THIS IS THE AUTONOMOUS FOR WHEN THE ROBOT STARTS AGAINST THE WALL
 // AND DRIVES FORWARD -> TURNS LEFT -> SHOOTS INTO BLUE GOAL
@@ -38,7 +39,11 @@ public class FBlue extends LinearOpMode {
         //driveAll(0);
 
         // Fire two shots using velocity triggering
-        fireSequence(1320, 2);
+        fireSequence(1320, 2, 500);
+
+        advanceThirdBall(900);
+
+        //fireSequence(1310, 1);
 
 
         telemetry.addData("Status", "Finished Auto :)");
@@ -47,27 +52,39 @@ public class FBlue extends LinearOpMode {
 
 
     // Shooting system
-    private void fireSequence(double targetVelocity, int shots) {
+    private void fireSequence(double targetVelocity, int shots, int delayBetweenShotsMs) {
+
+        final double tolerance = 0.99;
+        final double spinupTimeout = 1.5;
 
         robot.flywheel1.setVelocity(-targetVelocity);
         robot.flywheel2.setVelocity(-targetVelocity);
 
         for (int i = 0; i < shots && opModeIsActive(); i++) {
 
-            while (opModeIsActive() && getAvgFlywheel() < targetVelocity * 0.99) {
+            ElapsedTime spinupTimer = new ElapsedTime();
+            spinupTimer.reset();
+            while (opModeIsActive() && getAvgFlywheel() < targetVelocity * tolerance && spinupTimer.seconds() < spinupTimeout) {
+                telemetry.addData("Shot", i + 1);
                 telemetry.addData("Flywheel Avg", getAvgFlywheel());
-                telemetry.addData("Shots Fired", i);
+                telemetry.addData("Target Vel", targetVelocity);
                 telemetry.update();
-                sleep(10);
+                sleep(20);
             }
 
             feedOnce();
-            sleep(120);
+
+            if (i < shots - 1) {
+                startIntake();
+                sleep(delayBetweenShotsMs);
+            }
         }
 
+        stopIntake();
         robot.flywheel1.setVelocity(0);
         robot.flywheel2.setVelocity(0);
     }
+
 
     private double getAvgFlywheel() {
         return (Math.abs(robot.flywheel1.getVelocity()) +
@@ -87,7 +104,29 @@ public class FBlue extends LinearOpMode {
     }
 
 
+    private void advanceThirdBall(int stageTimeMs) {
+        startIntake();
+        robot.rollitbackbottom.setPower(-1);
+        robot.rollitbacktop.setPower(-1);
 
+        sleep(stageTimeMs);
+
+        stopIntake();
+        robot.rollitbackbottom.setPower(0);
+        robot.rollitbacktop.setPower(0);
+    }
+
+    private void startIntake() {
+        robot.rollerIntake.setPower(1);
+        robot.hotwheelsfront.setPower(1);
+        robot.hotwheelsback.setPower(1);
+    }
+
+    private void stopIntake() {
+        robot.rollerIntake.setPower(0);
+        robot.hotwheelsfront.setPower(0);
+        robot.hotwheelsback.setPower(0);
+    }
     // Movement helpers
     private void driveAll(double power) {
         robot.leftFrontDrive.setPower(power);
