@@ -52,9 +52,9 @@ public class Constants {
 
             .strafePodX(-5.6)
             .forwardEncoderDirection(Encoder.FORWARD)
-            .strafeEncoderDirection(Encoder.REVERSE)
-            .forwardTicksToInches(15.658827329368565)
-            .strafeTicksToInches(24.72190433384411);
+            .strafeEncoderDirection(Encoder.REVERSE);
+            //.forwardTicksToInches(15.658827329368565)
+            //.strafeTicksToInches(24.72190433384411);
 
 
 
