@@ -26,9 +26,9 @@ public class Constants {
             .leftFrontMotorDirection(DcMotor.Direction.REVERSE)
             .leftRearMotorDirection(DcMotor.Direction.REVERSE)
             .rightFrontMotorDirection(DcMotor.Direction.FORWARD)
-            .rightRearMotorDirection(DcMotor.Direction.FORWARD)
-            .xVelocity(1000)
-            .yVelocity(1000);
+            .rightRearMotorDirection(DcMotor.Direction.FORWARD);
+            //.yVelocity(1000)
+            //.xVelocity(38.23532561222649);
 
 
     public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 1, 1);
@@ -51,12 +51,11 @@ public class Constants {
             .forwardPodY(-1.4)
 
             .strafePodX(-5.6)
-
+            .forwardEncoderDirection(Encoder.REVERSE)
             .strafeEncoderDirection(Encoder.REVERSE)
-            //.forwardTicksToInches(0.01966263510288413)
-            //.strafeTicksToInches(0.043079223894641014);
             .forwardTicksToInches(15.658827329368565)
             .strafeTicksToInches(24.72190433384411);
+
 
 
 
