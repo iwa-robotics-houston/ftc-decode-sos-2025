@@ -48,15 +48,15 @@ public class Constants {
 
                     )
             )
-            .forwardPodY(-1.4)
 
-            .strafePodX(-5.6)
-            .forwardEncoderDirection(Encoder.FORWARD)
-            .strafeEncoderDirection(Encoder.REVERSE);
+
+            //.forwardEncoderDirection(Encoder.REVERSE)
+            //.strafeEncoderDirection(Encoder.REVERSE);
             //.forwardTicksToInches(15.658827329368565)
             //.strafeTicksToInches(24.72190433384411);
 
-
+            .forwardPodY(-1)
+            .strafePodX(-7);
 
 
     public static Follower createFollower(HardwareMap hardwareMap) {
