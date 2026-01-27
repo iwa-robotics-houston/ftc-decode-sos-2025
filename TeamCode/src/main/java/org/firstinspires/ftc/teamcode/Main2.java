@@ -17,7 +17,7 @@ import com.qualcomm.hardware.rev.RevBlinkinLedDriver;
 
 import org.firstinspires.ftc.robotcore.external.navigation.Pose2D;
 import org.firstinspires.ftc.robotcore.external.navigation.YawPitchRollAngles;
-
+//she was a fairyyy yea yea 🧚🧚🧚🧚
 @TeleOp(name = "TeleOp", group = "LinearOpMode")
 public class Main2 extends LinearOpMode {
 
@@ -59,7 +59,7 @@ public class Main2 extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            // DRIVE
+            // DRIVE COPY ALL THIS FOR NEXT SEASON
             double axial = -gamepad1.left_stick_y;
             double lateral = gamepad1.left_stick_x;
             double yaw = gamepad1.right_stick_x;

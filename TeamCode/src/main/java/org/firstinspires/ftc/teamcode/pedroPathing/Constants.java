@@ -15,8 +15,11 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Constants {
 
     public static FollowerConstants followerConstants = new FollowerConstants()
-            .mass(20.0);
-
+            .mass(11.00);
+            /*Note to self for tuning girlies.  if your speed goes too fast! check the weight by m
+            measuring your weight first and then measuring your weight with the roboot and subtract
+            total weight by your weight! :)  total - your weight = robot weight!
+             */
     public static MecanumConstants driveConstants = new MecanumConstants()
             .maxPower(1)
             .rightFrontMotorName("frontRight")
@@ -52,12 +55,12 @@ public class Constants {
 
             //.forwardEncoderDirection(Encoder.REVERSE)
             //.strafeEncoderDirection(Encoder.REVERSE);
-            //.forwardTicksToInches(15.658827329368565)
+            .forwardTicksToInches(1.5659510518646)
             //.strafeTicksToInches(24.72190433384411);
 
             .forwardPodY(-1)
             .strafePodX(-7);
-
+            //(-7, -1)  (-7, 1)
 
     public static Follower createFollower(HardwareMap hardwareMap) {
         return new FollowerBuilder(followerConstants, hardwareMap)
