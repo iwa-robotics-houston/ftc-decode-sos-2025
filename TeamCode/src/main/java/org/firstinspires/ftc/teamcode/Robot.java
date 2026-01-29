@@ -49,7 +49,11 @@ public class Robot {
 
 
     // motors
-
+    //cat
+    //cat
+    /*john cena john cena is
+       cat
+     */
     public DcMotor leftFrontDrive;
     public DcMotor rightFrontDrive;
     public DcMotor leftBackDrive;
@@ -88,6 +92,8 @@ public class Robot {
         hotwheelsback = hardwareMap.get(CRServo.class, "hotwheelBack");
         rollitbackbottom = hardwareMap.get(DcMotor.class, "rollitbackBottom");
         rollitbacktop = hardwareMap.get(CRServo.class, "rollitbackTop");
+
+
 
 
         // configure drive motors

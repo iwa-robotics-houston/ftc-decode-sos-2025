@@ -31,7 +31,11 @@ public class Constants {
             .rightFrontMotorDirection(DcMotor.Direction.FORWARD)
             .rightRearMotorDirection(DcMotor.Direction.FORWARD);
             //.yVelocity(82.67515770571744)
+
             //.xVelocity(38.23532561222649);
+            //Forward veloctiy : 85.09062101056136
+            //82.15165315036616
+
 
 
     public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 1, 1);
