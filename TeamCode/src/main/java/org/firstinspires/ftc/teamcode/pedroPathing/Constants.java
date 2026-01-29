@@ -30,7 +30,7 @@ public class Constants {
             .leftRearMotorDirection(DcMotor.Direction.REVERSE)
             .rightFrontMotorDirection(DcMotor.Direction.FORWARD)
             .rightRearMotorDirection(DcMotor.Direction.FORWARD);
-            //.yVelocity(1000)
+            //.yVelocity(82.67515770571744)
             //.xVelocity(38.23532561222649);
 
 
