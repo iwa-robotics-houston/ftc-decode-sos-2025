@@ -55,12 +55,18 @@ public class Constants {
 
             //.forwardEncoderDirection(Encoder.REVERSE)
             //.strafeEncoderDirection(Encoder.REVERSE);
-            .forwardTicksToInches(1.5659510518646)
-            //.strafeTicksToInches(24.72190433384411);
+            .forwardTicksToInches(0.002610399631681687)
+            .strafeTicksToInches(0.001938269212026631)
+            // 0.0014441070911830555
+            //0.001938269212026631
 
             .forwardPodY(-1)
             .strafePodX(-7);
             //(-7, -1)  (-7, 1)
+
+            /*also very important do not put this ------> ";" next to all the following commands
+            please only use that symbol once youre done with the constants.  I wish yall luck newbies😘
+             */
 
     public static Follower createFollower(HardwareMap hardwareMap) {
         return new FollowerBuilder(followerConstants, hardwareMap)
