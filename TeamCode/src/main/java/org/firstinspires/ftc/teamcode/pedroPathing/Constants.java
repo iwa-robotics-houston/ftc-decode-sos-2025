@@ -16,7 +16,7 @@ public class Constants {
 
     public static FollowerConstants followerConstants = new FollowerConstants()
             .mass(11.00);
-            /*Note to self for tuning girlies.  if your speed goes too fast! check the weight by m
+            /*Note to self for tuning for newbies.  if your speed goes too fast! check the weight by m
             measuring your weight first and then measuring your weight with the roboot and subtract
             total weight by your weight! :)  total - your weight = robot weight!
              */
@@ -32,7 +32,7 @@ public class Constants {
             .rightRearMotorDirection(DcMotor.Direction.FORWARD);
             //.yVelocity(82.67515770571744)
 
-            //.xVelocity(38.23532561222649);
+            //.xVelocity(85.09062101056136);
             //Forward veloctiy : 85.09062101056136
             //82.15165315036616
 
