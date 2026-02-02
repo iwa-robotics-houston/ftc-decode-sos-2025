@@ -66,7 +66,7 @@ public class Constants {
             //0.001938269212026631
 
             .forwardPodY(-1)
-            .strafePodX(-7);
+            .strafePodX(-6.50);
             //(-7, -1)  (-7, 1)
 
             /*also very important do not put this ------> ";" next to all the following commands
