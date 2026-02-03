@@ -60,8 +60,11 @@ public class Constants {
             //.forwardEncoderDirection(Encoder.REVERSE)
             //.strafeEncoderDirection(Encoder.REVERSE);
             .forwardTicksToInches(0.002610399631681687)
-            //.strafeTicksToInches(0.003769680059481762)
+            .strafeTicksToInches(0.002780111075841615)
             //0.09151578291380659
+
+            // 0.002747749553064749
+            // 0.002780111075841615
 
 
             .forwardPodY(-1)
