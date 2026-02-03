@@ -118,7 +118,7 @@ public class Main2 extends LinearOpMode {
                 robot.flywheel1.setVelocity(-targetVelocity);
                 robot.flywheel2.setVelocity(-targetVelocity);
                 robot.rollitbackbottom.setPower(0);
-                robot.rollitbacktop.setPower(0);
+                robot.rollitbacktop.setPower(-1);
 
             } else if (gamepad2.right_bumper) {
                 robot.flywheel1.setVelocity(targetVelocity);
