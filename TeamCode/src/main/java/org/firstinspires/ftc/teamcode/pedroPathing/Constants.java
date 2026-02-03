@@ -33,7 +33,9 @@ public class Constants {
             //.yVelocity(82.67515770571744)
 
             //.xVelocity(85.09062101056136);
-            //Forward veloctiy : 85.09062101056136
+            //Forward veloctiy : 85.09062101056136\
+            //Forward vleocity 102.75026814984247
+            //Strafe veloctiy: 71.56640154382777
             //82.15165315036616
 
 
