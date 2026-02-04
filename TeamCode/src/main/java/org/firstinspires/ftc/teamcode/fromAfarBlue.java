@@ -21,7 +21,7 @@ public class fromAfarBlue extends LinearOpMode {
         if (isStopRequested()) return;
 
         // Back up to line up shot
-        strafeLeft(0.4);
+        strafeRight(0.4);
         sleep(1000);
         driveAll(0);
 
@@ -36,7 +36,7 @@ public class fromAfarBlue extends LinearOpMode {
         advanceThirdBall(900);
 
         // Strafe left and stop
-        strafeRight(0.4);
+        strafeLeft(0.4);
         sleep(2000);
         driveAll(0);
 
