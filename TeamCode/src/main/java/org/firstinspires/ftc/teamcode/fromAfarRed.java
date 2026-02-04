@@ -30,10 +30,10 @@ public class fromAfarRed extends LinearOpMode {
         driveAll(0);
 
         // Fire first two balls
-        fireSequence(1505, 2, 500); // 250ms delay between first two shots
+        fireSequence(1505, 3, 750); // 500 // 250ms delay between first two shots
 
         // Third ball to flywheel
-        advanceThirdBall(900);
+        //advanceThirdBall(900);
 
         // Strafe left and stop
         strafeRight(0.4);
@@ -84,9 +84,9 @@ public class fromAfarRed extends LinearOpMode {
     }
 
     // Stage third ball
-    private void advanceThirdBall(int stageTimeMs) {
-        startIntake();
-        robot.rollitbackbottom.setPower(-1);
+    /*private void advanceThirdBall(int stageTimeMs) {
+        //startIntake();
+        //robot.rollitbackbottom.setPower(-1);
         robot.rollitbacktop.setPower(-1);
 
         sleep(stageTimeMs);
@@ -95,7 +95,7 @@ public class fromAfarRed extends LinearOpMode {
         robot.rollitbackbottom.setPower(0);
         robot.rollitbacktop.setPower(0);
     }
-
+    */
     // Average flywheel velocity
     private double getAvgFlywheel() {
         return (Math.abs(robot.flywheel1.getVelocity()) +
