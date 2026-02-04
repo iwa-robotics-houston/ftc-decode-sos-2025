@@ -15,8 +15,11 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 public class Constants {
 
     public static FollowerConstants followerConstants = new FollowerConstants()
-            .mass(11.00);
-            //.forwardZeroPowerAcceleration(deceleration)
+            .mass(11.00)
+            .forwardZeroPowerAcceleration(-53.377519196560364);
+            //-51.12524709535485
+            //-53.377519196560364
+            //-50.452787535754894
             /*Note to self for tuning for newbies.  if your speed goes too fast! check the weight by m
             measuring your weight first and then measuring your weight with the roboot and subtract
             total weight by your weight! :)  total - your weight = robot weight!
