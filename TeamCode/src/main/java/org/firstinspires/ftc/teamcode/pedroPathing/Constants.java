@@ -24,6 +24,13 @@ public class Constants {
             //-85.39521976747464
             //-90.91036473209661
             //-77.85728007406766
+
+            //65
+            //-84.6650549622675
+            //-84.48754623127735
+            //-89.4689939877809
+            //-90.68147976240056
+            //-104.6493394218943
             /*Note to self for tuning for newbies.  if your speed goes too fast! check the weight by m
             measuring your weight first and then measuring your weight with the roboot and subtract
             total weight by your weight! :)  total - your weight = robot weight!
