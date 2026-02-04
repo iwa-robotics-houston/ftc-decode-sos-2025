@@ -26,7 +26,7 @@ public class fromAfarBlue extends LinearOpMode {
         driveAll(0);
 
         turnLeft(0.28);
-        sleep(250);
+        sleep(300);
         driveAll(0);
 
         // Fire first two balls
