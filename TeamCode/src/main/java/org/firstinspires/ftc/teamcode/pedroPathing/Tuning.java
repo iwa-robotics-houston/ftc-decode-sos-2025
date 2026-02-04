@@ -626,9 +626,10 @@ class ForwardZeroPowerAccelerationTuner extends OpMode {
  * @author Baron Henderson - 20077 The Indubitables
  * @version 1.0, 3/13/2024
  */
-class LateralZeroPowerAccelerationTuner extends OpMode {
+class
+LateralZeroPowerAccelerationTuner extends OpMode {
     private final ArrayList<Double> accelerations = new ArrayList<>();
-    public static double VELOCITY = 70;
+    public static double VELOCITY = 60;
     private double previousVelocity;
     private long previousTimeNano;
     private boolean stopping;
