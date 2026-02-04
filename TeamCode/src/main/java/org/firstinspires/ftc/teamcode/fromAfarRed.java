@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "fromAfarBlue", group = "OpMode")
-public class fromAfarBlue extends LinearOpMode {
+@Autonomous(name = "fromAfarRed", group = "OpMode")
+public class fromAfarRed extends LinearOpMode {
 
     private Robot robot;
 
@@ -21,11 +21,11 @@ public class fromAfarBlue extends LinearOpMode {
         if (isStopRequested()) return;
 
         // Back up to line up shot
-        strafeRight(0.4);
+        strafeLeft(0.4);
         sleep(1000);
         driveAll(0);
 
-        turnLeft(0.28);
+        turnRight(0.28);
         sleep(300);
         driveAll(0);
 
@@ -36,7 +36,7 @@ public class fromAfarBlue extends LinearOpMode {
         advanceThirdBall(900);
 
         // Strafe left and stop
-        strafeLeft(0.4);
+        strafeRight(0.4);
         sleep(2000);
         driveAll(0);
 
@@ -143,12 +143,6 @@ public class fromAfarBlue extends LinearOpMode {
         robot.leftBackDrive.setPower(power);
         robot.rightBackDrive.setPower(-power);
     }
-    private void turnLeft(double power) {
-        robot.leftFrontDrive.setPower(-power);
-        robot.leftBackDrive.setPower(-power);
-        robot.rightFrontDrive.setPower(power);
-        robot.rightBackDrive.setPower(power);
-    }
 
     private void strafeRight(double power) {
         robot.leftFrontDrive.setPower(power);
@@ -156,5 +150,11 @@ public class fromAfarBlue extends LinearOpMode {
         robot.leftBackDrive.setPower(-power);
         robot.rightBackDrive.setPower(power);
     }
+
+    private void turnRight(double power) {
+        robot.leftFrontDrive.setPower(power);
+        robot.leftBackDrive.setPower(power);
+        robot.rightFrontDrive.setPower(-power);
+        robot.rightBackDrive.setPower(-power);
+    }
 }
-// i need you to take this code and mirror the direction so it works on the red side
