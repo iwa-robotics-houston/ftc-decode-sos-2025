@@ -32,8 +32,11 @@ public class fromAfarRed extends LinearOpMode {
         // Fire first two balls
         fireSequence(1505, 2, 250); // 500 // 250ms delay between first two shots
 
+        //waitForVelocity(1505, 0.97, 3.0);
+
+
         // Third ball to flywheel
-        advanceThirdBall(900);
+        advanceThirdBall(1400);
 
         // Strafe left and stop
         strafeRight(0.4);
@@ -94,13 +97,45 @@ public class fromAfarRed extends LinearOpMode {
         stopIntake();
         robot.rollitbackbottom.setPower(0);
         robot.rollitbacktop.setPower(0);
+
+
     }
 
+    /*private void waitForVelocity (double targetVelocity, double tolerance, double wait) {
+
+
+        // Start flywheel
+        ElapsedTime Timer = new ElapsedTime();
+        Timer.reset();
+        while (opModeIsActive() &&
+                getAvgFlywheel() < targetVelocity * tolerance && Timer.seconds() < wait) {
+            ElapsedTime spinupTimer = new ElapsedTime();
+            spinupTimer.reset();
+            while (opModeIsActive() && getAvgFlywheel() < targetVelocity * tolerance && spinupTimer.seconds() < wait) {
+                telemetry.addData("Flywheel", String.format("%0f / %0f", getAvgFlywheel(), targetVelocity));
+                telemetry.update();
+                sleep(30);
+            }
+
+            // Wait for flywheel to reach target speed (or timeout)
+
+            // Feed the ball
+            feedOnce();
+
+            // Stage next ball if applicable
+            if (Timer.seconds() >= wait) {
+                telemetry.addData("warning", "flywheel timeout - proceeding anyway");
+                telemetry.update();
+            }
+        }
+    }// Stop intake and flywheel after all shots
+*/
     // Average flywheel velocity
     private double getAvgFlywheel() {
         return (Math.abs(robot.flywheel1.getVelocity()) +
                 Math.abs(robot.flywheel2.getVelocity())) / 2.0;
     }
+
 
     // Feed one ball through shooter
     private void feedOnce() {

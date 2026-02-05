@@ -16,7 +16,8 @@ public class Constants {
 
     public static FollowerConstants followerConstants = new FollowerConstants()
             .mass(11.00)
-            .forwardZeroPowerAcceleration(-53.377519196560364);
+            .forwardZeroPowerAcceleration(-53.377519196560364)
+            .lateralZeroPowerAcceleration(-83.93407971504556);
             //-51.12524709535485
             //-53.377519196560364
             //-50.452787535754894
@@ -31,6 +32,12 @@ public class Constants {
             //-89.4689939877809
             //-90.68147976240056
             //-104.6493394218943
+
+            //54
+            //-85.43610073794079
+            //-88.86476093437331
+            //-83.93407971504556
+            //-87.12870335621824
             /*Note to self for tuning for newbies.  if your speed goes too fast! check the weight by m
             measuring your weight first and then measuring your weight with the roboot and subtract
             total weight by your weight! :)  total - your weight = robot weight!
@@ -58,6 +65,8 @@ public class Constants {
             //Strafe velocity: 72.10190712744952
             //73.02420103674652
             //70.44138898580954
+
+
 
 
 
