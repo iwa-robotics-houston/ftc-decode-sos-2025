@@ -2,11 +2,11 @@ package org.firstinspires.ftc.teamcode.pedroPathing;
 
 
 
+import com.pedropathing.control.PIDFCoefficients;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.follower.FollowerConstants;
 import com.pedropathing.ftc.FollowerBuilder;
 import com.pedropathing.ftc.drivetrains.MecanumConstants;
-import com.pedropathing.ftc.localization.Encoder;
 import com.pedropathing.ftc.localization.constants.TwoWheelConstants;
 import com.pedropathing.paths.PathConstraints;
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
@@ -17,7 +17,10 @@ public class Constants {
     public static FollowerConstants followerConstants = new FollowerConstants()
             .mass(11.00)
             .forwardZeroPowerAcceleration(-53.377519196560364)
-            .lateralZeroPowerAcceleration(-83.93407971504556);
+            .lateralZeroPowerAcceleration(-83.93407971504556)
+            .translationalPIDFCoefficients(new PIDFCoefficients(0.1, 0, 0.01, 0.02))
+            .headingPIDFCoefficients(new PIDFCoefficients(1, 0, 0.02, 0.01));
+
             //-51.12524709535485
             //-53.377519196560364
             //-50.452787535754894
@@ -72,6 +75,7 @@ public class Constants {
 
 
     public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 1, 1);
+
 
 
     private static Object multiplier;
