@@ -21,16 +21,16 @@ public class BlueFarPGPAuto extends LinearOpMode {
 
         // Drive forward away from wall
         driveAll(0.6);
-        sleep(2000);
+        sleep(2100); //og 2000
         driveAll(0);
 
         // Turn slightly left to aim at blue goal
-        turnLeft(0.28);
+        turnLeft(0.20); //og .28
         sleep(380);
         driveAll(0);
 
         // Shoot first two balls
-        fireSequence(1320, 2);
+        fireSequence(1310, 2);
 
 
         // Go collect more balls
