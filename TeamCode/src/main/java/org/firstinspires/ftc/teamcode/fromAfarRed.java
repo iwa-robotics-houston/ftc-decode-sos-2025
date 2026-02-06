@@ -30,15 +30,17 @@ public class fromAfarRed extends LinearOpMode {
         driveAll(0);
 
         // Fire first two balls
-        fireSequence(1505, 2, 500); // 500 // 250ms delay between first two shots
+        fireSequence(1505, 2, 500);
+        feedOnce();
+        fireSequence(1505, 1, 100);
 
-        //waitForVelocity(1505, 0.97, 3.0);
+        // 500 // 250ms delay between first two shots
 
 
         // Third ball to flywheel
-        advanceThirdBall(1000);
+        //advanceThirdBall(1000);
 
-        fireSequence(1505, 1, 250);
+        //fireSequence(1505, 1, 250);
 
         // Strafe left and stop
         strafeRight(0.4);

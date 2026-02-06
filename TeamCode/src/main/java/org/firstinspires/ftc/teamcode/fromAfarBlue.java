@@ -32,8 +32,9 @@ public class fromAfarBlue extends LinearOpMode {
         // Fire first two balls
         fireSequence(1505, 2, 500); // 250ms delay between first two shots
 
+        feedOnce();
         // Third ball to flywheel
-        advanceThirdBall(900);
+        //advanceThirdBall(900);
 
         fireSequence(1505, 1, 250);
 
