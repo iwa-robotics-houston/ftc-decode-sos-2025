@@ -29,6 +29,9 @@ public class fromAfarBlue extends LinearOpMode {
         sleep(360);
         driveAll(0);
 
+        driveAll(0.3);
+        sleep(300);
+        driveAll(0);
         //the angle could be the reason why your balls are not going in.
         //autonomous is a big PAIN IN THE A-
         // Fire first two ballsss
@@ -41,9 +44,7 @@ public class fromAfarBlue extends LinearOpMode {
 
         fireSequence(1525, 1, 400); //400
 
-        driveAll(0.3);
-        sleep(500);
-        driveAll(0);
+
 
         // Strafe left and stop
         strafeLeft(0.4);
