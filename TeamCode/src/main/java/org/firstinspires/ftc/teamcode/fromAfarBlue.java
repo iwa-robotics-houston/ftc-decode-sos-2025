@@ -29,7 +29,7 @@ public class fromAfarBlue extends LinearOpMode {
         sleep(360);
         driveAll(0);
 
-        // Fire first two balls
+        // Fire first two ballsss
         fireSequence(1525, 2, 750);
         // 250ms delay between first two shots
 
