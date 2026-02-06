@@ -25,18 +25,18 @@ public class fromAfarBlue extends LinearOpMode {
         sleep(1000);
         driveAll(0);
 
-        turnLeft(0.28);
-        sleep(270);  // Reduced from 300 to turn less
+        turnLeft(0.26);
+        sleep(340); // original 360
         driveAll(0);
 
         // Fire first two balls
-        fireSequence(1505, 2, 500);
+        fireSequence(1525, 2, 750);
 
         // Stage third ball (just position it, don't feed yet)
-        advanceThirdBall(600);  // Reduced time to just stage, not feed
+        advanceThirdBall(600);
 
         // Fire third ball
-        fireSequence(1505, 1, 250);
+        fireSequence(1525, 1, 400);
 
         // Strafe left and stop
         strafeLeft(0.4);
@@ -50,32 +50,23 @@ public class fromAfarBlue extends LinearOpMode {
     // Fire shots at target velocity
     private void fireSequence(double targetVelocity, int shots, int delayBetweenShotsMs) {
 
-        final double tolerance = 0.97;  // 97% of target
-        final double spinupTimeout = 2.0; // seconds for initial spinup
-        final double recoveryTimeout = 1.0; // seconds for recovery between shots
+        final double tolerance = 0.99;  // 99% of target
+        final double spinupTimeout = 1.5; // seconds
 
         // Start flywheel
         robot.flywheel1.setVelocity(-targetVelocity);
         robot.flywheel2.setVelocity(-targetVelocity);
 
         for (int i = 0; i < shots && opModeIsActive(); i++) {
-            double currentTimeout = (i == 0) ? spinupTimeout : recoveryTimeout;
 
             // Wait for flywheel to reach target speed (or timeout)
             ElapsedTime spinupTimer = new ElapsedTime();
             spinupTimer.reset();
-
-            while (opModeIsActive() && spinupTimer.seconds() < currentTimeout) {
-                double avgVel = getAvgFlywheel();
+            while (opModeIsActive() && getAvgFlywheel() < targetVelocity * tolerance && spinupTimer.seconds() < spinupTimeout) {
                 telemetry.addData("Shot", i + 1);
-                telemetry.addData("Flywheel Avg", avgVel);
+                telemetry.addData("Flywheel Avg", getAvgFlywheel());
                 telemetry.addData("Target Vel", targetVelocity);
                 telemetry.update();
-
-                // Break when speed is reached
-                if (avgVel >= targetVelocity * tolerance) {
-                    break;
-                }
                 sleep(20);
             }
 
@@ -84,10 +75,6 @@ public class fromAfarBlue extends LinearOpMode {
 
             // Stage next ball if applicable
             if (i < shots - 1) {
-                // Re-set velocity to maintain speed
-                robot.flywheel1.setVelocity(-targetVelocity);
-                robot.flywheel2.setVelocity(-targetVelocity);
-
                 startIntake();
                 sleep(delayBetweenShotsMs); // allow ball to move into position
             }
@@ -122,7 +109,7 @@ public class fromAfarBlue extends LinearOpMode {
         robot.rollitbackbottom.setPower(-1);
         robot.rollitbacktop.setPower(-1);
 
-        sleep(1000);  // Reduced from 1200 to minimize flywheel slowdown
+        sleep(1200);
 
         robot.hotwheelsback.setPower(0);
         robot.rollitbackbottom.setPower(0);
