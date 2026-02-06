@@ -29,6 +29,8 @@ public class fromAfarBlue extends LinearOpMode {
         sleep(360);
         driveAll(0);
 
+        //the angle could be the reason why your balls are not going in.
+        //autonomous is a big PAIN IN THE A-
         // Fire first two ballsss
         fireSequence(1525, 2, 750);
         // 250ms delay between first two shots
