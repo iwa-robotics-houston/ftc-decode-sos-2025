@@ -31,8 +31,10 @@ public class fromAfarRed extends LinearOpMode {
 
         // Fire first two balls
         fireSequence(1505, 2, 500);
-        feedOnce();
-        fireSequence(1505, 1, 100);
+        advanceThirdBall(600);  // Reduced time to just stage, not feed
+
+        // Fire third ball
+        fireSequence(1505, 1, 250);
 
         // 500 // 250ms delay between first two shots
 
