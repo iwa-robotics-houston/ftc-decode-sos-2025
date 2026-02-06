@@ -26,11 +26,12 @@ public class BackFromBlueAuto extends LinearOpMode {
         driveAll(0);
 
         // Fire first two balls
-        fireSequence(1310, 2, 500); // 250ms delay between first two shots
+        fireSequence(1325, 2, 750); // 250ms delay between first two shots
         //fireSequence(1310, 3, 1000)
         // Third ball to flywheel
-        advanceThirdBall(900); //980 MAYBE
+        advanceThirdBall(600); //980 MAYBE
 
+        fireSequence(1325, 2, 400);
         // Strafe left and stop
         strafeLeft(0.4);
         sleep(2000);
