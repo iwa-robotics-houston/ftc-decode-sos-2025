@@ -25,8 +25,13 @@ public class fromAfarBlue extends LinearOpMode {
         sleep(1000);
         driveAll(0);
 
-        turnLeft(0.26);
+        turnLeft(0.275);
         sleep(340); // original 360
+        driveAll(0);
+
+        // Drive forward a little bit
+        driveAll(0.3);
+        sleep(200);  // Adjust this time to control how far forward
         driveAll(0);
 
         // Fire first two balls
@@ -36,7 +41,7 @@ public class fromAfarBlue extends LinearOpMode {
         advanceThirdBall(600);
 
         // Fire third ball
-        fireSequence(1525, 1, 400);
+        fireSequence(1525, 1, 450);
 
         // Strafe left and stop
         strafeLeft(0.4);
