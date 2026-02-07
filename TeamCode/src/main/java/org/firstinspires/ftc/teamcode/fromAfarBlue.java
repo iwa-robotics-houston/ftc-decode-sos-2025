@@ -45,7 +45,7 @@ public class fromAfarBlue extends LinearOpMode {
 
         // Drive forward to ball collection area
         driveAll(0.5);
-        sleep(1410);  // Adjust time based on distance to balls //910
+        sleep(1440);  // Adjust time based on distance to balls //910
         driveAll(0);
 
         // Turn to face the balls
