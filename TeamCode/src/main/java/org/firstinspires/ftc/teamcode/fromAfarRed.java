@@ -86,6 +86,9 @@ public class fromAfarRed extends LinearOpMode {
         // Fire third ball
         fireSequence(1525, 1, 610);
 
+        driveAll(0.5);
+        sleep(500);
+        driveAll(0);
         telemetry.addData("Status", "Finished Auto");
         telemetry.update();
     }
