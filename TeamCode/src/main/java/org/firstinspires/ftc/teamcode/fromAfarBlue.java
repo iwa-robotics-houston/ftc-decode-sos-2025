@@ -22,7 +22,7 @@ public class fromAfarBlue extends LinearOpMode {
 
         // Back up to line up shot
         strafeRight(0.45);
-        sleep(1000);
+        sleep(1300);
         driveAll(0);
 
         turnLeft(0.275); //original .275
@@ -35,43 +35,56 @@ public class fromAfarBlue extends LinearOpMode {
         driveAll(0);
 
         // Fire first two balls
-        fireSequence(1525, 2, 750);
+        fireSequence(1535, 2, 750);
 
         // Stage third ball (just position it, don't feed yet)
-        advanceThirdBall(600);
+        advanceThirdBall(600); // og 600
 
         // Fire third ball
         fireSequence(1525, 1, 450);
 
         // Drive forward to ball collection area
         driveAll(0.5);
-        sleep(1428);  // Adjust time based on distance to balls //910
+        sleep(1425);  // Adjust time based on distance to balls; og 1360
         driveAll(0);
 
         // Turn to face the balls
-        turnLeft(0.38);
-        sleep(560);  // Adjust to get correct angle
+        turnLeft(0.38); //og 32
+        sleep(560);  // Adjust to get correct angle; og 400
         driveAll(0);
 
+        // Start intake, then drive forward slowly for 3 seconds while intaking
         startIntake();
         driveAll(0.25);  // Slow forward movement
-        sleep(3200);  // Drive and intake for 3 seconds
+        sleep(3150);  // Drive and intake for 3 seconds
         driveAll(0);
         stopIntake();
 
-        // Back up
+        // Return to shooting position - reverse all movements
+
+        // Back up from ball collection (reverse the slow forward intake movement)
+        driveAll(-0.50);
+        sleep(950);
+        driveAll(0);
+
+        // Turn right to reverse the turn left
+        turnRight(0.30); // CHANGED FROM .38
+        sleep(510);
+        driveAll(0);
+
+        // Drive backward to return to shooting area
         driveAll(-0.5);
-        sleep(400);  // Same distance as forward drive
+        sleep(1425);
         driveAll(0);
 
-        turnRight(0.275); //original .275
-        sleep(340); // original 360
-        driveAll(0);
+        // Fire first two balls
+        fireSequence(1525, 2, 750);
 
-        driveAll(-0.5);
-        sleep(1428);  // Adjust time based on distance to balls //910
-        driveAll(0);
+        // Stage third ball (just position it, don't feed yet)
+        advanceThirdBall(600); // og 600
 
+        // Fire third ball
+        fireSequence(1525, 1, 450);
 
         telemetry.addData("Status", "Finished Auto");
         telemetry.update();
@@ -125,17 +138,6 @@ public class fromAfarBlue extends LinearOpMode {
         sleep(stageTimeMs);
 
         stopIntake();
-    }
-
-    // Intake three balls
-    private void intakeThreeBalls(int intakeTimeMs) {
-        startIntake();
-        feedOnce();
-
-        sleep(intakeTimeMs);
-
-        stopIntake();
-
     }
 
     // Average flywheel velocity
@@ -193,21 +195,17 @@ public class fromAfarBlue extends LinearOpMode {
         robot.rightBackDrive.setPower(power);
     }
 
-    private void strafeRight(double power) {
-        robot.leftFrontDrive.setPower(power);
-        robot.rightFrontDrive.setPower(-power);
-        robot.leftBackDrive.setPower(-power);
-        robot.rightBackDrive.setPower(power);
-    }
-
     private void turnRight(double power) {
         robot.leftFrontDrive.setPower(power);
         robot.leftBackDrive.setPower(power);
         robot.rightFrontDrive.setPower(-power);
         robot.rightBackDrive.setPower(-power);
     }
+
+    private void strafeRight(double power) {
+        robot.leftFrontDrive.setPower(power);
+        robot.rightFrontDrive.setPower(-power);
+        robot.leftBackDrive.setPower(-power);
+        robot.rightBackDrive.setPower(power);
+    }
 }
-
-
-// i need you to take this code and mirror the direction so it works on the red side
-// i need you to take this code and mirror the direction so it works on the red side
