@@ -21,34 +21,44 @@ public class fromAfarBlue extends LinearOpMode {
         if (isStopRequested()) return;
 
         // Back up to line up shot
-        strafeRight(0.4);
+        strafeRight(0.45);
         sleep(1000);
         driveAll(0);
 
-        turnLeft(0.275);
-        sleep(360);
+        turnLeft(0.275); //original .275
+        sleep(340); // original 360
         driveAll(0);
 
+        // Drive forward a little bit
         driveAll(0.3);
-        sleep(300);
+        sleep(200);  // Adjust this time to control how far forward
         driveAll(0);
-        //the angle could be the reason why your balls are not going in.
-        //autonomous is a big PAIN IN THE A-
-        // Fire first two ballsss
+
+        // Fire first two balls
         fireSequence(1525, 2, 750);
-        // 250ms delay between first two shots
 
-        advanceThirdBall(600);
-        // Third ball to flywheel
-        //advanceThirdBall(900);ss
+        // Stage third ball (just position it, don't feed yet)
+        advanceThirdBall(580);
 
-        fireSequence(1525, 1, 400); //400
+        // Fire third ball
+        fireSequence(1525, 1, 450);
 
+        // Drive forward to ball collection area
+        driveAll(0.5);
+        sleep(900);  // Adjust time based on distance to balls
+        driveAll(0);
 
+        // Turn to face the balls
+        turnLeft(0.3);
+        sleep(400);  // Adjust to get correct angle
+        driveAll(0);
 
-        // Strafe left and stop
-        strafeLeft(0.4);
-        sleep(2000);
+        // Intake three balls
+        intakeThreeBalls(2500);  // Run intake for 2.5 seconds to collect 3 balls
+
+        // Back up
+        driveAll(-0.5);
+        sleep(400);  // Same distance as forward drive
         driveAll(0);
 
         telemetry.addData("Status", "Finished Auto");
@@ -94,17 +104,24 @@ public class fromAfarBlue extends LinearOpMode {
         robot.flywheel2.setVelocity(0);
     }
 
-    // Stage third ball
+    // Stage third ball - just move it into position, DON'T feed into flywheel yet
     private void advanceThirdBall(int stageTimeMs) {
         startIntake();
-        robot.rollitbackbottom.setPower(-1);
-        robot.rollitbacktop.setPower(-1);
+        // DON'T run the back rollers here - that feeds it into the flywheel
+        // Just run intake to position the ball
 
         sleep(stageTimeMs);
 
         stopIntake();
-        robot.rollitbackbottom.setPower(0);
-        robot.rollitbacktop.setPower(0);
+    }
+
+    // Intake three balls
+    private void intakeThreeBalls(int intakeTimeMs) {
+        startIntake();
+
+        sleep(intakeTimeMs);
+
+        stopIntake();
     }
 
     // Average flywheel velocity
@@ -154,6 +171,7 @@ public class fromAfarBlue extends LinearOpMode {
         robot.leftBackDrive.setPower(power);
         robot.rightBackDrive.setPower(-power);
     }
+
     private void turnLeft(double power) {
         robot.leftFrontDrive.setPower(-power);
         robot.leftBackDrive.setPower(-power);
@@ -168,4 +186,7 @@ public class fromAfarBlue extends LinearOpMode {
         robot.rightBackDrive.setPower(power);
     }
 }
+
+
+// i need you to take this code and mirror the direction so it works on the red side
 // i need you to take this code and mirror the direction so it works on the red side
