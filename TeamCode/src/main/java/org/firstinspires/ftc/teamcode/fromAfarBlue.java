@@ -22,7 +22,7 @@ public class fromAfarBlue extends LinearOpMode {
 
         // Back up to line up shot
         strafeRight(0.45);
-        sleep(1000);
+        sleep(1300);
         driveAll(0);
 
         turnLeft(0.275); //original .275
@@ -38,23 +38,27 @@ public class fromAfarBlue extends LinearOpMode {
         fireSequence(1525, 2, 750);
 
         // Stage third ball (just position it, don't feed yet)
-        advanceThirdBall(600);
+        advanceThirdBall(600); // og 600
 
         // Fire third ball
         fireSequence(1525, 1, 450);
 
         // Drive forward to ball collection area
         driveAll(0.5);
-        sleep(900);  // Adjust time based on distance to balls
+        sleep(1425);  // Adjust time based on distance to balls; og 1360
         driveAll(0);
 
         // Turn to face the balls
-        turnLeft(0.3);
-        sleep(400);  // Adjust to get correct angle
+        turnLeft(0.38); //og 32
+        sleep(560);  // Adjust to get correct angle; og 400
         driveAll(0);
 
-        // Intake three balls
-        intakeThreeBalls(2500);  // Run intake for 2.5 seconds to collect 3 balls
+        // Start intake, then drive forward slowly for 3 seconds while intaking
+        startIntake();
+        driveAll(0.25);  // Slow forward movement
+        sleep(3000);  // Drive and intake for 3 seconds
+        driveAll(0);
+        stopIntake();
 
         // Back up
         driveAll(-0.5);
@@ -111,15 +115,6 @@ public class fromAfarBlue extends LinearOpMode {
         // Just run intake to position the ball
 
         sleep(stageTimeMs);
-
-        stopIntake();
-    }
-
-    // Intake three balls
-    private void intakeThreeBalls(int intakeTimeMs) {
-        startIntake();
-
-        sleep(intakeTimeMs);
 
         stopIntake();
     }
