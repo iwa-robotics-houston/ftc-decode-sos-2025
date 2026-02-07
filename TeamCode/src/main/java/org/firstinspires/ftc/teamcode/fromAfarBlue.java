@@ -38,19 +38,19 @@ public class fromAfarBlue extends LinearOpMode {
         fireSequence(1525, 2, 750);
 
         // Stage third ball (just position it, don't feed yet)
-        advanceThirdBall(580);
+        advanceThirdBall(600);
 
         // Fire third ball
         fireSequence(1525, 1, 450);
 
         // Drive forward to ball collection area
         driveAll(0.5);
-        sleep(900);  // Adjust time based on distance to balls
+        sleep(1410);  // Adjust time based on distance to balls //910
         driveAll(0);
 
         // Turn to face the balls
-        turnLeft(0.32);
-        sleep(565);  // Adjust to get correct angle
+        turnLeft(0.38);
+        sleep(560);  // Adjust to get correct angle
         driveAll(0);
 
         // Intake three balls
@@ -118,10 +118,12 @@ public class fromAfarBlue extends LinearOpMode {
     // Intake three balls
     private void intakeThreeBalls(int intakeTimeMs) {
         startIntake();
+        feedOnce();
 
         sleep(intakeTimeMs);
 
         stopIntake();
+
     }
 
     // Average flywheel velocity
