@@ -49,8 +49,8 @@ public class fromAfarBlue extends LinearOpMode {
         driveAll(0);
 
         // Turn to face the balls
-        turnLeft(0.3);
-        sleep(545);  // Adjust to get correct angle
+        turnLeft(0.32);
+        sleep(565);  // Adjust to get correct angle
         driveAll(0);
 
         // Intake three balls
