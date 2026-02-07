@@ -35,7 +35,7 @@ public class fromAfarBlue extends LinearOpMode {
         driveAll(0);
 
         // Fire first two balls
-        fireSequence(1535, 2, 750);
+        fireSequence(1525, 2, 750);
 
         // Stage third ball (just position it, don't feed yet)
         advanceThirdBall(600); // og 600
@@ -50,7 +50,7 @@ public class fromAfarBlue extends LinearOpMode {
 
         // Turn to face the balls
         turnLeft(0.38); //og 32
-        sleep(560);  // Adjust to get correct angle; og 400
+        sleep(580);  // Adjust to get correct angle; og 400
         driveAll(0);
 
         // Start intake, then drive forward slowly for 3 seconds while intaking
@@ -69,7 +69,7 @@ public class fromAfarBlue extends LinearOpMode {
 
         // Turn right to reverse the turn left
         turnRight(0.30); // CHANGED FROM .38
-        sleep(580);
+        sleep(560); //540
         driveAll(0);
 
         // Drive backward to return to shooting area
@@ -81,10 +81,10 @@ public class fromAfarBlue extends LinearOpMode {
         fireSequence(1525, 2, 750);
 
         // Stage third ball (just position it, don't feed yet)
-        advanceThirdBall(600); // og 600
+        advanceThirdBall(700); // og 600
 
         // Fire third ball
-        fireSequence(1525, 1, 450);
+        fireSequence(1525, 1, 610);
 
         telemetry.addData("Status", "Finished Auto");
         telemetry.update();

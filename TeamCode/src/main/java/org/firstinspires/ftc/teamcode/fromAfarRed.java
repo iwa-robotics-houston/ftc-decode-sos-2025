@@ -21,36 +21,70 @@ public class fromAfarRed extends LinearOpMode {
         if (isStopRequested()) return;
 
         // Back up to line up shot
-        strafeLeft(0.4);
-        sleep(1000);
+        strafeLeft(0.45);
+        sleep(1300);
         driveAll(0);
 
-        turnRight(0.275);
-        sleep(360);
+        turnRight(0.275); //original .275
+        sleep(340); // original 360
         driveAll(0);
 
+        // Drive forward a little bit
         driveAll(0.3);
-        sleep(300);
+        sleep(200);  // Adjust this time to control how far forward
         driveAll(0);
+
         // Fire first two balls
-        fireSequence(1505, 2, 750);
-        advanceThirdBall(600);  // Reduced time to just stage, not feed
+        fireSequence(1525, 2, 750);
+
+        // Stage third ball (just position it, don't feed yet)
+        advanceThirdBall(600); // og 600
 
         // Fire third ball
-        fireSequence(1505, 1, 400);
+        fireSequence(1525, 1, 450);
 
-        // 500 // 250ms delay between first two shots
-
-
-        // Third ball to flywheel
-        //advanceThirdBall(1000);
-
-        //fireSequence(1505, 1, 250);
-
-        // Strafe left and stop
-        strafeRight(0.4);
-        sleep(2000);
+        // Drive forward to ball collection area
+        driveAll(0.5);
+        sleep(1425);  // Adjust time based on distance to balls; og 1360
         driveAll(0);
+
+        // Turn to face the balls
+        turnRight(0.38); //og 32
+        sleep(580);  // Adjust to get correct angle; og 400
+        driveAll(0);
+
+        // Start intake, then drive forward slowly for 3 seconds while intaking
+        startIntake();
+        driveAll(0.25);  // Slow forward movement
+        sleep(2500);  // Drive and intake for 3 seconds
+        driveAll(0);
+        stopIntake();
+
+        // Return to shooting position - reverse all movements
+
+        // Back up from ball collection (reverse the slow forward intake movement)
+        driveAll(-0.50);
+        sleep(950);
+        driveAll(0);
+
+        // Turn right to reverse the turn left
+        turnLeft(0.30); // CHANGED FROM .38
+        sleep(560); //540
+        driveAll(0);
+
+        // Drive backward to return to shooting area
+        driveAll(-0.5);
+        sleep(1425);
+        driveAll(0);
+
+        // Fire first two balls
+        fireSequence(1525, 2, 750);
+
+        // Stage third ball (just position it, don't feed yet)
+        advanceThirdBall(700); // og 600
+
+        // Fire third ball
+        fireSequence(1525, 1, 610);
 
         telemetry.addData("Status", "Finished Auto");
         telemetry.update();
@@ -188,12 +222,13 @@ public class fromAfarRed extends LinearOpMode {
         robot.rightBackDrive.setPower(-power);
     }
 
-    private void strafeRight(double power) {
+    /*private void strafeRight(double power) {
         robot.leftFrontDrive.setPower(power);
         robot.rightFrontDrive.setPower(-power);
         robot.leftBackDrive.setPower(-power);
         robot.rightBackDrive.setPower(power);
     }
+     */
 
     private void turnRight(double power) {
         robot.leftFrontDrive.setPower(power);
@@ -201,4 +236,12 @@ public class fromAfarRed extends LinearOpMode {
         robot.rightFrontDrive.setPower(-power);
         robot.rightBackDrive.setPower(-power);
     }
+
+    private void turnLeft(double power) {
+        robot.leftFrontDrive.setPower(-power);
+        robot.leftBackDrive.setPower(-power);
+        robot.rightFrontDrive.setPower(power);
+        robot.rightBackDrive.setPower(power);
+    }
+
 }
