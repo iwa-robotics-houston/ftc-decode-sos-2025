@@ -31,7 +31,7 @@ public class BackFromBlueAuto extends LinearOpMode {
         // Third ball to flywheel
         advanceThirdBall(900); //980 MAYBE
 
-        fireSequence(1310, 1, 400);
+        fireSequence(1310, 1, 350);
 
         // Strafe left and stop
         strafeLeft(0.4);
