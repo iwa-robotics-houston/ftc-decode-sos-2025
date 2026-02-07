@@ -35,7 +35,7 @@ public class fromAfarBlue extends LinearOpMode {
         driveAll(0);
 
         // Fire first two balls
-        fireSequence(1525, 2, 750);
+        fireSequence(1535, 2, 750);
 
         // Stage third ball (just position it, don't feed yet)
         advanceThirdBall(600); // og 600
@@ -56,14 +56,35 @@ public class fromAfarBlue extends LinearOpMode {
         // Start intake, then drive forward slowly for 3 seconds while intaking
         startIntake();
         driveAll(0.25);  // Slow forward movement
-        sleep(3000);  // Drive and intake for 3 seconds
+        sleep(3150);  // Drive and intake for 3 seconds
         driveAll(0);
         stopIntake();
 
-        // Back up
-        driveAll(-0.5);
-        sleep(400);  // Same distance as forward drive
+        // Return to shooting position - reverse all movements
+
+        // Back up from ball collection (reverse the slow forward intake movement)
+        driveAll(-0.50);
+        sleep(950);
         driveAll(0);
+
+        // Turn right to reverse the turn left
+        turnRight(0.30); // CHANGED FROM .38
+        sleep(560);
+        driveAll(0);
+
+        // Drive backward to return to shooting area
+        driveAll(-0.5);
+        sleep(1425);
+        driveAll(0);
+
+        // Fire first two balls
+        fireSequence(1525, 2, 750);
+
+        // Stage third ball (just position it, don't feed yet)
+        advanceThirdBall(600); // og 600
+
+        // Fire third ball
+        fireSequence(1525, 1, 450);
 
         telemetry.addData("Status", "Finished Auto");
         telemetry.update();
@@ -172,6 +193,13 @@ public class fromAfarBlue extends LinearOpMode {
         robot.leftBackDrive.setPower(-power);
         robot.rightFrontDrive.setPower(power);
         robot.rightBackDrive.setPower(power);
+    }
+
+    private void turnRight(double power) {
+        robot.leftFrontDrive.setPower(power);
+        robot.leftBackDrive.setPower(power);
+        robot.rightFrontDrive.setPower(-power);
+        robot.rightBackDrive.setPower(-power);
     }
 
     private void strafeRight(double power) {
