@@ -53,13 +53,25 @@ public class fromAfarBlue extends LinearOpMode {
         sleep(560);  // Adjust to get correct angle
         driveAll(0);
 
-        // Intake three balls
-        intakeThreeBalls(2500);  // Run intake for 2.5 seconds to collect 3 balls
+        startIntake();
+        driveAll(0.25);  // Slow forward movement
+        sleep(3200);  // Drive and intake for 3 seconds
+        driveAll(0);
+        stopIntake();
 
         // Back up
         driveAll(-0.5);
         sleep(400);  // Same distance as forward drive
         driveAll(0);
+
+        turnRight(0.275); //original .275
+        sleep(340); // original 360
+        driveAll(0);
+
+        driveAll(-0.5);
+        sleep(1428);  // Adjust time based on distance to balls //910
+        driveAll(0);
+
 
         telemetry.addData("Status", "Finished Auto");
         telemetry.update();
@@ -186,6 +198,13 @@ public class fromAfarBlue extends LinearOpMode {
         robot.rightFrontDrive.setPower(-power);
         robot.leftBackDrive.setPower(-power);
         robot.rightBackDrive.setPower(power);
+    }
+
+    private void turnRight(double power) {
+        robot.leftFrontDrive.setPower(power);
+        robot.leftBackDrive.setPower(power);
+        robot.rightFrontDrive.setPower(-power);
+        robot.rightBackDrive.setPower(-power);
     }
 }
 
