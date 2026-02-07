@@ -56,7 +56,7 @@ public class fromAfarBlue extends LinearOpMode {
         // Start intake, then drive forward slowly for 3 seconds while intaking
         startIntake();
         driveAll(0.25);  // Slow forward movement
-        sleep(3150);  // Drive and intake for 3 seconds
+        sleep(2500);  // Drive and intake for 3 seconds
         driveAll(0);
         stopIntake();
 
@@ -69,7 +69,7 @@ public class fromAfarBlue extends LinearOpMode {
 
         // Turn right to reverse the turn left
         turnRight(0.30); // CHANGED FROM .38
-        sleep(510);
+        sleep(580);
         driveAll(0);
 
         // Drive backward to return to shooting area
