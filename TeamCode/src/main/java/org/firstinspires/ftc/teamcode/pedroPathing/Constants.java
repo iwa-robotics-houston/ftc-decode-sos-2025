@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode.pedroPathing;
 
 
 
+import static com.sun.tools.javac.code.Lint.LintCategory.PATH;
+
 import com.pedropathing.control.PIDFCoefficients;
 import com.pedropathing.follower.Follower;
 import com.pedropathing.follower.FollowerConstants;
@@ -74,10 +76,23 @@ public class Constants {
 
 
 
-    public static PathConstraints pathConstraints = new PathConstraints(0.99, 100, 1, 1);
+    /*public static PathConstraints pathConstraints = new PathConstraints(0.99,
+            100,
+            2.0,
+            2.0);*/
 
 
 
+   public static PathConstraints pathConstraints = new PathConstraints(
+            0.995,
+            0.1,
+            0.1,
+            0.009,
+            50,
+            1.25,
+            10,
+            1
+    );
     private static Object multiplier;
     private static Object velocity;
     public static TwoWheelConstants localizerConstants = new TwoWheelConstants()
@@ -117,6 +132,7 @@ public class Constants {
         return new FollowerBuilder(followerConstants, hardwareMap)
                 .twoWheelLocalizer(localizerConstants)
                 .pathConstraints(pathConstraints)
+
                 .mecanumDrivetrain(driveConstants)
                 .build();
 
