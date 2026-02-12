@@ -76,10 +76,10 @@ public class Constants {
 
 
 
-    /*public static PathConstraints pathConstraints = new PathConstraints(0.99,
+    public static PathConstraints pathConstraints = new PathConstraints(0.99,
             100,
             2.0,
-            2.0);*/
+            2.0);
 
 
 
@@ -131,7 +131,7 @@ public class Constants {
     public static Follower createFollower(HardwareMap hardwareMap) {
         return new FollowerBuilder(followerConstants, hardwareMap)
                 .twoWheelLocalizer(localizerConstants)
-                //.pathConstraints(pathConstraints)
+                .pathConstraints(pathConstraints)
 
                 .mecanumDrivetrain(driveConstants)
                 .build();
