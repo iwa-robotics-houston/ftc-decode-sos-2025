@@ -76,23 +76,23 @@ public class Constants {
 
 
 
-    public static PathConstraints pathConstraints = new PathConstraints(0.99,
+    /*public static PathConstraints pathConstraints = new PathConstraints(0.99,
             100,
             2.0,
-            2.0);
+            2.0);*/
 
 
 
-   /*public static PathConstraints pathConstraints = new PathConstraints(
+   public static PathConstraints pathConstraints = new PathConstraints(
             0.995,
             0.1,
             0.1,
             0.009,
             50,
-            4.0,
+            1.25,
             10,
             1
-    );*/
+    );
     private static Object multiplier;
     private static Object velocity;
     public static TwoWheelConstants localizerConstants = new TwoWheelConstants()
