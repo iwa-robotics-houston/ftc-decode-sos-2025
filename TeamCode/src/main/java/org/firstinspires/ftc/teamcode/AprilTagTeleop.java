@@ -1,8 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-/*
- Limelight AprilTag TeleOp with PID Lock-On & Goal-Specific Offset (strafe only)
-*/
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -73,7 +70,7 @@ public class AprilTagTeleop extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            // -------- GOAL SELECTION --------
+            // GOAL SELECTION
             if (gamepad1.b) {
                 goalColor = "RED";
                 targetTX = -1.2;
@@ -82,7 +79,7 @@ public class AprilTagTeleop extends LinearOpMode {
                 targetTX = 1.2;
             }
 
-            // -------- TOGGLE LOCK-ON --------
+            // TOGGLE LOCK-ON --------
             if (gamepad1.a) {
                 lockOn = !lockOn;
                 integral = 0;  // reset integral
