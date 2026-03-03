@@ -49,6 +49,11 @@ public class Robot {
 
 
     // motors
+    //cat
+    //cat
+    /*john cena john cena is
+       cat
+     */
     public DcMotor leftFrontDrive;
     public DcMotor rightFrontDrive;
     public DcMotor leftBackDrive;
@@ -89,6 +94,8 @@ public class Robot {
         rollitbacktop = hardwareMap.get(CRServo.class, "rollitbackTop");
 
 
+
+
         // configure drive motors
         leftFrontDrive.setDirection(DcMotor.Direction.REVERSE);
         rightFrontDrive.setDirection(DcMotor.Direction.FORWARD);
@@ -102,7 +109,7 @@ public class Robot {
         rollitbacktop.setDirection(CRServo.Direction.REVERSE);
 
         // Configure encoders
-        // Encoder code
+        //Encoder code
         //flywheel1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         flywheel1.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         //flywheel2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);

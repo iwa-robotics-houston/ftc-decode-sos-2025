@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "fromAfarBlue", group = "OpMode")
-public class fromAfarBlue extends LinearOpMode {
+@Autonomous(name = "fromAfarRed", group = "OpMode")
+public class fromAfarRed extends LinearOpMode {
 
     private Robot robot;
 
@@ -21,11 +21,11 @@ public class fromAfarBlue extends LinearOpMode {
         if (isStopRequested()) return;
 
         // Back up to line up shot
-        strafeRight(0.45);
+        strafeLeft(0.45);
         sleep(1300);
         driveAll(0);
 
-        turnLeft(0.275); //original .275
+        turnRight(0.275); //original .275
         sleep(340); // original 360
         driveAll(0);
 
@@ -49,7 +49,7 @@ public class fromAfarBlue extends LinearOpMode {
         driveAll(0);
 
         // Turn to face the balls
-        turnLeft(0.38); //og 32
+        turnRight(0.38); //og 32
         sleep(580);  // Adjust to get correct angle; og 400
         driveAll(0);
 
@@ -68,7 +68,7 @@ public class fromAfarBlue extends LinearOpMode {
         driveAll(0);
 
         // Turn right to reverse the turn left
-        turnRight(0.30); // CHANGED FROM .38
+        turnLeft(0.30); // CHANGED FROM .38
         sleep(560); //540
         driveAll(0);
 
@@ -89,7 +89,6 @@ public class fromAfarBlue extends LinearOpMode {
         driveAll(0.5);
         sleep(500);
         driveAll(0);
-
         telemetry.addData("Status", "Finished Auto");
         telemetry.update();
     }
@@ -133,22 +132,56 @@ public class fromAfarBlue extends LinearOpMode {
         robot.flywheel2.setVelocity(0);
     }
 
-    // Stage third ball - just move it into position, DON'T feed into flywheel yet
+    // Stage third ball
     private void advanceThirdBall(int stageTimeMs) {
         startIntake();
-        // DON'T run the back rollers here - that feeds it into the flywheel
-        // Just run intake to position the ball
+        robot.rollitbackbottom.setPower(-1);
+        robot.rollitbacktop.setPower(-1);
 
         sleep(stageTimeMs);
 
         stopIntake();
+        robot.rollitbackbottom.setPower(0);
+        robot.rollitbacktop.setPower(0);
+
+
     }
 
+    /*private void waitForVelocity (double targetVelocity, double tolerance, double wait) {
+
+
+        // Start flywheel
+        ElapsedTime Timer = new ElapsedTime();
+        Timer.reset();
+        while (opModeIsActive() &&
+                getAvgFlywheel() < targetVelocity * tolerance && Timer.seconds() < wait) {
+            ElapsedTime spinupTimer = new ElapsedTime();
+            spinupTimer.reset();
+            while (opModeIsActive() && getAvgFlywheel() < targetVelocity * tolerance && spinupTimer.seconds() < wait) {
+                telemetry.addData("Flywheel", String.format("%0f / %0f", getAvgFlywheel(), targetVelocity));
+                telemetry.update();
+                sleep(30);
+            }
+
+            // Wait for flywheel to reach target speed (or timeout)
+
+            // Feed the ball
+            feedOnce();
+
+            // Stage next ball if applicable
+            if (Timer.seconds() >= wait) {
+                telemetry.addData("warning", "flywheel timeout - proceeding anyway");
+                telemetry.update();
+            }
+        }
+    }// Stop intake and flywheel after all shots
+*/
     // Average flywheel velocity
     private double getAvgFlywheel() {
         return (Math.abs(robot.flywheel1.getVelocity()) +
                 Math.abs(robot.flywheel2.getVelocity())) / 2.0;
     }
+
 
     // Feed one ball through shooter
     private void feedOnce() {
@@ -192,12 +225,13 @@ public class fromAfarBlue extends LinearOpMode {
         robot.rightBackDrive.setPower(-power);
     }
 
-    private void turnLeft(double power) {
-        robot.leftFrontDrive.setPower(-power);
+    /*private void strafeRight(double power) {
+        robot.leftFrontDrive.setPower(power);
+        robot.rightFrontDrive.setPower(-power);
         robot.leftBackDrive.setPower(-power);
-        robot.rightFrontDrive.setPower(power);
         robot.rightBackDrive.setPower(power);
     }
+     */
 
     private void turnRight(double power) {
         robot.leftFrontDrive.setPower(power);
@@ -206,10 +240,11 @@ public class fromAfarBlue extends LinearOpMode {
         robot.rightBackDrive.setPower(-power);
     }
 
-    private void strafeRight(double power) {
-        robot.leftFrontDrive.setPower(power);
-        robot.rightFrontDrive.setPower(-power);
+    private void turnLeft(double power) {
+        robot.leftFrontDrive.setPower(-power);
         robot.leftBackDrive.setPower(-power);
+        robot.rightFrontDrive.setPower(power);
         robot.rightBackDrive.setPower(power);
     }
+
 }

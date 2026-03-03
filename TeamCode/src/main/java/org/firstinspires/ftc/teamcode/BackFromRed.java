@@ -4,8 +4,8 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@Autonomous(name = "BackFromBlue", group = "OpMode")
-public class BackFromBlueAuto extends LinearOpMode {
+@Autonomous(name = "BackFromRed", group = "OpMode")
+public class BackFromRed extends LinearOpMode {
 
     private Robot robot;
 
@@ -26,15 +26,16 @@ public class BackFromBlueAuto extends LinearOpMode {
         driveAll(0);
 
         // Fire first two balls
-        fireSequence(1310, 2, 650); // 250ms delay between first two shots
-        //fireSequence(1310, 3, 1000)
+        fireSequence(1310, 2, 500);
+        //fireSequence(1310, 3, 750);
+        //potential value for the delay 466.66667
+        //kekeke 67 bomb
+
         // Third ball to flywheel
-        advanceThirdBall(900); //980 MAYBE
+        advanceThirdBall(900);
 
-        fireSequence(1310, 1, 350);
-
-        // Strafe left and stop
-        strafeLeft(0.4);
+        // Strafe right
+        strafeRight(0.4);
         sleep(2000);
         driveAll(0);
 
@@ -43,24 +44,16 @@ public class BackFromBlueAuto extends LinearOpMode {
     }
 
     // Fire shots at target velocity
-    //int = the variables that we are going to be using to define the values for the functions
-    //SPINUP timeout sec = 1.6
-
     private void fireSequence(double targetVelocity, int shots, int delayBetweenShotsMs) {
 
-        final double tolerance = 0.99;  // 99% of target
-        final double spinupTimeout = 1.5; // seconds
+        final double tolerance = 0.99;
+        final double spinupTimeout = 1.5;
 
-        // Start flywheel
         robot.flywheel1.setVelocity(-targetVelocity);
         robot.flywheel2.setVelocity(-targetVelocity);
 
         for (int i = 0; i < shots && opModeIsActive(); i++) {
 
-
-            //telemetry.addLine("FIRE IN THE HOLE!")
-            //telemetry.addData("Target Velocity", TARGET veLOCITY)
-            // Wait for flywheel to reach target speed (or timeout)
             ElapsedTime spinupTimer = new ElapsedTime();
             spinupTimer.reset();
             while (opModeIsActive() && getAvgFlywheel() < targetVelocity * tolerance && spinupTimer.seconds() < spinupTimeout) {
@@ -71,17 +64,14 @@ public class BackFromBlueAuto extends LinearOpMode {
                 sleep(20);
             }
 
-            // Feed the ball
             feedOnce();
 
-            // Stage next ball if applicable
             if (i < shots - 1) {
                 startIntake();
-                sleep(delayBetweenShotsMs); // allow ball to move into position
+                sleep(delayBetweenShotsMs);
             }
         }
 
-        // Stop intake and flywheel after all shots
         stopIntake();
         robot.flywheel1.setVelocity(0);
         robot.flywheel2.setVelocity(0);
@@ -100,13 +90,11 @@ public class BackFromBlueAuto extends LinearOpMode {
         robot.rollitbacktop.setPower(0);
     }
 
-    // Average flywheel velocity
     private double getAvgFlywheel() {
         return (Math.abs(robot.flywheel1.getVelocity()) +
                 Math.abs(robot.flywheel2.getVelocity())) / 2.0;
     }
 
-    // Feed one ball through shooter
     private void feedOnce() {
         robot.hotwheelsback.setPower(1);
         robot.rollitbackbottom.setPower(-1);
@@ -119,21 +107,18 @@ public class BackFromBlueAuto extends LinearOpMode {
         robot.rollitbacktop.setPower(0);
     }
 
-    // Start intake
     private void startIntake() {
         robot.rollerIntake.setPower(1);
         robot.hotwheelsfront.setPower(1);
         robot.hotwheelsback.setPower(1);
     }
 
-    // Stop intake
     private void stopIntake() {
         robot.rollerIntake.setPower(0);
         robot.hotwheelsfront.setPower(0);
         robot.hotwheelsback.setPower(0);
     }
 
-    // Drivetrain helpers
     private void driveAll(double power) {
         robot.leftFrontDrive.setPower(power);
         robot.rightFrontDrive.setPower(power);
@@ -141,11 +126,11 @@ public class BackFromBlueAuto extends LinearOpMode {
         robot.rightBackDrive.setPower(power);
     }
 
-    private void strafeLeft(double power) {
-        robot.leftFrontDrive.setPower(-power);
-        robot.rightFrontDrive.setPower(power);
-        robot.leftBackDrive.setPower(power);
-        robot.rightBackDrive.setPower(-power);
+    // Mirror of strafeLeft
+    private void strafeRight(double power) {
+        robot.leftFrontDrive.setPower(power);
+        robot.rightFrontDrive.setPower(-power);
+        robot.leftBackDrive.setPower(-power);
+        robot.rightBackDrive.setPower(power);
     }
 }
-// i need you to take this code and mirror the direction so it works on the red side
