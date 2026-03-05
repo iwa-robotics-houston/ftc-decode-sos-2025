@@ -4,9 +4,13 @@ package org.firstinspires.ftc.teamcode;
  Limelight AprilTag
 */
 
+
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorEx;
+import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
@@ -29,8 +33,13 @@ public class Main2 extends LinearOpMode {
     @Override
     public void runOpMode() {
 
+
+
+
         Robot robot = new Robot(hardwareMap);
         ElapsedTime runtime = new ElapsedTime();
+
+
 
         limelight = hardwareMap.get(Limelight3A.class, "limelight");
         limelight.pipelineSwitch(0);
@@ -55,10 +64,33 @@ public class Main2 extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-        double targetVelocity = 0;
+
         RevBlinkinLedDriver.BlinkinPattern readyColor = RevBlinkinLedDriver.BlinkinPattern.BLACK;
 
+        double targetVelocity = 0;
+
+        robot.flywheel1.setVelocityPIDFCoefficients(200, 0, 0, 14);
+        robot.flywheel2.setVelocityPIDFCoefficients(200, 0, 0, 14);
+
+
+        PIDFCoefficients coefficients1 = robot.flywheel1.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
+        telemetry.addData("P", coefficients1.p);
+        telemetry.addData("I", coefficients1.i);
+        telemetry.addData("D", coefficients1.d);
+        telemetry.addData("F", coefficients1.f);
+        telemetry.addData("MotorControlAlgorithm", coefficients1.algorithm);
+
+        PIDFCoefficients coefficients2 = robot.flywheel2.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
+        telemetry.addData("P", coefficients2.p);
+        telemetry.addData("I", coefficients2.i);
+        telemetry.addData("D", coefficients2.d);
+        telemetry.addData("F", coefficients2.f);
+        telemetry.addData("MotorControlAlgorithm", coefficients2.algorithm);
+
+
+
         while (opModeIsActive()) {
+
 
             // DRIVE COPY ALL THIS FOR NEXT SEASON
             double axial = -gamepad1.left_stick_y;
@@ -80,6 +112,7 @@ public class Main2 extends LinearOpMode {
                 leftBackPower /= max;
                 rightBackPower /= max;
             }
+
 
             robot.leftFrontDrive.setPower(leftFrontPower);
             robot.rightFrontDrive.setPower(rightFrontPower);
