@@ -69,8 +69,8 @@ public class Main2 extends LinearOpMode {
 
         double targetVelocity = 0;
 
-        robot.flywheel1.setVelocityPIDFCoefficients(200, 0, 0, 14);
-        robot.flywheel2.setVelocityPIDFCoefficients(200, 0, 0, 14);
+        robot.flywheel1.setVelocityPIDFCoefficients(0, 0, 0, 1);
+        robot.flywheel2.setVelocityPIDFCoefficients(0, 0, 0, 1);
 
 
         PIDFCoefficients coefficients1 = robot.flywheel1.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
@@ -181,6 +181,7 @@ public class Main2 extends LinearOpMode {
             }
 
             telemetry.addData("Run Time", runtime.toString());
+            telemetry.addData("target velocity", targetVelocity);
             telemetry.addData("Flywheel 1 Vel", robot.flywheel1.getVelocity());
             telemetry.addData("Flywheel 2 Vel", robot.flywheel2.getVelocity());
             telemetry.update();
