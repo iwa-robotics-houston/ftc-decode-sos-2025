@@ -75,6 +75,10 @@ public class Robot {
 
     public CRServo rollitbacktop;
 
+    public DcMotor lift1;
+
+    public DcMotor lift2;
+
     public Robot(HardwareMap hardwareMap) {
         // init hardware
         leftFrontDrive = hardwareMap.get(DcMotor.class, "frontLeft");
@@ -92,6 +96,9 @@ public class Robot {
         hotwheelsback = hardwareMap.get(CRServo.class, "hotwheelBack");
         rollitbackbottom = hardwareMap.get(DcMotor.class, "rollitbackBottom");
         rollitbacktop = hardwareMap.get(CRServo.class, "rollitbackTop");
+
+        lift1 = hardwareMap.get(DcMotor.class, "lifty1");
+        lift2 = hardwareMap.get(DcMotor.class, "lifty2");
 
 
 
@@ -120,6 +127,10 @@ public class Robot {
         rollerIntake.setDirection(DcMotor.Direction.REVERSE);
         hotwheelsfront.setDirection(DcMotorSimple.Direction.REVERSE);
         hotwheelsback.setDirection(CRServo.Direction.FORWARD);
+
+
+        lift1.setDirection(DcMotor.Direction.FORWARD);
+        lift2.setDirection(DcMotor.Direction.FORWARD);
     }
 }
 
