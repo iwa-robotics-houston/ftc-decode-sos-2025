@@ -167,7 +167,7 @@ public class Main2 extends LinearOpMode {
                 blinkin.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
             }
 
-
+            //
             //TBD for the buttons
             if (gamepad2.right_trigger > 0) {
                 robot.lift1.setPower(1);
