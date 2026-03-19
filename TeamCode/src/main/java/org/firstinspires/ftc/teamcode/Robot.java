@@ -67,7 +67,7 @@ public class Robot {
 
     public CRServo hotwheelsback;
 
-    public DcMotor rollerIntake;
+    public CRServo rollerIntake;
 
 
     //servos
@@ -90,7 +90,7 @@ public class Robot {
         flywheel2 = hardwareMap.get(DcMotorEx.class, "flywheel2");
 
 
-        rollerIntake = hardwareMap.get(DcMotor.class, "rollerIntake");
+        rollerIntake = hardwareMap.get(CRServo.class, "rollerIntake");
 
         hotwheelsfront = hardwareMap.get(CRServo.class, "hotwheelFront");
         hotwheelsback = hardwareMap.get(CRServo.class, "hotwheelBack");
