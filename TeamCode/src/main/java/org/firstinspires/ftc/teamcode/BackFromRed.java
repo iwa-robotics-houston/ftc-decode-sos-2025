@@ -80,13 +80,13 @@ public class BackFromRed extends LinearOpMode {
     // Stage third ball
     private void advanceThirdBall(int stageTimeMs) {
         startIntake();
-        robot.rollitbackbottom.setPower(-1);
+        //robot.rollitbackbottom.setPower(-1);
         robot.rollitbacktop.setPower(-1);
 
         sleep(stageTimeMs);
 
         stopIntake();
-        robot.rollitbackbottom.setPower(0);
+        //robot.rollitbackbottom.setPower(0);
         robot.rollitbacktop.setPower(0);
     }
 
@@ -97,13 +97,13 @@ public class BackFromRed extends LinearOpMode {
 
     private void feedOnce() {
         robot.hotwheelsback.setPower(1);
-        robot.rollitbackbottom.setPower(-1);
+        //robot.rollitbackbottom.setPower(-1);
         robot.rollitbacktop.setPower(-1);
 
         sleep(1200);
 
         robot.hotwheelsback.setPower(0);
-        robot.rollitbackbottom.setPower(0);
+        //robot.rollitbackbottom.setPower(0);
         robot.rollitbacktop.setPower(0);
     }
 

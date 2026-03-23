@@ -104,7 +104,6 @@ public class fromAfarRed extends LinearOpMode {
         robot.flywheel2.setVelocity(-targetVelocity);
 
         for (int i = 0; i < shots && opModeIsActive(); i++) {
-
             // Wait for flywheel to reach target speed (or timeout)
             ElapsedTime spinupTimer = new ElapsedTime();
             spinupTimer.reset();
@@ -135,13 +134,13 @@ public class fromAfarRed extends LinearOpMode {
     // Stage third ball
     private void advanceThirdBall(int stageTimeMs) {
         startIntake();
-        robot.rollitbackbottom.setPower(-1);
+        //robot.rollitbackbottom.setPower(-1);
         robot.rollitbacktop.setPower(-1);
 
         sleep(stageTimeMs);
 
         stopIntake();
-        robot.rollitbackbottom.setPower(0);
+        //robot.rollitbackbottom.setPower(0);
         robot.rollitbacktop.setPower(0);
 
 
@@ -186,13 +185,13 @@ public class fromAfarRed extends LinearOpMode {
     // Feed one ball through shooter
     private void feedOnce() {
         robot.hotwheelsback.setPower(1);
-        robot.rollitbackbottom.setPower(-1);
+        //robot.rollitbackbottom.setPower(-1);
         robot.rollitbacktop.setPower(-1);
 
         sleep(1200);
 
         robot.hotwheelsback.setPower(0);
-        robot.rollitbackbottom.setPower(0);
+        //robot.rollitbackbottom.setPower(0);
         robot.rollitbacktop.setPower(0);
     }
 

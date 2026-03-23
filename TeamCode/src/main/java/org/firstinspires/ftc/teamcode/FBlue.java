@@ -93,26 +93,26 @@ public class FBlue extends LinearOpMode {
 
     private void feedOnce() {
         robot.hotwheelsback.setPower(1);
-        robot.rollitbackbottom.setPower(-1);
+        //robot.rollitbackbottom.setPower(-1);
         robot.rollitbacktop.setPower(-1);
 
         sleep(1500);
 
         robot.hotwheelsback.setPower(0);
-        robot.rollitbackbottom.setPower(0);
+        //robot.rollitbackbottom.setPower(0);
         robot.rollitbacktop.setPower(0);
     }
 
 
     private void advanceThirdBall(int stageTimeMs) {
         startIntake();
-        robot.rollitbackbottom.setPower(-1);
+        //robot.rollitbackbottom.setPower(-1);
         robot.rollitbacktop.setPower(-1);
 
         sleep(stageTimeMs);
 
         stopIntake();
-        robot.rollitbackbottom.setPower(0);
+        //robot.rollitbackbottom.setPower(0);
         robot.rollitbacktop.setPower(0);
     }
 
