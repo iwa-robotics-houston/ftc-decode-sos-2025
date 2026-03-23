@@ -80,14 +80,14 @@ public class auto extends LinearOpMode {
 
         // Start feeding motors
         robot.hotwheelsback.setPower(1);
-        robot.rollitbackbottom.setPower(-1);
+        //robot.rollitbackbottom.setPower(-1);
         robot.rollitbacktop.setPower(-1);
 
         sleep(1000);  // adjust duration for your mechanism
 
         // Stop feeding motors
         robot.hotwheelsback.setPower(0);
-        robot.rollitbackbottom.setPower(0);
+        //robot.rollitbackbottom.setPower(0);
         robot.rollitbacktop.setPower(0);
     }
 
