@@ -125,7 +125,7 @@ public class Main2 extends LinearOpMode {
                 robot.rollerIntake.setPower(1);
                 robot.hotwheelsfront.setPower(-1);
                 robot.hotwheelsback.setPower(-1);
-                robot.rollitbackbottom.setPosition(1);
+                robot.rollitbackbottom.setPosition(-0.5);
                 robot.rollitbacktop.setPower(1);
             } else if (gamepad2.left_bumper) {
                 robot.rollerIntake.setPower(-1);
