@@ -71,7 +71,7 @@ public class Robot {
 
 
     //servos
-    //public Servo rollitbackbottom;
+    public CRServo rollitbackbottom;
 
     public CRServo rollitbacktop;
 
@@ -94,7 +94,7 @@ public class Robot {
 
         hotwheelsfront = hardwareMap.get(CRServo.class, "hotwheelFront");
         hotwheelsback = hardwareMap.get(CRServo.class, "hotwheelBack");
-        //rollitbackbottom = hardwareMap.get(Servo.class, "rollitbackBottom");
+        rollitbackbottom = hardwareMap.get(CRServo.class, "rollitbackBottom");
         rollitbacktop = hardwareMap.get(CRServo.class, "rollitbackTop");
 
         lift1 = hardwareMap.get(DcMotor.class, "lifty1");
@@ -112,7 +112,7 @@ public class Robot {
         //Flywheel 1
         flywheel1.setDirection(DcMotorEx.Direction.REVERSE);
         flywheel2.setDirection(DcMotorEx.Direction.REVERSE);
-        //rollitbackbottom.setDirection(Servo.Direction.FORWARD);
+        rollitbackbottom.setDirection(CRServo.Direction.FORWARD);
         rollitbacktop.setDirection(CRServo.Direction.REVERSE);
 
         // Configure encoders
