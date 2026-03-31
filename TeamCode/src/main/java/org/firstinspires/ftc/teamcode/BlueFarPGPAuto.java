@@ -30,7 +30,7 @@ public class BlueFarPGPAuto extends LinearOpMode {
         driveAll(0);
 
         // Shoot first two balls
-        fireSequence(1320, 2);
+        //fireSequence(1320, 2);
 
 
         // Go collect more balls
@@ -74,17 +74,17 @@ public class BlueFarPGPAuto extends LinearOpMode {
         driveAll(0);
 
         // Shoot collected balls
-        fireSequence(1320, 2);
+        //fireSequence(1320, 2);
 
         telemetry.addData("Status", "Finished Auto :)");
         telemetry.update();
     }
 
     // Shooting system
-    private void fireSequence(double targetVelocity, int shots) {
+    /*private void fireSequence(double targetVelocity, int shots) {
 
-        robot.flywheel1.setVelocity(-targetVelocity);
-        robot.flywheel2.setVelocity(-targetVelocity);
+        //robot.flywheel1.setVelocity(-targetVelocity);
+        //robot.flywheel2.setVelocity(-targetVelocity);
 
         for (int i = 0; i < shots && opModeIsActive(); i++) {
 
@@ -99,15 +99,15 @@ public class BlueFarPGPAuto extends LinearOpMode {
             sleep(120);
         }
 
-        robot.flywheel1.setVelocity(0);
-        robot.flywheel2.setVelocity(0);
+        //robot.flywheel1.setVelocity(0);
+        //robot.flywheel2.setVelocity(0);
     }
 
-    private double getAvgFlywheel() {
+    /*private double getAvgFlywheel() {
         return (Math.abs(robot.flywheel1.getVelocity()) +
                 Math.abs(robot.flywheel2.getVelocity())) / 2.0;
     }
-
+    */
     private void feedOnce() {
         robot.hotwheelsback.setPower(1);
         //robot.rollitbackbottom.setPower(-1);
