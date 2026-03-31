@@ -91,8 +91,8 @@ public class BackFromRed extends LinearOpMode {
     }
 
     private double getAvgFlywheel() {
-        return (Math.abs(robot.flywheel1.getVelocity()) +
-                Math.abs(robot.flywheel2.getVelocity())) / 2.0;
+        return (Math.abs(robot.flywheel1.getPower()) +
+                Math.abs(robot.flywheel2.getPower())) / 2.0;
     }
 
     private void feedOnce() {

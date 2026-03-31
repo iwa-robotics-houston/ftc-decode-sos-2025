@@ -70,12 +70,12 @@ public class Main2 extends LinearOpMode {
 
         double targetVelocity = 0;
 
-        robot.flywheel1.setVelocityPIDFCoefficients(0, 0, 0, 1);
-        robot.flywheel2.setVelocityPIDFCoefficients(0, 0, 0, 1);
+        //robot.flywheel1.setVelocityPIDFCoefficients(0, 0, 0, 1);
+        //robot.flywheel2.setVelocityPIDFCoefficients(0, 0, 0, 1);
 
 
-        PIDFCoefficients coefficients1 = robot.flywheel1.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
-        telemetry.addData("P", coefficients1.p);
+//        PIDFCoefficients coefficients1 = robot.flywheel1.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
+        /*telemetry.addData("P", coefficients1.p);
         telemetry.addData("I", coefficients1.i);
         telemetry.addData("D", coefficients1.d);
         telemetry.addData("F", coefficients1.f);
@@ -86,7 +86,7 @@ public class Main2 extends LinearOpMode {
         telemetry.addData("I", coefficients2.i);
         telemetry.addData("D", coefficients2.d);
         telemetry.addData("F", coefficients2.f);
-        telemetry.addData("MotorControlAlgorithm", coefficients2.algorithm);
+        telemetry.addData("MotorControlAlgorithm", coefficients2.algorithm);*/
 
 
 
@@ -157,18 +157,18 @@ public class Main2 extends LinearOpMode {
 
             // SHOOTER CONTROL
             if (gamepad2.right_trigger > 0) {
-                robot.flywheel1.setVelocity(-targetVelocity);
-                robot.flywheel2.setVelocity(-targetVelocity);
+                robot.flywheel1.setPower(-targetVelocity);
+                robot.flywheel2.setPower(-targetVelocity);
 
 
             } else if (gamepad2.right_bumper) {
-                robot.flywheel1.setVelocity(targetVelocity);
-                robot.flywheel2.setVelocity(targetVelocity);
+                robot.flywheel1.setPower(targetVelocity);
+                robot.flywheel2.setPower(targetVelocity);
 
             } else {
-                robot.flywheel1.setVelocity(0);
-                robot.flywheel2.setVelocity(0);
-                blinkin.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
+                robot.flywheel1.setPower(0);
+                robot.flywheel2.setPower(0);
+                //blinkin.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
             }
 
             //
@@ -187,7 +187,7 @@ public class Main2 extends LinearOpMode {
             }
 
             // BLINKIN READY INDICATOR
-            if (targetVelocity > 0 && (gamepad2.right_trigger > 0 || gamepad2.right_bumper)) {
+            /*if (targetVelocity > 0 && (gamepad2.right_trigger > 0 || gamepad2.right_bumper)) {
                 double flywheelVel = Math.abs(robot.flywheel1.getVelocity());
 
                 if (flywheelVel >= targetVelocity - tolerance) {
@@ -197,7 +197,7 @@ public class Main2 extends LinearOpMode {
                 }
             } else {
                 blinkin.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
-            }
+            }*/
 
             telemetry.addData("Run Time", runtime.toString());
             telemetry.addData("target velocity", targetVelocity);
