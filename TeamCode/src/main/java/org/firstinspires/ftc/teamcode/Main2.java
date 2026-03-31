@@ -187,7 +187,7 @@ public class Main2 extends LinearOpMode {
             }
 
             // BLINKIN READY INDICATOR
-            if (targetVelocity > 0 && (gamepad2.right_trigger > 0 || gamepad2.right_bumper)) {
+            /*if (targetVelocity > 0 && (gamepad2.right_trigger > 0 || gamepad2.right_bumper)) {
                 double flywheelVel = Math.abs(robot.flywheel1.getVelocity());
 
                 if (flywheelVel >= targetVelocity - tolerance) {
@@ -197,7 +197,7 @@ public class Main2 extends LinearOpMode {
                 }
             } else {
                 blinkin.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
-            }
+            }*/
 
             telemetry.addData("Run Time", runtime.toString());
             telemetry.addData("target velocity", targetVelocity);
