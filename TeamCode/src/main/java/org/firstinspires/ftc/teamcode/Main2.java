@@ -68,7 +68,7 @@ public class Main2 extends LinearOpMode {
 
         RevBlinkinLedDriver.BlinkinPattern readyColor = RevBlinkinLedDriver.BlinkinPattern.BLACK;
 
-        double targetVelocity = 0;
+        double targetPower = 0;
 
         //robot.flywheel1.setVelocityPIDFCoefficients(0, 0, 0, 1);
         //robot.flywheel2.setVelocityPIDFCoefficients(0, 0, 0, 1);
@@ -146,10 +146,10 @@ public class Main2 extends LinearOpMode {
 
             // SHOOTER MODE SELECT
             if (gamepad2.x) {
-                targetVelocity = 1415;  ///1315
+                targetPower = 1415;  ///1315
                 readyColor = RevBlinkinLedDriver.BlinkinPattern.BLUE_GREEN; // purple
             } else if (gamepad2.y) {
-                targetVelocity = 1505;
+                targetPower = 1505;
                 readyColor = RevBlinkinLedDriver.BlinkinPattern.HEARTBEAT_RED; // green
             }
 
@@ -157,13 +157,13 @@ public class Main2 extends LinearOpMode {
 
             // SHOOTER CONTROL
             if (gamepad2.right_trigger > 0) {
-                robot.flywheel1.setPower(-targetVelocity);
-                robot.flywheel2.setPower(-targetVelocity);
+                robot.flywheel1.setPower(-targetPower);
+                robot.flywheel2.setPower(-targetPower);
 
 
             } else if (gamepad2.right_bumper) {
-                robot.flywheel1.setPower(targetVelocity);
-                robot.flywheel2.setPower(targetVelocity);
+                robot.flywheel1.setPower(targetPower);
+                robot.flywheel2.setPower(targetPower);
 
             } else {
                 robot.flywheel1.setPower(0);
@@ -187,22 +187,22 @@ public class Main2 extends LinearOpMode {
             }
 
             // BLINKIN READY INDICATOR
-            /*if (targetVelocity > 0 && (gamepad2.right_trigger > 0 || gamepad2.right_bumper)) {
-                double flywheelVel = Math.abs(robot.flywheel1.getVelocity());
+            if (targetPower > 0 && (gamepad2.right_trigger > 0 || gamepad2.right_bumper)) {
+                double flywheelVel = Math.abs(robot.flywheel1.getPower());
 
-                if (flywheelVel >= targetVelocity - tolerance) {
+                if (flywheelVel >= targetPower - tolerance) {
                     blinkin.setPattern(readyColor);
                 } else {
                     blinkin.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
                 }
             } else {
                 blinkin.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
-            }*/
+            }
 
             telemetry.addData("Run Time", runtime.toString());
-            telemetry.addData("target velocity", targetVelocity);
-            telemetry.addData("Flywheel 1 Vel", robot.flywheel1.getVelocity());
-            telemetry.addData("Flywheel 2 Vel", robot.flywheel2.getVelocity());
+            telemetry.addData("target power", targetPower);
+            telemetry.addData("Flywheel 1 Vel", robot.flywheel1.getPower());
+            telemetry.addData("Flywheel 2 Vel", robot.flywheel2.getPower());
             telemetry.update();
         }
     }
