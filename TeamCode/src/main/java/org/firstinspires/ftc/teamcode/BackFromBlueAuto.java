@@ -52,8 +52,8 @@ public class BackFromBlueAuto extends LinearOpMode {
         final double spinupTimeout = 1.5; // seconds
 
         // Start flywheel
-        robot.flywheel1.setVelocity(-targetVelocity);
-        robot.flywheel2.setVelocity(-targetVelocity);
+        robot.flywheel1.setPower(-targetVelocity);
+        robot.flywheel2.setPower(-targetVelocity);
 
         for (int i = 0; i < shots && opModeIsActive(); i++) {
 
@@ -83,8 +83,8 @@ public class BackFromBlueAuto extends LinearOpMode {
 
         // Stop intake and flywheel after all shots
         stopIntake();
-        robot.flywheel1.setVelocity(0);
-        robot.flywheel2.setVelocity(0);
+        robot.flywheel1.setPower(0);
+        robot.flywheel2.setPower(0);
     }
 
     // Stage third ball
@@ -102,8 +102,8 @@ public class BackFromBlueAuto extends LinearOpMode {
 
     // Average flywheel velocity
     private double getAvgFlywheel() {
-        return (Math.abs(robot.flywheel1.getVelocity()) +
-                Math.abs(robot.flywheel2.getVelocity())) / 2.0;
+        return (Math.abs(robot.flywheel1.getPower()) +
+                Math.abs(robot.flywheel2.getPower())) / 2.0;
     }
 
     // Feed one ball through shooter

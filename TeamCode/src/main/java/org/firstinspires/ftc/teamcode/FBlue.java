@@ -57,8 +57,8 @@ public class FBlue extends LinearOpMode {
         final double tolerance = 0.99;
         final double spinupTimeout = 1.5;
 
-        robot.flywheel1.setVelocity(-targetVelocity);
-        robot.flywheel2.setVelocity(-targetVelocity);
+        robot.flywheel1.setPower(-targetVelocity);
+        robot.flywheel2.setPower(-targetVelocity);
 
         for (int i = 0; i < shots && opModeIsActive(); i++) {
 
@@ -81,14 +81,14 @@ public class FBlue extends LinearOpMode {
         }
 
         stopIntake();
-        robot.flywheel1.setVelocity(0);
-        robot.flywheel2.setVelocity(0);
+        robot.flywheel1.setPower(0);
+        robot.flywheel2.setPower(0);
     }
 
 
     private double getAvgFlywheel() {
-        return (Math.abs(robot.flywheel1.getVelocity()) +
-                Math.abs(robot.flywheel2.getVelocity())) / 2.0;
+        return (Math.abs(robot.flywheel1.getPower()) +
+                Math.abs(robot.flywheel2.getPower())) / 2.0;
     }
 
     private void feedOnce() {

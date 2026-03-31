@@ -44,8 +44,8 @@ public class auto extends LinearOpMode {
     private void fireSequence(double targetVelocity, int shots) {
 
         // Start flywheel motors spinning toward target
-        robot.flywheel1.setVelocity(-targetVelocity);
-        robot.flywheel2.setVelocity(-targetVelocity);
+        //robot.flywheel1.setVelocity(-targetVelocity);
+        //robot.flywheel2.setVelocity(-targetVelocity);
 
         for (int i = 0; i < shots && opModeIsActive(); i++) {
 
@@ -65,14 +65,14 @@ public class auto extends LinearOpMode {
         }
 
         // Stop flywheel after all shots
-        robot.flywheel1.setVelocity(0);
-        robot.flywheel2.setVelocity(0);
+        //robot.flywheel1.setPower(0);
+        //robot.flywheel2.setVelocity(0);
     }
 
     // avg flywheel velocity
     private double getAvgFlywheel() {
-        return (Math.abs(robot.flywheel1.getVelocity()) +
-                Math.abs(robot.flywheel2.getVelocity())) / 2.0;
+        return (Math.abs(robot.flywheel1.getPower()) +
+                Math.abs(robot.flywheel2.getPower())) / 2.0;
     }
 
     // feed one artifact
