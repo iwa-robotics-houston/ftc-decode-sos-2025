@@ -145,13 +145,13 @@ public class Main2 extends LinearOpMode {
             }
 
             // SHOOTER MODE SELECT
-            /*if (gamepad2.x) {
+            if (gamepad2.x) {
                 targetVelocity = 1415;  ///1315
                 readyColor = RevBlinkinLedDriver.BlinkinPattern.BLUE_GREEN; // purple
             } else if (gamepad2.y) {
-                targetVelocity = 1505; //1505
+                targetVelocity = 1505;
                 readyColor = RevBlinkinLedDriver.BlinkinPattern.HEARTBEAT_RED; // green
-            }*/
+            }
 
             double tolerance = 40;
 
@@ -168,7 +168,7 @@ public class Main2 extends LinearOpMode {
             } else {
                 robot.flywheel1.setVelocity(0);
                 robot.flywheel2.setVelocity(0);
-                //blinkin.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
+                blinkin.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
             }
 
             //
@@ -187,7 +187,7 @@ public class Main2 extends LinearOpMode {
             }
 
             // BLINKIN READY INDICATOR
-            /*if (targetVelocity > 0 && (gamepad2.right_trigger > 0 || gamepad2.right_bumper)) {
+            if (targetVelocity > 0 && (gamepad2.right_trigger > 0 || gamepad2.right_bumper)) {
                 double flywheelVel = Math.abs(robot.flywheel1.getVelocity());
 
                 if (flywheelVel >= targetVelocity - tolerance) {
@@ -197,7 +197,7 @@ public class Main2 extends LinearOpMode {
                 }
             } else {
                 blinkin.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
-            }*/
+            }
 
             telemetry.addData("Run Time", runtime.toString());
             telemetry.addData("target velocity", targetVelocity);
