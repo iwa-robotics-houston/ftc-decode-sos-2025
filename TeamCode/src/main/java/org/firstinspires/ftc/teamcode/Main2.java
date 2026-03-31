@@ -146,10 +146,10 @@ public class Main2 extends LinearOpMode {
 
             // SHOOTER MODE SELECT
             if (gamepad2.x) {
-                targetVelocity = 1315;
+                targetVelocity = 1415;  ///1315
                 readyColor = RevBlinkinLedDriver.BlinkinPattern.BLUE_GREEN; // purple
             } else if (gamepad2.y) {
-                targetVelocity = 1505;
+                targetVelocity = 1605; //
                 readyColor = RevBlinkinLedDriver.BlinkinPattern.HEARTBEAT_RED; // green
             }
 

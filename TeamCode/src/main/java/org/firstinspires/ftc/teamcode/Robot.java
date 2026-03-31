@@ -10,12 +10,6 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-/*
-Hey chat, uh at the moment this is just a copy and paste of the Robot.Java from last year.
-I haven't changed much but you'll want to see what needs to be reinstated,
-as I have commented out a couple lines of code as practice using this software.
-- Addy
- */
 
 /*
 Contains robot build, state, and transformation functions.
