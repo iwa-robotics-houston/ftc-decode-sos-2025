@@ -49,8 +49,8 @@ public class BackFromRed extends LinearOpMode {
         final double tolerance = 0.99;
         final double spinupTimeout = 1.5;
 
-        robot.flywheel1.setVelocity(-targetVelocity);
-        robot.flywheel2.setVelocity(-targetVelocity);
+        robot.flywheel1.setPower(-targetVelocity);
+        robot.flywheel2.setPower(-targetVelocity);
 
         for (int i = 0; i < shots && opModeIsActive(); i++) {
 
@@ -73,8 +73,8 @@ public class BackFromRed extends LinearOpMode {
         }
 
         stopIntake();
-        robot.flywheel1.setVelocity(0);
-        robot.flywheel2.setVelocity(0);
+        robot.flywheel1.setPower(0);
+        robot.flywheel2.setPower(0);
     }
 
     // Stage third ball
