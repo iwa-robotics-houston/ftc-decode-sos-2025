@@ -186,9 +186,9 @@ public class Main2 extends LinearOpMode {
 
             // BLINKIN READY INDICATOR
             if (targetVelocity > 0 && (gamepad2.right_trigger > 0 || gamepad2.right_bumper)) {
-                double flywheelVel = Math.abs(robot.flywheel1.getPower());
+                double flywheelVelocity = Math.abs(robot.flywheel1.getPower());
 
-                if (flywheelVel >= targetVelocity - tolerance) {
+                if (flywheelVelocity >= targetVelocity - tolerance) {
                     blinkin.setPattern(readyColor);
                 } else {
                     blinkin.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
