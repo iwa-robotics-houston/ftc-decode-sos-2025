@@ -168,7 +168,7 @@ public class Main2 extends LinearOpMode {
             } else {
                 robot.flywheel1.setPower(0);
                 robot.flywheel2.setPower(0);
-                //blinkin.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
+                blinkin.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
             }
 
             //
