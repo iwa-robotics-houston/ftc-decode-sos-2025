@@ -119,14 +119,14 @@ public class Main2 extends LinearOpMode {
             robot.rightBackDrive.setPower(rightBackPower);
 
             // INTAKE
-            if (gamepad1.left_trigger > 0) {
+            if (gamepad2.left_trigger > 0) {
                 robot.rollerIntake.setPower(1);
                 robot.hotwheelsfront.setPower(-1);
                 robot.hotwheelsback.setPower(-1);
                 //robot.rollitbackbottom.setPosition(-0.5);
                 robot.rollitbackbottom.setPower(-1);
                 robot.rollitbacktop.setPower(1);
-            } else if (gamepad1.left_bumper) {
+            } else if (gamepad2.left_bumper) {
                 robot.rollerIntake.setPower(-1);
                 robot.hotwheelsfront.setPower(1);
                 robot.hotwheelsback.setPower(1);
@@ -154,12 +154,12 @@ public class Main2 extends LinearOpMode {
             double tolerance = 40;
 
             // SHOOTER CONTROL
-            if (gamepad1.right_trigger > 0) {
+            if (gamepad2.right_trigger > 0) {
                 robot.flywheel1.setVelocity(-targetVelocity);
                 robot.flywheel2.setVelocity(-targetVelocity);
 
 
-            } else if (gamepad1.right_bumper) {
+            } else if (gamepad2.right_bumper) {
                 robot.flywheel1.setVelocity(targetVelocity);
                 robot.flywheel2.setVelocity(targetVelocity);
 
