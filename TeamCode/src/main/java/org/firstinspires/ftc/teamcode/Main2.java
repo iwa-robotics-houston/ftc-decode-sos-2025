@@ -188,7 +188,7 @@ public class Main2 extends LinearOpMode {
 
             // BLINKIN READY INDICATOR
             if (targetVelocity > 0 && (gamepad2.right_trigger > 0 || gamepad2.right_bumper)) {
-                double flywheelVel = Math.abs(robot.flywheel1.getPower());
+                double flywheelVel = Math.abs(robot.flywheel1.getVelocity());
 
                 if (flywheelVel >= targetVelocity - tolerance) {
                     blinkin.setPattern(readyColor);
@@ -201,8 +201,8 @@ public class Main2 extends LinearOpMode {
 
             telemetry.addData("Run Time", runtime.toString());
             telemetry.addData("target power", targetVelocity);
-            telemetry.addData("Flywheel 1 Vel", robot.flywheel1.getPower());
-            telemetry.addData("Flywheel 2 Vel", robot.flywheel2.getPower());
+            telemetry.addData("Flywheel 1 Vel", robot.flywheel1.getVelocity());
+            telemetry.addData("Flywheel 2 Vel", robot.flywheel2.getVelocity());
             telemetry.update();
         }
     }

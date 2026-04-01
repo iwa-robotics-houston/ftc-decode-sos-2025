@@ -111,7 +111,7 @@ public class Robot {
 
         // Configure encoders
         //Encoder code
-        //flywheel1.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //flywheel1.setMode(DcMotor.RunMode.S\TOP_AND_RESET_ENCODER);
         flywheel1.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
         //flywheel2.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         flywheel2.setMode(DcMotorEx.RunMode.RUN_USING_ENCODER);
