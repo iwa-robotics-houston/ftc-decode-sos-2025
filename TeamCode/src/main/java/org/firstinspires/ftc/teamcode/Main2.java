@@ -200,7 +200,7 @@ public class Main2 extends LinearOpMode {
             }
 
             telemetry.addData("Run Time", runtime.toString());
-            telemetry.addData("target power", targetVelocity);
+            telemetry.addData("target Velocity", targetVelocity);
             telemetry.addData("Flywheel 1 Vel", robot.flywheel1.getVelocity());
             telemetry.addData("Flywheel 2 Vel", robot.flywheel2.getVelocity());
             telemetry.update();
