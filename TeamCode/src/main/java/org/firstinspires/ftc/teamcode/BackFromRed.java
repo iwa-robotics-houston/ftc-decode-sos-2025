@@ -73,8 +73,8 @@ public class BackFromRed extends LinearOpMode {
         }
 
         stopIntake();
-        robot.flywheel1.setPower(0);
-        robot.flywheel2.setPower(0);
+        robot.flywheel1.setVelocity(0);
+        robot.flywheel2.setVelocity(0);
     }
 
     // Stage third ball
