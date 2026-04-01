@@ -8,7 +8,6 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -73,14 +72,14 @@ public class Main2 extends LinearOpMode {
         robot.flywheel1.setVelocityPIDFCoefficients(0, 0, 0, 1);
         robot.flywheel2.setVelocityPIDFCoefficients(0, 0, 0, 1);
 
-        PIDFCoefficients coefficients1 = robot.flywheel1.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
+        PIDFCoefficients coefficients1 = robot.flywheel1.getPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER);
         telemetry.addData("P", coefficients1.p);
         telemetry.addData("I", coefficients1.i);
         telemetry.addData("D", coefficients1.d);
         telemetry.addData("F", coefficients1.f);
         telemetry.addData("MotorControlAlgorithm", coefficients1.algorithm);
 
-        PIDFCoefficients coefficients2 = robot.flywheel2.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
+        PIDFCoefficients coefficients2 = robot.flywheel2.getPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER);
         telemetry.addData("P", coefficients2.p);
         telemetry.addData("I", coefficients2.i);
         telemetry.addData("D", coefficients2.d);
