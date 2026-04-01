@@ -8,6 +8,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -69,22 +70,23 @@ public class Main2 extends LinearOpMode {
 
         double targetVelocity = 0;
 
-        robot.flywheel1.setVelocityPIDFCoefficients(0, 0, 0, 1);
-        robot.flywheel2.setVelocityPIDFCoefficients(0, 0, 0, 1);
+        //robot.flywheel1.setVelocityPIDFCoefficients(0, 0, 0, 1);
+        //robot.flywheel2.setVelocityPIDFCoefficients(0, 0, 0, 1);
 
-        PIDFCoefficients coefficients1 = robot.flywheel1.getPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER);
-        telemetry.addData("P", coefficients1.p);
+
+//        PIDFCoefficients coefficients1 = robot.flywheel1.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
+        /*telemetry.addData("P", coefficients1.p);
         telemetry.addData("I", coefficients1.i);
         telemetry.addData("D", coefficients1.d);
         telemetry.addData("F", coefficients1.f);
         telemetry.addData("MotorControlAlgorithm", coefficients1.algorithm);
 
-        PIDFCoefficients coefficients2 = robot.flywheel2.getPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        PIDFCoefficients coefficients2 = robot.flywheel2.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
         telemetry.addData("P", coefficients2.p);
         telemetry.addData("I", coefficients2.i);
         telemetry.addData("D", coefficients2.d);
         telemetry.addData("F", coefficients2.f);
-        telemetry.addData("MotorControlAlgorithm", coefficients2.algorithm);
+        telemetry.addData("MotorControlAlgorithm", coefficients2.algorithm);*/
 
 
 
@@ -144,7 +146,7 @@ public class Main2 extends LinearOpMode {
 
             // SHOOTER MODE SELECT
             if (gamepad2.x) {
-                targetVelocity = 1315;  ///1315
+                targetVelocity = 1415;  ///1315
                 readyColor = RevBlinkinLedDriver.BlinkinPattern.BLUE_GREEN; // purple
             } else if (gamepad2.y) {
                 targetVelocity = 1505;
@@ -186,9 +188,9 @@ public class Main2 extends LinearOpMode {
 
             // BLINKIN READY INDICATOR
             if (targetVelocity > 0 && (gamepad2.right_trigger > 0 || gamepad2.right_bumper)) {
-                double flywheelVelocity = Math.abs(robot.flywheel1.getPower());
+                double flywheelVel = Math.abs(robot.flywheel1.getPower());
 
-                if (flywheelVelocity >= targetVelocity - tolerance) {
+                if (flywheelVel >= targetVelocity - tolerance) {
                     blinkin.setPattern(readyColor);
                 } else {
                     blinkin.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
@@ -198,9 +200,9 @@ public class Main2 extends LinearOpMode {
             }
 
             telemetry.addData("Run Time", runtime.toString());
-            telemetry.addData("target velocity", targetVelocity);
-            telemetry.addData("Flywheel 1 Vel", robot.flywheel1.getVelocity());
-            telemetry.addData("Flywheel 2 Vel", robot.flywheel2.getVelocity());
+            telemetry.addData("target power", targetVelocity);
+            telemetry.addData("Flywheel 1 Vel", robot.flywheel1.getPower());
+            telemetry.addData("Flywheel 2 Vel", robot.flywheel2.getPower());
             telemetry.update();
         }
     }
