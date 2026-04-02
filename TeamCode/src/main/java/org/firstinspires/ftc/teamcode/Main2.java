@@ -70,23 +70,23 @@ public class Main2 extends LinearOpMode {
 
         double targetVelocity = 0;
 
-        //robot.flywheel1.setVelocityPIDFCoefficients(0, 0, 0, 1);
-        //robot.flywheel2.setVelocityPIDFCoefficients(0, 0, 0, 1);
+        robot.flywheel1.setVelocityPIDFCoefficients(0, 0, 0, 1);
+        robot.flywheel2.setVelocityPIDFCoefficients(0, 0, 0, 1);
 
 
-//        PIDFCoefficients coefficients1 = robot.flywheel1.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
-        /*telemetry.addData("P", coefficients1.p);
+        PIDFCoefficients coefficients1 = robot.flywheel1.getPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER);
+        telemetry.addData("P", coefficients1.p);
         telemetry.addData("I", coefficients1.i);
         telemetry.addData("D", coefficients1.d);
         telemetry.addData("F", coefficients1.f);
         telemetry.addData("MotorControlAlgorithm", coefficients1.algorithm);
 
-        PIDFCoefficients coefficients2 = robot.flywheel2.getPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER);
+        PIDFCoefficients coefficients2 = robot.flywheel2.getPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER);
         telemetry.addData("P", coefficients2.p);
         telemetry.addData("I", coefficients2.i);
         telemetry.addData("D", coefficients2.d);
         telemetry.addData("F", coefficients2.f);
-        telemetry.addData("MotorControlAlgorithm", coefficients2.algorithm);*/
+        telemetry.addData("MotorControlAlgorithm", coefficients2.algorithm);
 
 
 
