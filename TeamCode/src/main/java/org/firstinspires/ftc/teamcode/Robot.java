@@ -35,7 +35,7 @@ public class Robot {
     // to correct movement lengths
     static final double drivetrainMultiplier = 1.5;
 
-    // state
+    // state////
     public boolean rightBumperPrev = false;
     public ElapsedTime timer = new ElapsedTime();  // Create a timer instance
     public double lastIntakeTime = 0;
