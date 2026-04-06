@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 
-@TeleOp(name = "tuningFlywheel", group = "LinearOpMode")
+@TeleOp    //(name = "tuningFlywheel", group = "LinearOpMode")
 public class tuningFlywheel extends OpMode {
 
     //Robot robot = new Robot(hardwareMap);
@@ -86,6 +86,8 @@ public class tuningFlywheel extends OpMode {
             P -= stepSizes[stepIndex];
         }
 
+
+
         PIDFCoefficients pidfCoefficients = new PIDFCoefficients(P, 0, 0, F);
         flywheel1.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
         flywheel2.setPIDFCoefficients(DcMotor.RunMode.RUN_USING_ENCODER, pidfCoefficients);
@@ -97,7 +99,7 @@ public class tuningFlywheel extends OpMode {
         double velocity2 = flywheel2.getVelocity();
         double TargetVelocity = (velocity1 + velocity2) / 2.0;
 
-        double error = cuTargetVelcoity2 -TargetVelocity;
+        double error = cuTargetVelcoity2 - TargetVelocity;
 
         telemetry.addData("Target Velocity", cuTargetVelcoity2);
         telemetry.addData("Current Velocity, %.2f", TargetVelocity);
