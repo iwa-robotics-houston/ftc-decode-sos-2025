@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.PIDFCoefficients;
 
 
-@TeleOp
+@TeleOp(name = "tuningFlywheel", group = "LinearOpMode")
 public class tuningFlywheel extends OpMode {
 
     //Robot robot = new Robot(hardwareMap);
