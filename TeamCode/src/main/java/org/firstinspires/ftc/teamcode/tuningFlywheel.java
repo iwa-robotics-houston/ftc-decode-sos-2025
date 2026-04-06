@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+/*package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -103,9 +103,12 @@ public class tuningFlywheel extends OpMode {
 
 
 
-        /*//get our gamepad commands
+        /*
+        //get our gamepad commands
         //set target vleocity
         //update etelemetry
+
+/*
         if (gamepad1.yWasPressed()){
             if (cuTargetVelcoity2 == highVelocity){
                 cuTargetVelcoity2 = lowVelocity;
@@ -159,4 +162,4 @@ public class tuningFlywheel extends OpMode {
 
 
     }
-}*/
+            }*/
