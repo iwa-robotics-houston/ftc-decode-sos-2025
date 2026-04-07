@@ -175,12 +175,12 @@ public class Main2 extends LinearOpMode {
                 robot.lift2.setPower(1);
 
             } else if (gamepad1.dpad_down) {
-                robot.lift1.setPower(1);
-                robot.lift2.setPower(1);
+                robot.lift1.setPower(-1);
+                robot.lift2.setPower(-1);
 
             } else {
-                robot.lift1.setPower(1);
-                robot.lift2.setPower(1);
+                robot.lift1.setPower(0);
+                robot.lift2.setPower(0);
             }
 
             // BLINKIN READY INDICATOR

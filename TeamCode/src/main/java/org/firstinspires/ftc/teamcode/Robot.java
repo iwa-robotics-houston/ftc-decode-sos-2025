@@ -125,6 +125,9 @@ public class Robot {
 
         lift1.setDirection(DcMotor.Direction.FORWARD);
         lift2.setDirection(DcMotor.Direction.FORWARD);
+
+        //flywheel1.setVelocityPIDFCoefficients(200, 0, 0, 14);
+        //flywheel2.setVelocityPIDFCoefficients(200, 0, 0, 14);
     }
 }
 
