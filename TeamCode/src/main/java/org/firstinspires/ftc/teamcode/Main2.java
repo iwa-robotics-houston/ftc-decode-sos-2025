@@ -69,7 +69,7 @@ public class Main2 extends LinearOpMode {
         RevBlinkinLedDriver.BlinkinPattern readyColor = RevBlinkinLedDriver.BlinkinPattern.BLACK;
 
         double targetVelocity = 0;
-
+        /*
         robot.flywheel1.setVelocityPIDFCoefficients(0, 0, 0, 1);
         robot.flywheel2.setVelocityPIDFCoefficients(0, 0, 0, 1);
 
@@ -88,7 +88,7 @@ public class Main2 extends LinearOpMode {
         telemetry.addData("F", coefficients2.f);
         telemetry.addData("MotorControlAlgorithm", coefficients2.algorithm);
 
-
+        */
 
         while (opModeIsActive()) {
 
