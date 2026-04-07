@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 /*
- Limelight AprilTag;jdlkjsalfjdjfladlflk;fal;sdlkfdljisfljkd
+ Limelight AprilTag;
 */
 
 
