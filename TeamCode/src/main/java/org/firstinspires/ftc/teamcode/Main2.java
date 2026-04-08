@@ -170,11 +170,11 @@ public class Main2 extends LinearOpMode {
 
             //
             //TBD for the buttons
-            if (gamepad1.dpad_up) {
+            if (gamepad1.dpadUpWasPressed()) {
                 robot.lift1.setPower(1);
                 robot.lift2.setPower(1);
 
-            } else if (gamepad1.dpad_down) {
+            } else if (gamepad1.dpadDownWasPressed()) {
                 robot.lift1.setPower(-1);
                 robot.lift2.setPower(-1);
 
