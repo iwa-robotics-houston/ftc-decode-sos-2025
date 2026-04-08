@@ -144,8 +144,8 @@ public class Main2 extends LinearOpMode {
                 robot.lift1.setPower(-1);
                 robot.lift2.setPower(-1);
             } else {
-                robot.lift1.setPower(0.0);
-                robot.lift2.setPower(0.0);
+                robot.lift1.setPower(0);
+                robot.lift2.setPower(0);
             }
 
 
