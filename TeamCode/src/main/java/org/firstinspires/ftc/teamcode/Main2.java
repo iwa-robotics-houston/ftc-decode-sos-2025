@@ -120,6 +120,20 @@ public class Main2 extends LinearOpMode {
             robot.leftBackDrive.setPower(leftBackPower);
             robot.rightBackDrive.setPower(rightBackPower);
 
+
+            double leg1 = 1;
+            double leg2 = 1;
+            if (gamepad2.dpad_down) { //was: dpad_up edit: reverted
+                robot.lift1.setPower(-leg1);
+                robot.lift2.setPower(-leg2);
+                //robot.arm.setTargetPosition(robot.arm.getCurrentPosition()-10);
+            } else if (gamepad2.dpad_up) { //was: dpad_down edit: reverted
+                robot.lift1.setPower(leg1);
+                robot.lift2.setPower(leg2);
+            } else {
+                robot.lift1.setPower(0);
+                robot.lift2.setPower(0);
+            }
             // INTAKE
             if (gamepad2.left_trigger > 0) {
                 robot.rollerIntake.setPower(1);
@@ -168,20 +182,8 @@ public class Main2 extends LinearOpMode {
                 blinkin.setPattern(RevBlinkinLedDriver.BlinkinPattern.BLACK);
             }
 
-            //
-            //TBD for the buttons
-            if (gamepad2.dpad_up) {
-                robot.lift1.setPower(1);
-                robot.lift2.setPower(1);
 
-            } else if (gamepad2.dpad_down) {
-                robot.lift1.setPower(-1);
-                robot.lift2.setPower(-1);
 
-            } else {
-                robot.lift1.setPower(0);
-                robot.lift2.setPower(0);
-            }
 
             // BLINKIN READY INDICATOR
             if (targetVelocity > 0 && (gamepad2.right_trigger > 0 || gamepad2.right_bumper)) {
