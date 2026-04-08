@@ -175,7 +175,7 @@ public class Main2 extends LinearOpMode {
                 targetVelocity = 1510 ;  ///1315
                 readyColor = RevBlinkinLedDriver.BlinkinPattern.BLUE_GREEN; // purple
             } else if (gamepad2.y) {
-                targetVelocity = 1505;
+                targetVelocity = 1725;
                 readyColor = RevBlinkinLedDriver.BlinkinPattern.HEARTBEAT_RED; // green
             }
 
