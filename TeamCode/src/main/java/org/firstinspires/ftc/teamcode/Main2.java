@@ -136,11 +136,11 @@ public class Main2 extends LinearOpMode {
             }*/
 
 
-            if (gamepad2.y) {
+            if (gamepad1.y) {
                 robot.lift1.setPower(1);
                 robot.lift2.setPower(1);
             }
-            else if (gamepad2.x) {
+            else if (gamepad1.x) {
                 robot.lift1.setPower(-1);
                 robot.lift2.setPower(-1);
             } else {
