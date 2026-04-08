@@ -70,8 +70,11 @@ public class Main2 extends LinearOpMode {
 
         double targetVelocity = 0;
 
-        robot.flywheel1.setVelocityPIDFCoefficients(100, 0, 0, 0); //17
-        robot.flywheel2.setVelocityPIDFCoefficients(100, 0, 0, 0);  //17
+
+        //tune f first until you reach to target velocity
+        //put f to zero and put p value
+        robot.flywheel1.setVelocityPIDFCoefficients(170, 0, 0, 0); //17
+        robot.flywheel2.setVelocityPIDFCoefficients(170, 0, 0, 0);  //17
 
 
         PIDFCoefficients coefficients1 = robot.flywheel1.getPIDFCoefficients(DcMotorEx.RunMode.RUN_USING_ENCODER);
