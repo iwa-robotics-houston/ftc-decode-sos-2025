@@ -45,7 +45,7 @@ public class FRed extends LinearOpMode {
 
 
         // Fire two velocity-triggered shots
-        fireSequence(1310, 2, 500);
+        fireSequence(1513, 2, 500);
 
         advanceThirdBall(900);
 

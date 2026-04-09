@@ -28,12 +28,12 @@ public class BackFromBlueAuto extends LinearOpMode {
         driveAll(0);
 
         // Fire first two balls
-        fireSequence(1310, 2, 650); // 250ms delay between first two shots
+        fireSequence(1513, 2, 650); // 250ms delay between first two shots
         //fireSequence(1310, 3, 1000)
         // Third ball to flywheel
         advanceThirdBall(900); //980 MAYBE
 
-        fireSequence(1310, 1, 350);
+        fireSequence(1513, 1, 350);
 
         // Strafe left and stop
         strafeLeft(0.4);
@@ -53,6 +53,8 @@ public class BackFromBlueAuto extends LinearOpMode {
         final double tolerance = 0.99;  // 99% of target
         final double spinupTimeout = 1.5; // seconds
 
+
+        //note this can be put in robot.java
         robot.flywheel1.setVelocityPIDFCoefficients(100, 0, 0, 17); //17
         robot.flywheel2.setVelocityPIDFCoefficients(100, 0, 0, 17);  //17
 

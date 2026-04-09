@@ -28,7 +28,7 @@ public class BackFromRed extends LinearOpMode {
         driveAll(0);
 
         // Fire first two balls
-        fireSequence(1310, 2, 500);
+        fireSequence(1513, 2, 500);
         //fireSequence(1310, 3, 750);
         //potential value for the delay 466.66667
         //kekeke 67 bomb

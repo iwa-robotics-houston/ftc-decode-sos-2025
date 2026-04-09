@@ -80,13 +80,13 @@ public class fromAfarBlue extends LinearOpMode {
         driveAll(0);
 
         // Fire first two balls
-        fireSequence(1525, 2, 750);
+        fireSequence(1725, 2, 750);
 
         // Stage third ball (just position it, don't feed yet)
         advanceThirdBall(700); // og 600
 
         // Fire third ball
-        fireSequence(1525, 1, 610);
+        fireSequence(1725, 1, 610);
 
         driveAll(0.5);
         sleep(500);

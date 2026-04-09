@@ -41,7 +41,7 @@ public class FBlue extends LinearOpMode {
         //driveAll(0);
 
         // Fire two shots using velocity triggering
-        fireSequence(1320, 2, 500);
+        fireSequence(1513, 2, 500);
 
         advanceThirdBall(900);
 
