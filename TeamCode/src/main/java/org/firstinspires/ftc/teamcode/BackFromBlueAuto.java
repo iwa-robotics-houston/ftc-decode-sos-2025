@@ -70,7 +70,6 @@ public class BackFromBlueAuto extends LinearOpMode {
         telemetry.addData("D", coefficients2.d);
         telemetry.addData("F", coefficients2.f);
         telemetry.addData("MotorControlAlgorithm", coefficients2.algorithm);
-
         // Start flywheel
         robot.flywheel1.setPower(-targetVelocity);
         robot.flywheel2.setPower(-targetVelocity);
