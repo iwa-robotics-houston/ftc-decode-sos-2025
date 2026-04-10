@@ -73,6 +73,8 @@ public class Robot {
 
     public DcMotor lift2;
 
+    public Servo line;
+
     public Robot(HardwareMap hardwareMap) {
         // init hardware
         leftFrontDrive = hardwareMap.get(DcMotor.class, "frontLeft");
@@ -95,6 +97,8 @@ public class Robot {
         lift2 = hardwareMap.get(DcMotor.class, "lifty2");
 
 
+
+        line = hardwareMap.get(Servo.class, "line");
 
 
         // configure drive motors
@@ -122,7 +126,7 @@ public class Robot {
         hotwheelsfront.setDirection(DcMotorSimple.Direction.REVERSE);
         hotwheelsback.setDirection(CRServo.Direction.FORWARD);
 
-
+        line.setDirection(Servo.Direction.FORWARD);
         lift1.setDirection(DcMotor.Direction.FORWARD);
         lift2.setDirection(DcMotor.Direction.FORWARD);
 

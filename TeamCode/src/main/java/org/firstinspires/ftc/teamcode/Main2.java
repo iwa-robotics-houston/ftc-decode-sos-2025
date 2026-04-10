@@ -151,6 +151,12 @@ public class Main2 extends LinearOpMode {
                 robot.lift2.setPower(0);
             }
 
+            if (gamepad1.b) {
+                robot.line.setPosition(0.6);
+            } else {
+                robot.line.setPosition(0);
+            }
+
 
             // INTAKE
             if (gamepad2.left_trigger > 0) {
